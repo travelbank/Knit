@@ -1,6 +1,7 @@
 [![](https://jitpack.io/v/travelbank/Knit.svg)](https://jitpack.io/#travelbank/Knit)
 [![Build Status](https://travis-ci.org/travelbank/Knit.svg?branch=master)](https://travis-ci.org/travelbank/Knit)   
 
+Issues and comments: omer@travelbank.com
 
 # Knit
 MVP Framework for Android apps. 
