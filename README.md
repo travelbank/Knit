@@ -1,4 +1,5 @@
-[![](https://jitpack.io/v/OmerUygurOzer/knit.svg)](https://jitpack.io/#OmerUygurOzer/knit)     [![Build Status](https://travis-ci.org/OmerUygurOzer/Knit.svg?branch=master)](https://travis-ci.org/OmerUygurOzer/Knit)   
+[![](https://jitpack.io/v/travelbank/Knit.svg)](https://jitpack.io/#travelbank/Knit)
+[![Build Status](https://travis-ci.org/travelbank/Knit.svg?branch=master)](https://travis-ci.org/travelbank/Knit)   
 
 
 # Knit
@@ -15,7 +16,7 @@ Features:
 7. Navigation is supported as outlined here : [Navigation in the context of MVP](https://medium.com/@nikita.kozlov/navigation-in-the-context-of-mvp-f474ed313901)  
 8. Easy integration with other libraries such as Dagger.
 
-Version 1.2.2  
+Version 1.1
 
 - Supports multiple threads for generators to be executed on
 - Usage tree for components
@@ -37,8 +38,8 @@ allprojects {
 }
 
 dependencies {
-  implementation 'com.github.OmerUygurOzer.knit:knitlib:v1.1.0'
-  annotationProcessor 'com.github.OmerUygurOzer.knit:knitprocessor:v1.1.0'
+  implementation 'com.github.travelbank:knit:knitlib:v1.1.0'
+  annotationProcessor 'com.github.travelbank:nit:knitprocessor:v1.1.0'
 }
 ```
 
@@ -83,6 +84,8 @@ public class InputActivity extends Activity{
     EditText editText;
 
     Button button;
+    
+    ViewEvents viewEvents;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,17 +93,8 @@ public class InputActivity extends Activity{
         setContentView(R.layout.activity_input);
         editText = (EditText)findViewById(R.id.edit_text);
         button = (Button)findViewById(R.id.button);
-        KnitEvents.onClick(SEARCH_CLICK,this, button);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+        viewEvents = Knit.getInstance().getViewEvents();
+        viewEvents.onClick(SEARCH_CLICK,this, button);
     }
 
     public String getUserName(){
@@ -141,7 +135,7 @@ public class RepoActivityPresenter extends KnitPresenter<RepoActivityContract> {
 
     }
 
-    @Updating(RestLayer.GET_REPOS)
+    @ModelEvent(RestLayer.GET_REPOS)
     public void repoRec(List<Repo> repos){
         getContract().showRepos(repos);
     }
