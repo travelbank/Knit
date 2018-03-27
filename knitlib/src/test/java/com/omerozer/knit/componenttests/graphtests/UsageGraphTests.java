@@ -3,7 +3,10 @@ package com.omerozer.knit.componenttests.graphtests;
 import com.omerozer.knit.InternalModel;
 import com.omerozer.knit.InternalPresenter;
 import com.omerozer.knit.KnitInterface;
+import com.omerozer.knit.KnitMessage;
 import com.omerozer.knit.KnitMock;
+import com.omerozer.knit.MessageTrain;
+import com.omerozer.knit.MockKnitMessage;
 import com.omerozer.knit.ModelMap;
 import com.omerozer.knit.ModelMapInterface;
 import com.omerozer.knit.TestEnv;
@@ -64,6 +67,9 @@ public class UsageGraphTests {
     @Captor
     ArgumentCaptor<Class<? extends InternalPresenter>> internalPresenterCaptor;
 
+    @Captor
+    ArgumentCaptor<KnitMessage> messageCaptor;
+
     InternalModel testModel;
 
     InternalModel testModel2;
@@ -82,8 +88,8 @@ public class UsageGraphTests {
         this.modelManager = knit.getModelManager();
         this.modelLoader = knit.getModelLoader();
         this.presenterLoader = knit.getPresenterLoader();
-        this.modelMap = knit.getUtilsLoader().getModelMap(Class.class);
-        this.viewToPresenterMap = knit.getUtilsLoader().getViewToPresenterMap(Class.class);
+        this.modelMap = knit.getModelMap();
+        this.viewToPresenterMap = knit.getViewToPresenterMap();
         this.usageGraph = new UsageGraph(knit);
         this.testModel = modelLoader.loadModel(TestModel_Model.class);
         this.testModel2 = modelLoader.loadModel(TestModel2_Model.class);
@@ -122,6 +128,9 @@ public class UsageGraphTests {
         verify(testUmbrellaModel).onCreate();
         verify(testSingletonModel).onCreate();
         verify(testPresenter).onCreate();
+        verify(testPresenter).receiveMessage(messageCaptor.capture());
+        assertEquals(MockKnitMessage.get(),messageCaptor.getValue());
+
     }
 
     @Test

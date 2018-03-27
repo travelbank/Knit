@@ -7,7 +7,7 @@ import com.omerozer.knit.components.ModelManager;
 import com.omerozer.knit.schedulers.SchedulerProvider;
 
 /**
- * Created by bo_om on 3/12/2018.
+ * Created by Omer Ozer on 3/12/2018.
  */
 
 public interface KnitInterface {
@@ -29,4 +29,8 @@ public interface KnitInterface {
     MessagePool getMessagePool();
 
     MessageTrain getMessageTrain();
+
+    ViewToPresenterMapInterface getViewToPresenterMap();
+
+    ModelMapInterface getModelMap();
 }

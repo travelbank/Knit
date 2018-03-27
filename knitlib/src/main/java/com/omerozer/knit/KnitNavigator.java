@@ -21,8 +21,6 @@ public class KnitNavigator {
 
     private KnitInterface knitInterface;
 
-    private WeakReference<Context> contextRef;
-
     public KnitNavigator(KnitInterface knitInterface) {
         this.knitInterface = knitInterface;
     }
@@ -31,21 +29,20 @@ public class KnitNavigator {
         return new ActivityNavigator();
     }
 
-    void navigatedTo(Object viewObject) {
-        if (viewObject instanceof Activity) {
-            contextRef = new WeakReference<Context>((Activity) viewObject);
-        }
-    }
-
-
     public abstract class Navigator {
         public abstract Class<?> getTarget();
     }
 
     public class ActivityNavigator extends Navigator {
 
+        private WeakReference<Activity> from;
         private Class<? extends Activity> target;
         private KnitMessage knitMessage;
+
+        public ActivityNavigator from(Object viewObject){
+            this.from = new WeakReference<Activity> ((Activity)viewObject);
+            return this;
+        }
 
         public ActivityNavigator target(Class<? extends Activity> target) {
             this.target = target;
@@ -59,10 +56,10 @@ public class KnitNavigator {
 
         public void go() {
             if (knitMessage != null) {
-                knitInterface.getMessageTrain().putMessageForView(target, knitMessage);
+                knitInterface.getMessageTrain().putMessageForView(knitInterface.getViewToPresenterMap().getPresenterClassForView(target), knitMessage);
             }
-            Intent intent = new Intent(contextRef.get(), target);
-            contextRef.get().startActivity(intent);
+            Intent intent = new Intent(from.get(), target);
+            from.get().startActivity(intent);
         }
 
         @Override

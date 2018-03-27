@@ -25,11 +25,6 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
     private FragmentManager.FragmentLifecycleCallbacks supportFragmentCallbacks;
     private android.app.FragmentManager.FragmentLifecycleCallbacks oFragmentCallbacks;
 
-    private Class<? extends Activity> topType;
-    private WeakReference<Activity> topActivityRef;
-
-    private int orientation;
-
     KnitAppListener(Knit knit) {
         this.knit = knit;
     }
@@ -38,24 +33,9 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
     @Override
     public void onActivityCreated(Activity activity, Bundle bundle) {
         attachFragmentListeners(activity);
-        assignAsTop(activity);
         knit.initViewDependencies(activity);
     }
 
-    private boolean topExists(){
-        return topActivityRef!=null;
-    }
-
-
-    private boolean orientationChanged(Activity activity){
-        return this.orientation != activity.getResources().getConfiguration().orientation && topType.equals(activity.getClass());
-    }
-
-    private void assignAsTop(Activity activity){
-        this.topActivityRef = new WeakReference<Activity>(activity);
-        this.topType = activity.getClass();
-        this.orientation = activity.getResources().getConfiguration().orientation;
-    }
 
     private boolean returnedToView(Activity activity){
         return false;
@@ -70,7 +50,6 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
             }
             knit.findPresenterForView(activity).onViewStart();
         }
-        assignAsTop(activity);
     }
 
     @Override
@@ -105,6 +84,7 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
             knit.destoryComponent(activity);
             return;
         }
+        knit.releaseViewFromComponent(activity);
     }
 
     private void attachFragmentListeners(Activity activity){

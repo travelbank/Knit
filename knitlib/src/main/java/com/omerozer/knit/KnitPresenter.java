@@ -26,15 +26,12 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
 
     private Object contract;
 
-    private KnitMessage message;
-
     public void setKnit(Knit knit) {
         this.knitInstance = knit;
     }
 
     @Override
     public void onViewApplied(Object viewObject) {
-        this.contract = null;
         this.viewObjectRef = new WeakReference<Object>(viewObject);
     }
 
@@ -67,7 +64,6 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
         if(modelManager == null){
             modelManager = knitInstance.findPresenterForParent(this).getModelManager();
         }
-
         return modelManager;
     }
 
@@ -163,7 +159,4 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
 
     }
 
-    protected KnitMessage getMessage(){
-        return this.message;
-    }
 }

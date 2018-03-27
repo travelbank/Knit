@@ -17,7 +17,7 @@ public class KnitMethodsFilter {
 
     static {
         knitSpecificMethods.addAll(
-                Arrays.asList("onCreate","onDestroy","onViewApplied","onCurrentViewReleased","onLoad","shouldLoad","onMemoryLow"));
+                Arrays.asList("onCreate","onDestroy","onViewApplied","onCurrentViewReleased","onLoad","shouldLoad","onMemoryLow","receiveMessage"));
         knitSpecificMethods.addAll(NativeViewCallbacks.getAll());
 
     }

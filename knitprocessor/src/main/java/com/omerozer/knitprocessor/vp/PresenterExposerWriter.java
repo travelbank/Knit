@@ -45,7 +45,6 @@ public class PresenterExposerWriter extends KnitClassWriter {
         clazzBuilder.addMethod(InterfaceMethodsCreatorForExposers.getOnLoadMethod());
         clazzBuilder.addMethod(InterfaceMethodsCreatorForExposers.getOnMemoryLow());
         clazzBuilder.addMethod(InterfaceMethodsCreatorForExposers.getOnDestroyMethod());
-        clazzBuilder.addMethod(InterfaceMethodsCreatorForExposers.getSetMessageMethod());
         createNativeCallbacks(clazzBuilder);
 
         PackageElement enclosingPackage = (PackageElement) presenterMirror.enclosingClass.getEnclosingElement();
@@ -116,25 +115,7 @@ public class PresenterExposerWriter extends KnitClassWriter {
     }
 
     private void createNativeCallbacks(TypeSpec.Builder builder) {
-        for (String callback : NativeViewCallbacks.getAll()) {
-            if(NativeViewCallbacks.isOnViewResult(callback)){
-                builder.addMethod(MethodSpec
-                        .methodBuilder("use_" + callback)
-                        .addParameter(TypeName.INT,"req")
-                        .addParameter(TypeName.INT,"res")
-                        .addParameter(ANDROID_INTENT,"data")
-                        .addModifiers(Modifier.PUBLIC)
-                        .addStatement("this.parent.$L(req,res,data)", callback)
-                        .build());
-                continue;
-            }
-
-            builder.addMethod(MethodSpec
-                    .methodBuilder("use_" + callback)
-                    .addModifiers(Modifier.PUBLIC)
-                    .addStatement("this.parent.$L()", callback)
-                    .build());
-        }
+        NativeViewCallbacks.createNativeCallbackMethodsForExposer(builder);
     }
 
 }

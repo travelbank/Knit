@@ -21,11 +21,6 @@ import com.omerozer.sample.views.SecondActivity;
 public class MainPresenter extends KnitPresenter<MainActivityContract> {
 
     @Override
-    public void onCurrentViewReleased() {
-        super.onCurrentViewReleased();
-    }
-
-    @Override
     public void onCreate() {
         super.onCreate();
         Log.d("KNIT_TEST","MAIN PRESENTER MAIN CREATED");
@@ -63,14 +58,12 @@ public class MainPresenter extends KnitPresenter<MainActivityContract> {
 
     @ViewEvent(BUTTON_CLICK)
     public void handle(ViewEventEnv eventEnv) {
-        if(eventEnv.getTag().equals("button")){
-
             getNavigator()
                     .toActivity()
+                    .from(getView())
+                    .setMessage(newMessage().putData("txt",getContract().get()))
                     .target(SecondActivity.class)
                     .go();
-        }
-
     }
 
 

@@ -3,6 +3,7 @@ package com.omerozer.sample.views;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +18,14 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
 
+    EditText edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.button = (Button)findViewById(R.id.btn_next) ;
+        this.button = (Button)findViewById(R.id.btn_next);
+        this.edit = (EditText)findViewById(R.id.edit);
         Knit.getInstance().getViewEvents().onClick(BUTTON_CLICK,this,button);
     }
 
@@ -31,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void showToast(String message){
         Toast.makeText(this,"YASSTOASTHEYA",Toast.LENGTH_LONG).show();
+    }
+
+    public String get(){
+        return edit.getText().toString();
     }
 
 

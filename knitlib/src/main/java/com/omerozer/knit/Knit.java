@@ -51,6 +51,10 @@ public class Knit implements KnitInterface {
 
     private MessageTrain messageTrain;
 
+    private ModelMapInterface modelMap;
+
+    private ViewToPresenterMapInterface viewToPresenterMap;
+
     private Knit(Application application){
         this.app = new WeakReference<Application>(application);
         this.modelManager = new ModelManager();
@@ -59,8 +63,10 @@ public class Knit implements KnitInterface {
         this.knitModelLoader = new KnitModelLoader(schedulerProvider);
         this.knitPresenterLoader = new KnitPresenterLoader(this);
         this.knitUtilsLoader = new KnitUtilsLoader();
-        this.userGraph = new UsageGraph(this);
         this.messagePool = new MessagePool();
+        this.modelMap = knitUtilsLoader.getModelMap(Knit.class);
+        this.viewToPresenterMap = knitUtilsLoader.getViewToPresenterMap(Knit.class);
+        this.userGraph = new UsageGraph(this);
         application.registerComponentCallbacks(new KnitMemoryManager(userGraph));
         application.registerActivityLifecycleCallbacks(new KnitAppListener(this));
     }
@@ -70,7 +76,6 @@ public class Knit implements KnitInterface {
     }
 
     void initViewDependencies(Object viewObject) {
-        navigator.navigatedTo(viewObject);
         userGraph.startViewAndItsComponents(viewObject);
     }
 
@@ -139,5 +144,15 @@ public class Knit implements KnitInterface {
             messageTrain = new MessageTrain();
         }
         return messageTrain;
+    }
+
+    @Override
+    public ViewToPresenterMapInterface getViewToPresenterMap() {
+        return viewToPresenterMap;
+    }
+
+    @Override
+    public ModelMapInterface getModelMap() {
+        return modelMap;
     }
 }

@@ -40,14 +40,16 @@ public class KnitMock {
         when(knitPresenterLoader.loadPresenter(TestPresenter_Presenter.class)).thenReturn(mockPresenter);
         when(knitPresenterLoader.loadPresenter(TestPresenter2_Presenter.class)).thenReturn(mockPresenter2);
 
-        ViewToPresenterMap mockViewToPresenterMap = ViewToPresenterMap.getMock();
-        when(utilsLoader.getViewToPresenterMap(any(Class.class))).thenReturn(mockViewToPresenterMap);
-
-        ModelMap mockModelMap = ModelMap.getMock();
-        when(utilsLoader.getModelMap(any(Class.class))).thenReturn(mockModelMap);
+        KnitMessage message = MockKnitMessage.get();
 
         MessageTrain mockMessageTrain = Mockito.mock(MessageTrain.class);
-        when(mockMessageTrain.getMessageForView(any(Class.class))).thenReturn(null);
+        when(mockMessageTrain.hasMessage(any(Class.class))).thenReturn(true);
+        when(mockMessageTrain.getMessageForView(any(Class.class))).thenReturn(message);
+
+        MessagePool messagePool = Mockito.mock(MessagePool.class);
+
+        ViewToPresenterMap viewToPresenterMap = ViewToPresenterMap.getMock();
+        ModelMap modelMap = ModelMap.getMock();
 
         when(knit.getModelManager()).thenReturn(Mockito.mock(ModelManager.class));
         when(knit.getNavigator()).thenReturn(Mockito.mock(KnitNavigator.class));
@@ -56,6 +58,9 @@ public class KnitMock {
         when(knit.getModelLoader()).thenReturn(knitModelLoader);
         when(knit.getPresenterLoader()).thenReturn(knitPresenterLoader);
         when(knit.getMessageTrain()).thenReturn(mockMessageTrain);
+        when(knit.getMessagePool()).thenReturn(messagePool);
+        when(knit.getViewToPresenterMap()).thenReturn(viewToPresenterMap);
+        when(knit.getModelMap()).thenReturn(modelMap);
         return knit;
     }
 

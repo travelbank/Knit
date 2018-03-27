@@ -59,12 +59,4 @@ public class InterfaceMethodsCreatorForExposers {
                 .build();
     }
 
-    public static MethodSpec getSetMessageMethod(){
-        return MethodSpec
-                .methodBuilder("use_"+KnitFileStrings.KNIT_PRESENTER_RECEIVE_MESSAGE)
-                .addModifiers(Modifier.PUBLIC)
-                .addParameter(KnitFileStrings.TYPE_NAME_KNIT_MESSAGE,"msg")
-                .addStatement("parent.receiveMessage(msg)")
-                .build();
-    }
 }

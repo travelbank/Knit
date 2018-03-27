@@ -1,13 +1,11 @@
 package com.omerozer.knit.components.graph;
 
-import android.os.Bundle;
+import android.util.Log;
 
 import com.omerozer.knit.InternalModel;
 import com.omerozer.knit.InternalPresenter;
-import com.omerozer.knit.Knit;
 import com.omerozer.knit.KnitInterface;
 import com.omerozer.knit.KnitMessage;
-import com.omerozer.knit.KnitNavigator;
 import com.omerozer.knit.MemoryEntity;
 import com.omerozer.knit.MessagePool;
 import com.omerozer.knit.MessageTrain;
@@ -15,10 +13,8 @@ import com.omerozer.knit.ModelMapInterface;
 import com.omerozer.knit.ViewToPresenterMapInterface;
 import com.omerozer.knit.classloaders.KnitModelLoader;
 import com.omerozer.knit.classloaders.KnitPresenterLoader;
-import com.omerozer.knit.classloaders.KnitUtilsLoader;
 import com.omerozer.knit.components.ComponentTag;
 import com.omerozer.knit.components.ModelManager;
-import com.omerozer.knit.schedulers.SchedulerProvider;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -66,8 +62,8 @@ public class UsageGraph {
     public UsageGraph(KnitInterface knitInstance) {
         this.modelManager = knitInstance.getModelManager();
         this.modelManager.setUsageGraph(this);
-        this.viewToPresenterMap = knitInstance.getUtilsLoader().getViewToPresenterMap(knitInstance.getClass());
-        this.modelMap = knitInstance.getUtilsLoader().getModelMap(knitInstance.getClass());
+        this.viewToPresenterMap = knitInstance.getViewToPresenterMap();
+        this.modelMap = knitInstance.getModelMap();
         this.knitModelLoader = knitInstance.getModelLoader();
         this.knitPresenterLoader = knitInstance.getPresenterLoader();
         this.messageTrain = knitInstance.getMessageTrain();
@@ -241,22 +237,28 @@ public class UsageGraph {
                 break;
 
             case PRESENTER:
+                InternalPresenter internalPresenter;
                 if (!counterMap.get(entityNode.tag).isUsed()) {
-                    InternalPresenter internalPresenter = knitPresenterLoader.loadPresenter(tagToClazzMap.get(entityNode.tag));
-                    if(messageTrain.hasMessage(tagToClazzMap.get(entityNode.tag))){
-                        KnitMessage message = messageTrain.getMessageForView(tagToClazzMap.get(entityNode.tag));
-                        internalPresenter.receiveMessage(message);
-                        messagePool.pool(message);
-                    }
+                    internalPresenter = knitPresenterLoader.loadPresenter(tagToClazzMap.get(entityNode.tag));
                     instanceMap.put(entityNode.tag, internalPresenter);
                     activePresenterTags.add(entityNode.tag);
                     internalPresenter.onCreate();
                 }
-                ((InternalPresenter) instanceMap.get(entityNode.tag)).onViewApplied(viewObject);
+                internalPresenter = ((InternalPresenter) instanceMap.get(entityNode.tag));
+                internalPresenter.onViewApplied(viewObject);
+                handleMessageDelivery(internalPresenter,entityNode.tag);
                 break;
         }
         counterMap.get(entityNode.tag).use();
 
+    }
+
+    private void handleMessageDelivery(InternalPresenter presenter,ComponentTag tag){
+        if(messageTrain.hasMessage(tagToClazzMap.get(tag))){
+            KnitMessage message = messageTrain.getMessageForView(tagToClazzMap.get(tag));
+            presenter.receiveMessage(message);
+            messagePool.pool(message);
+        }
     }
 
     public void stopViewAndItsComponents(Object viewObject) {

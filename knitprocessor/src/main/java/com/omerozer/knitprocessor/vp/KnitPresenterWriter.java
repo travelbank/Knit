@@ -183,14 +183,6 @@ class KnitPresenterWriter extends KnitClassWriter {
                 .addStatement("return this.parent.getParent()")
                 .build();
 
-        MethodSpec receiveMessageMethod = MethodSpec
-                .methodBuilder(KnitFileStrings.KNIT_PRESENTER_RECEIVE_MESSAGE)
-                .addAnnotation(Override.class)
-                .addModifiers(Modifier.PUBLIC)
-                .addParameter(KnitFileStrings.TYPE_NAME_KNIT_MESSAGE,"msg")
-                .addStatement("this.parent.use_receiveMessage(msg)")
-                .build();
-
         builder.addMethod(shouldLoadMethod);
         builder.addMethod(getModelManagerMethod);
         builder.addMethod(getContractMethod);
@@ -198,30 +190,10 @@ class KnitPresenterWriter extends KnitClassWriter {
         builder.addMethod(getUpdatablesMethod);
         builder.addMethod(getNavigatorMEthod);
         builder.addMethod(getParentMethod);
-        builder.addMethod(receiveMessageMethod);
     }
 
     private void createNativeViewCallbacks(TypeSpec.Builder builder, KnitPresenterMirror knitPresenterMirror){
-        for(String callback : NativeViewCallbacks.getAll()){
-            if(NativeViewCallbacks.isOnViewResult(callback)){
-                builder.addMethod(MethodSpec
-                        .methodBuilder(callback)
-                        .addParameter(TypeName.INT,"req")
-                        .addParameter(TypeName.INT,"res")
-                        .addParameter(ANDROID_INTENT,"data")
-                        .addAnnotation(Override.class)
-                        .addModifiers(Modifier.PUBLIC)
-                        .addStatement("this.parent.use_$L(req,res,data)", callback)
-                        .build());
-                continue;
-            }
-            builder.addMethod(MethodSpec
-                    .methodBuilder(callback)
-                    .addAnnotation(Override.class)
-                    .addModifiers(Modifier.PUBLIC)
-                    .addStatement("this.parent.use_$L()",callback)
-                    .build());
-        }
+        NativeViewCallbacks.createNativeCallbackMethodsForPresenter(builder);
     }
 
     private void createHandleMethod(TypeSpec.Builder clazzBuilder,
