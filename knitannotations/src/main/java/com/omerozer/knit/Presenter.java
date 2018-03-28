@@ -12,6 +12,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
 public @interface Presenter {
-    Class<?> value();
+    Class<?> value() default Object.class;
     String[] needs() default "";
 }

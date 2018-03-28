@@ -13,12 +13,14 @@ import com.android.tools.lint.detector.api.Severity;
 
 public class KnitIssues {
 
+    public static final String ANNOTATION_CLASS_MISMATCH = "Knit : Annotation Wrongly Used";
+
     public static final Issue PRESENTER_ANNOTATION_MISMATCH = Issue.create(
             "pr_an_mtc",
             "Knit: 'Presenter' annotation wrongly used",
             "Knit: 'Presenter' annotation used on an Class that doesn't extend 'KnitPresenter'",
             Category.CORRECTNESS,
-            7,
+            9,
             Severity.ERROR,
             new Implementation(KnitAnnotationDetector.class, Scope.JAVA_FILE_SCOPE)
     );
@@ -28,7 +30,7 @@ public class KnitIssues {
             "Knit: 'Model' annotation wrongly used",
             "Knit: 'Model' annotation used on an Class that doesn't extend 'KnitModel'",
             Category.CORRECTNESS,
-            7,
+            9,
             Severity.ERROR,
             new Implementation(KnitAnnotationDetector.class, Scope.JAVA_FILE_SCOPE)
     );

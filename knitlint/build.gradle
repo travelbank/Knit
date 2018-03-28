@@ -9,6 +9,9 @@ dependencies {
     compileOnly "com.android.tools.lint:lint-api:26.1.0"
     compileOnly "com.android.tools.lint:lint-checks:26.1.0"
 
+    testImplementation "com.android.tools.lint:lint:26.1.0"
+    testImplementation "com.android.tools.lint:lint-tests:26.1.0"
+    testImplementation 'junit:junit:4.12'
 }
 
 jar {
