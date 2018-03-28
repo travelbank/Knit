@@ -3,6 +3,7 @@ package com.omerozer.knit.classloadertests;
 import com.omerozer.knit.InternalModel;
 import com.omerozer.knit.TestModel;
 import com.omerozer.knit.TestModel_Model;
+import com.omerozer.knit.TestSchedulers;
 import com.omerozer.knit.classloaders.KnitModelLoader;
 import com.omerozer.knit.schedulers.SchedulerProvider;
 import com.omerozer.knit.schedulers.Schedulers;
@@ -24,7 +25,7 @@ public class KnitModelLoaderTests {
 
     @Before
     public void setup(){
-        this.schedulerProvider = new Schedulers();
+        this.schedulerProvider = new TestSchedulers();
         this.knitModelLoader = new KnitModelLoader(schedulerProvider);
     }
 
