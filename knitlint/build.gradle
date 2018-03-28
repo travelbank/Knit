@@ -1,0 +1,18 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    compileOnly "com.android.tools.lint:lint-api:26.1.0"
+    compileOnly "com.android.tools.lint:lint-checks:26.1.0"
+
+}
+
+jar {
+    manifest {
+        attributes('Lint-Registry-v2': 'com.omerozer.knitlint.KnitIssueRegistry')
+    }
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

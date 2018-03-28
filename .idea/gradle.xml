@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/knitannotations" />
             <option value="$PROJECT_DIR$/knitlib" />
+            <option value="$PROJECT_DIR$/knitlint" />
             <option value="$PROJECT_DIR$/knitprocessor" />
             <option value="$PROJECT_DIR$/knittestkit" />
           </set>

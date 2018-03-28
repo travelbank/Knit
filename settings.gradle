@@ -1,1 +1,1 @@
-include ':app', ':knitannotations', ':knitprocessor', ':knitlib', ':knittestkit'
+include ':app', ':knitannotations', ':knitprocessor', ':knitlib', ':knittestkit', ':knitlint', ':knitlint'

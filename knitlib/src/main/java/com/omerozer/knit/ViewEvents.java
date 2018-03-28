@@ -65,7 +65,7 @@ public class ViewEvents {
         });
     }
 
-    public void onTextChanged(final String tag, final Object carrierObject,
+    public void onBeforeTextChanged(final String tag, final Object carrierObject,
             final EditText view) {
         final TextWatcher watcher = new TextWatcher() {
             @Override
@@ -85,6 +85,27 @@ public class ViewEvents {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+        view.addTextChangedListener(watcher);
+    }
+
+    public void onTextChanged(final String tag, final Object carrierObject,
+            final EditText view) {
+        final TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 view.removeTextChangedListener(this);
                 KnitTextChangedEvent event = onTextChangedEventPool.getObject();
                 event.setTag(tag);
@@ -96,6 +117,27 @@ public class ViewEvents {
                 knit.findPresenterForView(carrierObject).handle(onTextChangedEventPool, event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+        view.addTextChangedListener(watcher);
+    }
+
+    public void onAfterTextChanged(final String tag, final Object carrierObject,
+            final EditText view) {
+        final TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
@@ -161,5 +203,6 @@ public class ViewEvents {
     public void onViewResult(Object carrierObject,int requestCode,int resultCode,Intent data){
         knit.findPresenterForView(carrierObject).onViewResult(requestCode,resultCode,data);
     }
+
 
 }

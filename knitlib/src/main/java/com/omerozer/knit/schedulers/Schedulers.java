@@ -12,6 +12,8 @@ public class Schedulers implements SchedulerProvider{
 
     private KnitIOReceiverThread ioReceiverThread = new KnitIOReceiverThread();
 
+    private MainHandlerSupplier mainThreadSupplier = new MainHandlerSupplier();
+
     @Override
     public SchedulerInterface io(){
         return new IOScheduler(ioThreadPool,ioReceiverThread);
@@ -19,7 +21,7 @@ public class Schedulers implements SchedulerProvider{
 
     @Override
     public SchedulerInterface main(){
-        return new AndroidMainThreadScheduler();
+        return new AndroidMainThreadScheduler(mainThreadSupplier);
     }
 
     @Override

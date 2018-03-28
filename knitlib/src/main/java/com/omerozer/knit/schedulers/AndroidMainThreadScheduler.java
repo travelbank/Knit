@@ -14,25 +14,22 @@ import java.util.concurrent.atomic.AtomicReference;
 public class AndroidMainThreadScheduler implements SchedulerInterface {
 
 
-    private static AtomicReference<Handler> MAIN_THREAD_HANDLER;
     private AtomicReference<SchedulerInterface> target;
     private AtomicReference<Consumer> resultConsumer;
     private AtomicBoolean isDone;
+    private MainHandlerSupplierInterface mainHandlerSupplier;
 
-    static {
-        MAIN_THREAD_HANDLER = new AtomicReference<>(new Handler(Looper.getMainLooper()));
-    }
-
-    public AndroidMainThreadScheduler(){
+    public AndroidMainThreadScheduler(MainHandlerSupplierInterface mainHandlerSupplier){
         this.target = new AtomicReference<>();
         this.resultConsumer = new AtomicReference<>();
         this.isDone = new AtomicBoolean(false);
+        this.mainHandlerSupplier = mainHandlerSupplier;
     }
 
 
     @Override
     public <T> void submit(final Callable<T> callable) {
-        MAIN_THREAD_HANDLER.get().post(new Runnable() {
+        mainHandlerSupplier.post(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -57,7 +54,7 @@ public class AndroidMainThreadScheduler implements SchedulerInterface {
 
     @Override
     public void submit(Runnable runnable) {
-        MAIN_THREAD_HANDLER.get().post(runnable);
+        mainHandlerSupplier.post(runnable);
         isDone.set(true);
     }
 
