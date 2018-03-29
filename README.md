@@ -112,33 +112,55 @@ Presenters:
 public class RepoActivityPresenter extends KnitPresenter<RepoActivityContract> {
 
 
+@Override
+    public void receiveMessage(KnitMessage message) {
+        super.receiveMessage(message);
+        this.string = message.<String>getData("txt");
+    }
+
     @Override
     public void onCreate() {
+        super.onCreate();
+        Log.d("KNIT_TEST","PRESENTER TWO CREATED");
+    }
 
+
+    @Override
+    public void onViewStart() {
+        super.onViewStart();
+        getContract().recMes(string);
     }
 
     @Override
-    public void onViewApplied(Object o, Bundle bundle) {
-        request(RestLayer.GET_REPOS, KnitSchedulers.IO,KnitSchedulers.MAIN,bundle.getString("userName"));
+    public void onViewResume() {
+        super.onViewResume();
     }
 
+    
     @Override
-    public void onCurrentViewReleased() {
-
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("KNIT_TEST","PRESENTER TWO DESTROYED");
     }
 
-    @ViewEvent(SEARCH_CLICK)
-    public void handle(ViewEventEnv viewEventEnv) {
-            getNavigator()
-                    .toActivity()
-                    .target(RepoActivity.class)
-                    .go();
-
+    @ViewEvent(BUTTON_CLICK)
+    public void handle(ViewEventEnv eventEnv) {
+        getNavigator()
+                .toActivity()
+                .from(getView())
+                .setMessage(newMessage().putData("txt",getContract().get()))
+                .target(SecondActivity.class)
+                .go();
     }
 
-    @ModelEvent(RestLayer.GET_REPOS)
-    public void repoRec(List<Repo> repos){
-        getContract().showRepos(repos);
+    @ModelEvent("umbrella")
+    void updateData2(KnitResponse<String> data){
+        getContract().recMes(data.getBody());
+    }
+
+    @ModelEvent("Ttest")
+    void updateDatat2(KnitResponse<List<StringWrapper>> data){
+        getContract().recMes(data.getBody().get(0).string);
     }
 }
 ```
