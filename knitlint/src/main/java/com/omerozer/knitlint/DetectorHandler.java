@@ -4,6 +4,8 @@ import com.android.tools.lint.client.api.UElementHandler;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 
+import com.intellij.psi.PsiElement;
+
 import org.jetbrains.uast.UAnnotation;
 import org.jetbrains.uast.UClass;
 
@@ -25,7 +27,6 @@ public class DetectorHandler extends UElementHandler {
         checkForAnnotations(node);
     }
 
-
     private void checkForAnnotations(UClass node){
 
         if(node.findAnnotation(AnnotationsToCover.PRESENTER)!=null){
@@ -38,6 +39,12 @@ public class DetectorHandler extends UElementHandler {
             return;
         }
 
+        context.report(KnitIssues.PRESENTER_ANNOTATION_MISMATCH,node,context.getLocation((PsiElement) node),KnitIssues.ANNOTATION_CLASS_MISMATCH);
+
+    }
+
+    private void reportMismatch(UClass node,UAnnotation annotation,Issue issue){
+        context.report(issue,node,context.getLocation(annotation),KnitIssues.ANNOTATION_CLASS_MISMATCH);
     }
 
     private void handlePresenter(UClass node,UAnnotation annotation){
@@ -49,10 +56,6 @@ public class DetectorHandler extends UElementHandler {
             clazz = clazz.getSuperClass();
         }
         reportMismatch(node,annotation,KnitIssues.PRESENTER_ANNOTATION_MISMATCH);
-    }
-
-    private void reportMismatch(UClass node,UAnnotation annotation,Issue issue){
-        context.report(KnitIssues.PRESENTER_ANNOTATION_MISMATCH,node,context.getLocation(annotation),KnitIssues.ANNOTATION_CLASS_MISMATCH);
     }
 
     private void handleModel(UClass node,UAnnotation annotation ){

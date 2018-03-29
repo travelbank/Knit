@@ -16,21 +16,21 @@ public class KnitIssues {
     public static final String ANNOTATION_CLASS_MISMATCH = "Knit : Annotation Wrongly Used";
 
     public static final Issue PRESENTER_ANNOTATION_MISMATCH = Issue.create(
-            "pr_an_mtc",
+            "presenter ant mismatch",
             "Knit: 'Presenter' annotation wrongly used",
             "Knit: 'Presenter' annotation used on an Class that doesn't extend 'KnitPresenter'",
-            Category.CORRECTNESS,
-            9,
+            Category.USABILITY,
+            7,
             Severity.ERROR,
             new Implementation(KnitAnnotationDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 
     public static final Issue MODEL_ANNOTATION_MISMATCH = Issue.create(
-            "mo_an_mtc",
+            "model ant mismatch",
             "Knit: 'Model' annotation wrongly used",
             "Knit: 'Model' annotation used on an Class that doesn't extend 'KnitModel'",
-            Category.CORRECTNESS,
-            9,
+            Category.USABILITY,
+            7,
             Severity.ERROR,
             new Implementation(KnitAnnotationDetector.class, Scope.JAVA_FILE_SCOPE)
     );

@@ -5,7 +5,6 @@ import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.JavaContext;
 
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.uast.UAnnotation;
 import org.jetbrains.uast.UClass;
 import org.jetbrains.uast.UElement;
 
