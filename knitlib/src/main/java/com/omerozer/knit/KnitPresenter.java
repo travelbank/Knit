@@ -40,12 +40,12 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
     }
 
     protected void request(String data,KnitSchedulers runOn, KnitSchedulers consumeOn,Object... params) {
-        InternalPresenter instance = knitInstance.findPresenterForParent(this);
+        EntityInstance<InternalPresenter> instance = knitInstance.findPresenterForParent(this);
         getModelManager().request(data, runOn, consumeOn ,instance, params);
     }
 
     protected void request(String data,Object... params) {
-        InternalPresenter instance = knitInstance.findPresenterForParent(this);
+        EntityInstance<InternalPresenter> instance = knitInstance.findPresenterForParent(this);
         getModelManager().request(data, KnitSchedulers.IMMEDIATE, KnitSchedulers.IMMEDIATE ,instance, params);
     }
 
@@ -55,14 +55,14 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
 
     protected T getContract() {
         if(contract == null){
-            contract = knitInstance.findPresenterForParent(this).getContract();
+            contract = knitInstance.findPresenterForParent(this).get().getContract();
         }
         return (T) contract;
     }
 
     protected InternalModel getModelManager() {
         if(modelManager == null){
-            modelManager = knitInstance.findPresenterForParent(this).getModelManager();
+            modelManager = knitInstance.findPresenterForParent(this).get().getModelManager();
         }
         return modelManager;
     }
@@ -81,7 +81,7 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
 
     protected KnitNavigator getNavigator() {
         if(navigator == null){
-            navigator =  knitInstance.findPresenterForParent(this).getNavigator();
+            navigator =  knitInstance.findPresenterForParent(this).get().getNavigator();
         }
         return navigator;
     }

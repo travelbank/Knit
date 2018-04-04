@@ -19,9 +19,10 @@ public class TestModel_Model extends InternalModel {
         return schedulerProvider;
     }
 
+
     @Override
     public void request(String data, KnitSchedulers runOn, KnitSchedulers consumeOn,
-            InternalPresenter presenter, Object... params) {
+            EntityInstance<InternalPresenter> presenterInstance, Object... params) {
 
     }
 

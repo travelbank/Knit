@@ -58,9 +58,9 @@ public final class TestModelManager extends ModelManager {
 
     @Override
     public void request(String data, KnitSchedulers runOn, KnitSchedulers consumeOn,
-            InternalPresenter internalPresenter, Object... params) {
+            EntityInstance<InternalPresenter> instance, Object... params) {
         if(dataToModelMap.containsKey(data)){
-            dataToModelMap.get(data).request(data,runOn,consumeOn,internalPresenter,params);
+            dataToModelMap.get(data).request(data,runOn,consumeOn,instance,params);
         }
     }
 

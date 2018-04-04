@@ -8,7 +8,7 @@ import com.omerozer.knit.schedulers.KnitSchedulers;
 
 public abstract class InternalModel implements ModelInterface {
 
-    public abstract void request(String data,KnitSchedulers runOn,KnitSchedulers consumeOn,InternalPresenter presenter, Object... params);
+    public abstract void request(String data,KnitSchedulers runOn,KnitSchedulers consumeOn,EntityInstance<InternalPresenter> presenterInstance, Object... params);
 
     public abstract <T>KnitResponse<T> requestImmediately(String data, Object... params);
 

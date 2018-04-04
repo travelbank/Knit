@@ -2,6 +2,8 @@ package com.omerozer.knit.componenttests;
 
 import android.content.ComponentCallbacks2;
 
+import com.omerozer.knit.EntityInstance;
+import com.omerozer.knit.InternalPresenter;
 import com.omerozer.knit.MemoryEntity;
 import com.omerozer.knit.components.KnitMemoryManager;
 import com.omerozer.knit.components.graph.UsageGraph;
@@ -28,7 +30,7 @@ public class KnitMemoryManagerTests {
     @Mock
     UsageGraph usageGraph;
 
-    List<MemoryEntity> memoryEntityList;
+    List<EntityInstance> memoryEntityList;
 
     @Mock
     MemoryEntity memoryEntity;
@@ -38,7 +40,9 @@ public class KnitMemoryManagerTests {
         MockitoAnnotations.initMocks(this);
         this.knitMemoryManager = new KnitMemoryManager(usageGraph);
         this.memoryEntityList = new ArrayList<>();
-        this.memoryEntityList.add(memoryEntity);
+        EntityInstance instance = new EntityInstance();
+        instance.set(memoryEntity);
+        this.memoryEntityList.add(instance);
         when(usageGraph.activeEntities()).thenReturn(memoryEntityList);
     }
 

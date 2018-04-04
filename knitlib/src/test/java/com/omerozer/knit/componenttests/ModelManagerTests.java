@@ -1,5 +1,6 @@
 package com.omerozer.knit.componenttests;
 
+import com.omerozer.knit.EntityInstance;
 import com.omerozer.knit.InternalModel;
 import com.omerozer.knit.InternalPresenter;
 import com.omerozer.knit.KnitModel;
@@ -40,9 +41,17 @@ public class ModelManagerTests {
     @Mock
     KnitModel m2;
 
-    InternalModel model1;
+    @Mock
+    EntityInstance<InternalModel> model1;
 
-    InternalModel model2;
+    @Mock
+    EntityInstance<InternalModel> model2;
+
+    @Mock
+    InternalModel internalModel1;
+
+    @Mock
+    InternalModel internalModel2;
 
     @Mock
     UsageGraph usageGraph;
@@ -57,17 +66,19 @@ public class ModelManagerTests {
         this.tag1 = ComponentTag.getNewTag();
         this.tag2 = ComponentTag.getNewTag();
 
-        this.model1 = TestInternalModelCreator.create();
-        this.model2 = TestInternalModelCreator.create();
+        when(internalModel1.getHandledValues()).thenReturn(handledVals1);
+        when(model1.get()).thenReturn(internalModel1);
 
-        when(model1.getHandledValues()).thenReturn(handledVals1);
-        when(model2.getHandledValues()).thenReturn(handledVals2);
+
+        when(internalModel2.getHandledValues()).thenReturn(handledVals2);
+        when(model2.get()).thenReturn(internalModel2);
+
 
         when(usageGraph.getModelWithTag(tag1)).thenReturn(model1);
         when(usageGraph.getModelWithTag(tag2)).thenReturn(model2);
 
-        when(model1.getParent()).thenReturn(m1);
-        when(model2.getParent()).thenReturn(m2);
+        when(model1.get().getParent()).thenReturn(m1);
+        when(model2.get().getParent()).thenReturn(m2);
 
         this.modelManager =  new ModelManager();
 
@@ -79,7 +90,7 @@ public class ModelManagerTests {
         modelManager.registerModelComponentTag(tag1);
         ArgumentCaptor<ModelManager> modelManagerArgumentCaptor = ArgumentCaptor.forClass(ModelManager.class);
         verify(m1).setModelManager(modelManagerArgumentCaptor.capture());
-        verify(model1).getHandledValues();
+        verify(internalModel1).getHandledValues();
         assertEquals(modelManager,modelManagerArgumentCaptor.getValue());
     }
 
@@ -87,7 +98,7 @@ public class ModelManagerTests {
     public void unregisterComponentTagTest(){
         modelManager.registerModelComponentTag(tag1);
         modelManager.unregisterComponentTag(tag1);
-        verify(model1,times(handledVals1.length)).getHandledValues();
+        verify(internalModel1   ,times(handledVals1.length)).getHandledValues();
     }
 
     @Test
@@ -96,10 +107,10 @@ public class ModelManagerTests {
         ArgumentCaptor<String> dataArgumentCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<KnitSchedulers> runOnCaptor = ArgumentCaptor.forClass(KnitSchedulers.class);
         ArgumentCaptor<KnitSchedulers> consumeOnCaptor = ArgumentCaptor.forClass(KnitSchedulers.class);
-        ArgumentCaptor<InternalPresenter> presenterArgumentCaptor = ArgumentCaptor.forClass(InternalPresenter.class);
+        ArgumentCaptor<EntityInstance<InternalPresenter>> presenterArgumentCaptor = ArgumentCaptor.forClass(EntityInstance.class);
         ArgumentCaptor<String> paramCaptor = ArgumentCaptor.forClass(String.class);
         modelManager.request("v1", KnitSchedulers.IO,KnitSchedulers.MAIN, NullValues.NULL_PRESENTER,"param1");
-        verify(model1).request(dataArgumentCaptor.capture(),runOnCaptor.capture(),consumeOnCaptor.capture(),presenterArgumentCaptor.capture(),paramCaptor.capture());
+        verify(internalModel1).request(dataArgumentCaptor.capture(),runOnCaptor.capture(),consumeOnCaptor.capture(),presenterArgumentCaptor.capture(),paramCaptor.capture());
         assertEquals("v1",dataArgumentCaptor.getValue());
         assertEquals(KnitSchedulers.IO,runOnCaptor.getValue());
         assertEquals(KnitSchedulers.MAIN,consumeOnCaptor.getValue());
@@ -113,7 +124,7 @@ public class ModelManagerTests {
         ArgumentCaptor<String> dataArgumentCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<Integer> paramCaptor = ArgumentCaptor.forClass(Integer.class);
         modelManager.requestImmediately("v2",4);
-        verify(model1).requestImmediately(dataArgumentCaptor.capture(),paramCaptor.capture());
+        verify(internalModel1).requestImmediately(dataArgumentCaptor.capture(),paramCaptor.capture());
         assertEquals("v2",dataArgumentCaptor.getValue());
         assertEquals(Integer.valueOf(4),paramCaptor.getValue());
     }
@@ -124,7 +135,7 @@ public class ModelManagerTests {
         ArgumentCaptor<String> dataArgumentCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<Integer> paramCaptor = ArgumentCaptor.forClass(Integer.class);
         modelManager.input("v2",4);
-        verify(model1).input(dataArgumentCaptor.capture(),paramCaptor.capture());
+        verify(internalModel1).input(dataArgumentCaptor.capture(),paramCaptor.capture());
         assertEquals("v2",dataArgumentCaptor.getValue());
         assertEquals(Integer.valueOf(4),paramCaptor.getValue());
     }

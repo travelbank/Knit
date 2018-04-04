@@ -7,8 +7,10 @@ import com.omerozer.knit.schedulers.KnitSchedulers;
  */
 
 public class UmbrellaModel_Model extends InternalModel {
+
     @Override
-    public void request(String data, KnitSchedulers runOn, KnitSchedulers consumeOn, InternalPresenter presenter, Object... params) {
+    public void request(String data, KnitSchedulers runOn, KnitSchedulers consumeOn,
+            EntityInstance<InternalPresenter> presenterInstance, Object... params) {
 
     }
 

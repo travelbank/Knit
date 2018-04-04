@@ -1,5 +1,6 @@
 package com.omerozer.knit.components;
 
+import com.omerozer.knit.EntityInstance;
 import com.omerozer.knit.InternalModel;
 import com.omerozer.knit.InternalPresenter;
 import com.omerozer.knit.KnitModel;
@@ -29,32 +30,32 @@ public class ModelManager extends InternalModel {
     }
 
     public void registerModelComponentTag(ComponentTag componentTag) {
-        for (String val : usageGraph.getModelWithTag(componentTag).getHandledValues()) {
+        for (String val : usageGraph.getModelWithTag(componentTag).get().getHandledValues()) {
             valueToModelMap.put(val, componentTag);
         }
-        usageGraph.getModelWithTag(componentTag).getParent().setModelManager(this);
+        usageGraph.getModelWithTag(componentTag).get().getParent().setModelManager(this);
     }
 
     public void unregisterComponentTag(ComponentTag componentTag) {
         if(usageGraph.getModelWithTag(componentTag)==null){
             return;
         }
-        for (String val : usageGraph.getModelWithTag(componentTag).getHandledValues()) {
+        for (String val : usageGraph.getModelWithTag(componentTag).get().getHandledValues()) {
             valueToModelMap.remove(val);
         }
     }
 
     @Override
-    public void request(String data,KnitSchedulers runOn,KnitSchedulers consumeOn,InternalPresenter internalPresenter, Object... params) {
+    public void request(String data,KnitSchedulers runOn,KnitSchedulers consumeOn,EntityInstance<InternalPresenter> presenterInstance, Object... params) {
             if (valueToModelMap.containsKey(data)) {
-                usageGraph.getModelWithTag(valueToModelMap.get(data)).request(data, runOn,consumeOn,internalPresenter, params);
+                usageGraph.getModelWithTag(valueToModelMap.get(data)).get().request(data, runOn,consumeOn,presenterInstance, params);
             }
     }
 
     @Override
     public <T> KnitResponse<T> requestImmediately(String data, Object... params) {
             if (valueToModelMap.containsKey(data)) {
-                return usageGraph.getModelWithTag(valueToModelMap.get(data)).requestImmediately(data, params);
+                return usageGraph.getModelWithTag(valueToModelMap.get(data)).get().requestImmediately(data, params);
             }
         return null;
     }
@@ -62,7 +63,7 @@ public class ModelManager extends InternalModel {
     @Override
     public void input(String data, Object... params) {
             if (valueToModelMap.containsKey(data)) {
-                usageGraph.getModelWithTag(valueToModelMap.get(data)).input(data, params);
+                usageGraph.getModelWithTag(valueToModelMap.get(data)).get().input(data, params);
             }
     }
 
