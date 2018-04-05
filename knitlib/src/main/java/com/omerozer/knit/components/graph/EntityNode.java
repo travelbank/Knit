@@ -25,6 +25,16 @@ public class EntityNode {
     }
 
     @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+
+        EntityNode that = (EntityNode) object;
+
+        return tag.equals(that.tag);
+    }
+
+    @Override
     public int hashCode() {
         return tag.hashCode();
     }

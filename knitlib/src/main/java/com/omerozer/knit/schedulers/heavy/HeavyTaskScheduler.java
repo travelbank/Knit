@@ -20,7 +20,20 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Created by omerozer on 2/26/18.
+ *
+ * This is a {@link SchedulerInterface} that is meant to handle heavy weight tasks such as
+ * downloading large files/images. Tasks will be run on an Android {@link android.app.IntentService}.
+ * Knit creates a pool ({@link PriorityQueue}) of 4 {@link HeavyThread} s which are {@link android.app.IntentService}s.
+ * The pool prioritizes these bases on the number of current running tasks. The next task will always
+ * run on the {@link HeavyThread} with the least number of tasks running.
+ *
+ * @see HeavyThread
+ * @see HThread1
+ * @see HThread2
+ * @see HThread3
+ * @see HThread4
+ *
+ * @author Omer Ozer
  */
 
 public class HeavyTaskScheduler implements SchedulerInterface {
@@ -33,6 +46,9 @@ public class HeavyTaskScheduler implements SchedulerInterface {
     private static final Object queueLock;
     private static final PriorityQueue<AvailableThread> avaiableThreads;
 
+    /**
+     * Initialize all threads in the pool
+     */
     static {
         queueLock = new Object();
         avaiableThreads = new PriorityQueue<>(4,getThreadPriorityComparator());
@@ -73,16 +89,26 @@ public class HeavyTaskScheduler implements SchedulerInterface {
         this.context = Knit.getInstance().getApp();
     }
 
+    /**
+     * Creates a {@link TaskPackage} to be sent to the {@link HeavyThread}.
+     * @param callable {@link Callable} task that's being passed.
+     * @param <T> Type of that the callable returns.
+     */
     @Override
     public <T> void submit(Callable<T> callable) {
         TaskPackage taskPackage = new TaskPackage();
         taskPackage.setCallable(callable);
+        taskPackage.setCurrent(this);
         taskPackage.setTarget(target);
         taskPackage.setConsumer(consumer);
         AvailableThread availableThread = getLeastBusyThread();
         handleTask(availableThread.threadId, taskPackage, context, availableThread.clazz);
     }
 
+    /**
+     * Creates a {@link TaskPackage} to be sent to the {@link HeavyThread}.
+     * @param runnable {@link Runnable} task that's being passed.
+     */
     @Override
     public void submit(Runnable runnable) {
         TaskPackage taskPackage = new TaskPackage();
@@ -101,26 +127,42 @@ public class HeavyTaskScheduler implements SchedulerInterface {
         }
     }
 
+    /**
+     * Starts the scheduler. Also registers in to the {@link com.omerozer.knit.schedulers.EvictorThread}
+     */
     @Override
     public void start() {
         EVICTOR_THREAD.registerScheduler(this);
     }
 
+    /**
+     * Shuts down the Scheduler.
+     */
     @Override
     public void shutDown() {
-        context.stopService(new Intent(context, HThread1.class));
-        context.stopService(new Intent(context, HThread2.class));
-        context.stopService(new Intent(context, HThread3.class));
-        context.stopService(new Intent(context, HThread4.class));
-
+        if(getPriority(HEAVY_THREAD_NAME1)==0){context.stopService(new Intent(context, HThread1.class));}
+        if(getPriority(HEAVY_THREAD_NAME2)==0){context.stopService(new Intent(context, HThread2.class));}
+        if(getPriority(HEAVY_THREAD_NAME3)==0){context.stopService(new Intent(context, HThread3.class));}
+        if(getPriority(HEAVY_THREAD_NAME4)==0){context.stopService(new Intent(context, HThread4.class));}
     }
 
+    /**
+     * Sets the target {@link SchedulerInterface} which will run the consume task.
+     * @param schedulerInterface Target scheduler to run the consume task.
+     * @param consumer {@link Consumer} object that contains the way consume will occur.
+     * @param <T> Type that the consumer will receive.
+     */
     @Override
     public <T> void setTargetAndConsumer(SchedulerInterface schedulerInterface, Consumer consumer) {
         this.target = schedulerInterface;
         this.consumer = consumer;
     }
 
+    /**
+     * If there are no {@link HeavyThread} running actively. This will return {@code true}.
+     * If {@code true} then {@link com.omerozer.knit.schedulers.EvictorThread} will shut down and evict this scheduler.
+     * @return Whether this scheduler has any tasks running or not.
+     */
     @Override
     public boolean isDone() {
         return  getPriority(HEAVY_THREAD_NAME1) == 0 &&

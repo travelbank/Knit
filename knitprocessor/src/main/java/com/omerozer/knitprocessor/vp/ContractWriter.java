@@ -34,7 +34,7 @@ public class ContractWriter extends KnitClassWriter {
 
        createParentField(contractClassBuilder,viewMirror);
        createConstructor(contractClassBuilder,viewMirror);
-       createNullcheckMethod(contractClassBuilder,viewMirror);
+       //createNullcheckMethod(contractClassBuilder,viewMirror);
        createNonAndroidMethods(contractClassBuilder,viewMirror);
 
        PackageElement packageElement = (PackageElement)viewMirror.enclosingClass.getEnclosingElement();
@@ -93,17 +93,17 @@ public class ContractWriter extends KnitClassWriter {
             }
 
             if(executableElement.getReturnType().toString().contains("void")){
-                methodBuilder.beginControlFlow("if(nullCheck())");
-                methodBuilder.addStatement("return");
-                methodBuilder.endControlFlow();
+//                methodBuilder.beginControlFlow("if(nullCheck())");
+//                methodBuilder.addStatement("return");
+//                methodBuilder.endControlFlow();
                 methodBuilder.addStatement("this.parent.get().$L($L)",executableElement.getSimpleName(),paramBlock);
             }else{
                 TypeName returnType = TypeName.get(executableElement.getReturnType());
                 methodBuilder.returns(returnType);
 
-                methodBuilder.beginControlFlow("if(nullCheck())");
-                methodBuilder.addStatement("return $L", ReturnTypeExaminer.getDefaultReturnValueInString(returnType));
-                methodBuilder.endControlFlow();
+//                methodBuilder.beginControlFlow("if(nullCheck())");
+//                methodBuilder.addStatement("return $L", ReturnTypeExaminer.getDefaultReturnValueInString(returnType));
+//                methodBuilder.endControlFlow();
 
                 methodBuilder.addStatement("return this.parent.get().$L($L)",executableElement.getSimpleName(),paramBlock);
             }

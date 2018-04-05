@@ -62,6 +62,8 @@ class KnitPresenterWriter extends KnitClassWriter {
     }
 
     private void createFields(TypeSpec.Builder builder,ClassName contractName ,KnitPresenterMirror presenterMirror){
+
+
         FieldSpec parentField = FieldSpec
                 .builder(ClassName.bestGuess(presenterMirror.enclosingClass.getQualifiedName() +
                                 KnitFileStrings.KNIT_MODEL_EXPOSER_POSTFIX), "parent",

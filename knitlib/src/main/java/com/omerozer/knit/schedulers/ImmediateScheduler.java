@@ -5,7 +5,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Created by omerozer on 2/26/18.
+ * This scheduler runs the tasks directly on the thread that it was fired from. Provides no async
+ * operations. The main use case is for Unit tests.
+ *
+ * @author Omer Ozer
  */
 
 public class ImmediateScheduler implements SchedulerInterface {

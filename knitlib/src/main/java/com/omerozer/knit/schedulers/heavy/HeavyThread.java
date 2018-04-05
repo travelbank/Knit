@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.Map;
 import java.util.Queue;
@@ -12,7 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * Created by omerozer on 2/28/18.
+ *
+ * Base class for all threads in {@link HeavyTaskScheduler} pool.
+ *
+ * @author Omer Ozer
  */
 
 public abstract class HeavyThread extends IntentService {
@@ -25,6 +27,13 @@ public abstract class HeavyThread extends IntentService {
 
     private static Map<String,ConcurrentLinkedQueue<TaskPackage>> taskMap;
 
+    /**
+     * This methods starts {@link HeavyThread}s.
+     * @param threadId Unique identifier for the {@link HeavyThread}
+     * @param taskPackage Package that contains the task to be handled.
+     * @param context Android {@link Context} to help start the {@link HeavyThread}s
+     * @param taskThread The exact thread type to be used for the thread pool.({@code HThread1, HThread2... etc})
+     */
     public static void handleTask(String threadId, TaskPackage taskPackage,Context context,Class<? extends HeavyThread> taskThread){
         getTaskQueueForThread(threadId).add(taskPackage);
         Intent intent = new Intent(context,taskThread);
@@ -47,6 +56,13 @@ public abstract class HeavyThread extends IntentService {
         return taskMap.get(threadId);
     }
 
+    /**
+     * Returns the priority of the active {@link HeavyThread} with the given id.
+     * Priority is the number of current active tasks. A priority of 0 means, the thread is the most
+     * available to receive an incoming task.
+     * @param threadId
+     * @return
+     */
     public static int getPriority(String threadId){
         return getTaskQueueForThread(threadId).size();
     }
@@ -58,13 +74,17 @@ public abstract class HeavyThread extends IntentService {
         this.threadId = name;
     }
 
+    /**
+     * @see IntentService
+     * @param intent intent that's sent to start the thread.
+     */
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         final TaskPackage currentTask = getNextTask(threadId);
-        Log.d("KNIT_TEST","HEAVY:"+threadId);
         switch (intent.getIntExtra(TASK_TYPE_KEY,RUNNABLE)){
             case RUNNABLE:
                 currentTask.getRunnable().run();
+                currentTask.getCurrent().shutDown();
                 break;
             case CALLABLE:
                 try {
@@ -74,6 +94,7 @@ public abstract class HeavyThread extends IntentService {
                         @Override
                         public void run() {
                             currentTask.getConsumer().consume(data);
+                            currentTask.getCurrent().shutDown();
                         }
                     });
                 } catch (Exception e) {
@@ -86,5 +107,6 @@ public abstract class HeavyThread extends IntentService {
 
         }
     }
+
 
 }

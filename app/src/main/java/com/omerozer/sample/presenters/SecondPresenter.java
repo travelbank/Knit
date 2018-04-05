@@ -26,10 +26,9 @@ public class SecondPresenter extends KnitPresenter<SecondActivityContract> {
     @Override
     public void onViewApplied(Object viewObject){
         super.onViewApplied(viewObject);
-//        request("umbrella", KnitSchedulers.IO,KnitSchedulers.MAIN);
-//        request("Ttest", KnitSchedulers.IO,KnitSchedulers.MAIN);
+        request("umbrella", KnitSchedulers.IO,KnitSchedulers.MAIN);
+        request("Ttest", KnitSchedulers.IO,KnitSchedulers.MAIN);
         Log.d("KNIT_TEST","PRESENTER TWO VIEW APPLIED");
-
     }
 
     @Override
