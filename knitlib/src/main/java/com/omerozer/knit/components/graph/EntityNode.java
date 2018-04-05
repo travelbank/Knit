@@ -5,8 +5,14 @@ import com.omerozer.knit.components.ComponentTag;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+
 /**
- * Created by omerozer on 2/16/18.
+ *
+ * Node that is used by the {@link UsageGraph} .
+ * Contains the associated {@link ComponentTag} and {@link EntityType} for each component
+ * and a {@link Set} of entities that this entity depends on.
+ * @see UsageGraph
+ * @author Omer Ozer
  */
 
 public class EntityNode {

@@ -1,31 +1,29 @@
 package com.omerozer.knitprocessor.model;
 
-import static com.omerozer.knitprocessor.KnitFileStrings.*;
-
 import com.omerozer.knit.InstanceType;
 import com.omerozer.knitprocessor.KnitClassWriter;
 import com.omerozer.knitprocessor.KnitFileStrings;
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.WildcardTypeName;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Modifier;
 
+import static com.omerozer.knitprocessor.KnitFileStrings.TYPE_NAME_CLASS;
+import static com.omerozer.knitprocessor.KnitFileStrings.TYPE_NAME_LIST;
+import static com.omerozer.knitprocessor.KnitFileStrings.TYPE_NAME_STRING;
+
 /**
  * Created by omerozer on 2/6/18.
  */
 
-public class ModelMapWriter extends KnitClassWriter  {
+public class  ModelMapWriter extends KnitClassWriter  {
     void write(Filer filer, Set<KnitModelMirror> modelMirrors) {
 
         TypeSpec.Builder modelMapBuilder = TypeSpec

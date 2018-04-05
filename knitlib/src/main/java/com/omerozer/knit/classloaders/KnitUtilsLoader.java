@@ -1,7 +1,5 @@
 package com.omerozer.knit.classloaders;
 
-import com.omerozer.knit.InternalModel;
-import com.omerozer.knit.KnitNavigator;
 import com.omerozer.knit.ModelMapInterface;
 import com.omerozer.knit.ViewToPresenterMapInterface;
 
@@ -9,7 +7,12 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * Created by omerozer on 2/12/18.
+ *
+ * Initializes {@link ModelMapInterface} and {@link ViewToPresenterMapInterface} classes
+ * with the data created by the KnitProcessor. The loaded classes will be {@code ModelMap} and {@code ViewToPresenterMap}
+ * that implement {@link ModelMapInterface} and {@link ViewToPresenterMapInterface} respectively
+ *
+ * @author Omer Ozer
  */
 
 public class KnitUtilsLoader {
@@ -35,6 +38,12 @@ public class KnitUtilsLoader {
         return null;
     }
 
+
+    /**
+     * Initializes the {@link ModelMapInterface} required by the current environment
+     * @param clazz base class required by the {@link ClassLoader}. Knit passes a {@code Knit.class} to it.
+     * @return This is the {@code ModelMap implements ModelMapInterface} class.
+     */
     public ModelMapInterface getModelMap(Class<?> clazz){
         try {
             return (ModelMapInterface)getConstructorForModelMap(clazz).newInstance();
@@ -67,6 +76,11 @@ public class KnitUtilsLoader {
         return null;
     }
 
+    /**
+     * Initializes the {@link ViewToPresenterMapInterface} required by the current environment
+     * @param clazz base class required by the {@link ClassLoader}. Knit passes a {@code Knit.class} to it.
+     * @return This is the {@code ViewToPresenterMap implements ViewToPresenterMapInterface} class.
+     */
     public ViewToPresenterMapInterface getViewToPresenterMap(Class<?> clazz){
         try {
             return (ViewToPresenterMapInterface)getViewToPresenterConstructor(clazz).newInstance();

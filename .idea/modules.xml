@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/knitlib/knitlib.iml" filepath="$PROJECT_DIR$/knitlib/knitlib.iml" />
       <module fileurl="file://C:\Users\bo_om\StudioProjects\Knit\knitlib\knitlibs.iml" filepath="C:\Users\bo_om\StudioProjects\Knit\knitlib\knitlibs.iml" />
       <module fileurl="file://$PROJECT_DIR$/knitlint/knitlint.iml" filepath="$PROJECT_DIR$/knitlint/knitlint.iml" />
+      <module fileurl="file://C:\Users\bo_om\StudioProjects\Knit\knitlint\knitlint.iml" filepath="C:\Users\bo_om\StudioProjects\Knit\knitlint\knitlint.iml" />
       <module fileurl="file://$PROJECT_DIR$/knitprocessor/knitprocessor.iml" filepath="$PROJECT_DIR$/knitprocessor/knitprocessor.iml" />
       <module fileurl="file://$PROJECT_DIR$/knittestkit/knittestkit.iml" filepath="$PROJECT_DIR$/knittestkit/knittestkit.iml" />
     </modules>

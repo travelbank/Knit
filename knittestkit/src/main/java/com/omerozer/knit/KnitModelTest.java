@@ -21,9 +21,12 @@ public abstract class KnitModelTest<T extends KnitModel>{
 
     private Mocker mocker;
 
+    private KnitInterface knit;
+
     @Before
     public void init(){
-        modelManager = new TestModelManager(getSchedulerProvider());
+        this.knit = new TestKnit();
+        modelManager = new TestModelManager(knit);
         try{
         setup();
         }catch (Exception e){

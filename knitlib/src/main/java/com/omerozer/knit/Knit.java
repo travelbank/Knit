@@ -60,9 +60,9 @@ public class Knit implements KnitInterface {
         this.modelManager = new ModelManager();
         this.schedulerProvider = new Schedulers();
         this.navigator = new KnitNavigator(this);
-        this.knitModelLoader = new KnitModelLoader(schedulerProvider);
         this.knitPresenterLoader = new KnitPresenterLoader(this);
         this.knitUtilsLoader = new KnitUtilsLoader();
+        this.knitModelLoader = new KnitModelLoader(this);
         this.messagePool = new MessagePool();
         this.modelMap = knitUtilsLoader.getModelMap(Knit.class);
         this.viewToPresenterMap = knitUtilsLoader.getViewToPresenterMap(Knit.class);

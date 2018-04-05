@@ -1,17 +1,24 @@
 package com.omerozer.knit.classloadertests;
 
 import com.omerozer.knit.InternalModel;
+import com.omerozer.knit.Knit;
+import com.omerozer.knit.KnitInterface;
+import com.omerozer.knit.KnitMock;
 import com.omerozer.knit.TestModel;
 import com.omerozer.knit.TestModel_Model;
 import com.omerozer.knit.TestSchedulers;
 import com.omerozer.knit.classloaders.KnitModelLoader;
+import com.omerozer.knit.classloaders.KnitUtilsLoader;
 import com.omerozer.knit.schedulers.SchedulerProvider;
 import com.omerozer.knit.schedulers.Schedulers;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static junit.framework.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by omerozer on 3/8/18.
@@ -23,10 +30,16 @@ public class KnitModelLoaderTests {
 
     SchedulerProvider schedulerProvider;
 
+    @Mock
+    KnitInterface knit;
+
     @Before
     public void setup(){
+        MockitoAnnotations.initMocks(this);
         this.schedulerProvider = new TestSchedulers();
-        this.knitModelLoader = new KnitModelLoader(schedulerProvider);
+        when(knit.getSchedulerProvider()).thenReturn(schedulerProvider);
+        when(knit.getModelMap()).thenReturn(new KnitUtilsLoader().getModelMap(Knit.class));
+        this.knitModelLoader = new KnitModelLoader(knit);
     }
 
     @Test

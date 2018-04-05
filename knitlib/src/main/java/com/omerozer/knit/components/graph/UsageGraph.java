@@ -1,7 +1,5 @@
 package com.omerozer.knit.components.graph;
 
-import android.util.Log;
-
 import com.omerozer.knit.InternalModel;
 import com.omerozer.knit.InternalPresenter;
 import com.omerozer.knit.KnitInterface;
@@ -25,7 +23,24 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by omerozer on 2/16/18.
+ * This is the core of smart life-cycle management of all components. This class creates a dependency tree with all components created by KnitProcessor.
+ * Receives all components from {@link ModelMapInterface} and {@link ViewToPresenterMapInterface}, assigns a {@link ComponentTag} to each one then inserts them
+ * into the graph via {@link EntityNode}s . In the tree hierarchy, Entities annotated with {@link com.omerozer.knit.KnitView} will be at the top. The initialization of
+ * the views will trigger the initialization of the entities that the view requires. {@link com.omerozer.knit.KnitView} -> {@link com.omerozer.knit.Presenter} -> {@link com.omerozer.knit.Model}.
+ * Initialized components will be put into a {@link Map<ComponentTag,MemoryEntity>} that holds their instances until they're released.
+ *
+ * Each of the annotated entities will have an internal counterpart that Knit uses.
+ * {@link com.omerozer.knit.KnitView} -> As is
+ * {@link com.omerozer.knit.Presenter} -> {@link com.omerozer.knit.KnitPresenter} -> {@link InternalPresenter}
+ * {@link com.omerozer.knit.Model} -> {@link com.omerozer.knit.KnitModel} -> {@link InternalModel}
+ *
+ *
+ * However the initialization will be done in a bottom-up manner. Meaning {@link InternalModel}s will be created first. Then {@link InternalPresenter}
+ *
+ * @see InternalModel
+ * @see InternalPresenter
+ * @see ModelManager
+ * @author Omer Ozer
  */
 
 public class UsageGraph {
@@ -141,26 +156,65 @@ public class UsageGraph {
         }
     }
 
+
+
+    /**
+     *  Returns a {@link Collection} of entities currently living in the memory.
+      * @return entities currently living in the memory.
+     */
     public Collection<MemoryEntity> activeEntities(){
         return instanceMap.values();
     }
 
+
+
+    /**
+     * Returns {@link InternalModel} associated with the given {@link ComponentTag}.
+     * @param componentTag Tag that is being searched for.
+     * @return returning the model associated with the tag.
+     */
     public InternalModel getModelWithTag(ComponentTag componentTag){
         return (InternalModel) instanceMap.get(componentTag);
     }
 
+    /**
+     * Returns {@link InternalPresenter} associated with the given {@link ComponentTag}.
+     * @param componentTag Tag that is being searched for.
+     * @return returning the presenter associated with the tag.
+     */
     public InternalPresenter getPresenterTag(ComponentTag componentTag){
         return (InternalPresenter) instanceMap.get(componentTag);
     }
 
+
+
+    /**
+     * Finds the internal counterpart({@link InternalPresenter}) of a {@link com.omerozer.knit.KnitPresenter} instance.
+     * @param presenterObject {@link com.omerozer.knit.KnitPresenter} object exposed to the developer.
+     * @return {@link} returning the internal part Knit uses.
+     * @see UsageGraph
+     */
     public InternalPresenter getPresenterForObject(Object presenterObject){
         return (InternalPresenter) instanceMap.get(clazzToTagMap.get(viewToPresenterMap.getPresenterClassForPresenter(presenterObject.getClass())));
     }
 
+
+
+    /**
+     * Finds {@link InternalPresenter} for a view object .
+     * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment}).
+     * @return {@link InternalPresenter} returning the presenter for the object.
+     */
     public InternalPresenter getPresenterForView(Object viewObject){
         return (InternalPresenter)instanceMap.get(clazzToTagMap.get(viewToPresenterMap.getPresenterClassForView(viewObject.getClass())));
     }
 
+
+    /**
+     * Attaches a view object to an underlying presenter({@link InternalPresenter}.
+     * Increments the {@link UserCounter} for each entity.
+     * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment})
+     */
     public void attachViewToComponent(Object viewObject){
         if(!graphBase.containsKey(clazzToTagMap.get(viewObject.getClass()))){
             return;
@@ -173,6 +227,12 @@ public class UsageGraph {
         }
     }
 
+
+    /**
+     * Calls the {@code .onViewReleased()} on the presenter of the viewObject.
+     * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment})
+     * @see MemoryEntity
+     */
     public void releaseViewFromComponent(Object viewObject){
         if(!graphBase.containsKey(clazzToTagMap.get(viewObject.getClass()))){
             return;
@@ -196,6 +256,13 @@ public class UsageGraph {
         return false;
     }
 
+    /**
+     * Attaches a view object to an underlying presenter({@link InternalPresenter} & required {@link InternalModel}s). Initializes them if they aren't already initialized.
+     * For each entity that's initialized, an {@code .onCreate()} method is called.
+     * Increments the {@link UserCounter} for each entity.
+     * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment}).
+     * @see MemoryEntity
+     */
     public void startViewAndItsComponents(Object viewObject) {
         if(isComponentCreated(viewObject)){
             attachViewToComponent(viewObject);
@@ -261,6 +328,11 @@ public class UsageGraph {
         }
     }
 
+    /**
+     * Decrements {@link UserCounter} of all entities depended on this view. If the counter reaches to 0, destroys them calling {@code .onDestroy()}
+     * @param viewObject
+     * @see MemoryEntity
+     */
     public void stopViewAndItsComponents(Object viewObject) {
         recurseTraverseTheGraphAndDestroyIfNeeded(clazzToTagMap.get(viewObject.getClass()));
     }

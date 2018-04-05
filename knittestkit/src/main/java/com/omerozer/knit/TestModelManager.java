@@ -17,14 +17,12 @@ public final class TestModelManager extends ModelManager {
 
     private Map<String,InternalModel> dataToModelMap = new HashMap<>();
     private KnitModelLoader modelLoader;
-    private KnitUtilsLoader utilsLoader;
     private ModelMapInterface modelMapInterface;
 
-    public TestModelManager(SchedulerProvider schedulerProvider){
+    public TestModelManager(KnitInterface knitInterface){
         this.dataToModelMap = new HashMap<>();
-        this.modelLoader = new KnitModelLoader(schedulerProvider==null? new TestSchedulers() : schedulerProvider);
-        this.utilsLoader = new KnitUtilsLoader();
-        this.modelMapInterface = utilsLoader.getModelMap(Knit.class);
+        this.modelLoader = new KnitModelLoader(knitInterface);
+        this.modelMapInterface = knitInterface.getModelMap();
     }
 
     KnitModel registerModel(Class<? extends KnitModel> modelClazz){
