@@ -1,6 +1,5 @@
 package com.omerozer.knitlint;
 
-
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;

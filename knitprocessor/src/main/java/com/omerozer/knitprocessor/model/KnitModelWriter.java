@@ -34,7 +34,9 @@ import static com.omerozer.knitprocessor.KnitFileStrings.*;
 
 class KnitModelWriter extends KnitClassWriter {
 
-    String[] defaultMethods = new String[]{KNIT_ME_ONCREATE_METHOD,KNIT_ME_DESTROY_METHOD,KNIT_ME_LOAD_METHOD,KNIT_ME_MEMORY_LOW_METHOD};
+     String[] defaultMethods = new String[]{KNIT_ME_ONCREATE_METHOD,KNIT_ME_DESTROY_METHOD,KNIT_ME_LOAD_METHOD,KNIT_ME_MEMORY_LOW_METHOD};
+
+    ParameterizedTypeName entityInstanceName = ParameterizedTypeName.get(KnitFileStrings.TYPE_NAME_ENTITY,ClassName.bestGuess(KnitFileStrings.KNIT_PRESENTER));
 
      void write(Filer filer, KnitModelMirror modelMirror,
             Map<KnitModelMirror, Set<UserMirror>> map) {
@@ -83,7 +85,7 @@ class KnitModelWriter extends KnitClassWriter {
 
         FieldSpec instanceMapField = FieldSpec
                 .builder(ParameterizedTypeName.get(ClassName.get(Map.class),
-                        ClassName.bestGuess(KnitFileStrings.KNIT_PRESENTER),
+                        entityInstanceName,
                         ClassName.bestGuess(KnitFileStrings.KNIT_USER)), "userMap")
                 .addModifiers(Modifier.PRIVATE)
                 .build();
@@ -230,7 +232,7 @@ class KnitModelWriter extends KnitClassWriter {
                 .addParameter(String.class, "data")
                 .addParameter(KnitFileStrings.TYPE_NAME_SCHEDULER_ENUM, "runOn")
                 .addParameter(KnitFileStrings.TYPE_NAME_SCHEDULER_ENUM, "consumeOn")
-                .addParameter(ClassName.bestGuess(KnitFileStrings.KNIT_PRESENTER), "presenter")
+                .addParameter(entityInstanceName, "instance")
                 .addParameter(Object[].class, "params", Modifier.FINAL);
 
 
@@ -241,18 +243,18 @@ class KnitModelWriter extends KnitClassWriter {
                 Set<UserMirror> users = map.get(modelMirror);
                 for (UserMirror userMirror : users) {
                     if (methodExists(generatedVals, userMirror)) {
-                        requestMethodBuilder.beginControlFlow("if(presenter instanceof $L)",
+                        requestMethodBuilder.beginControlFlow("if(instance.instanceOf($L.class))",
                                 userMirror.enclosingClass.getQualifiedName());
                         requestMethodBuilder.beginControlFlow("if(!userMap.containsKey($L))",
-                                "presenter");
-                        requestMethodBuilder.addStatement("userMap.put(presenter,new $L$L($L))",
+                                "instance");
+                        requestMethodBuilder.addStatement("userMap.put(instance,new $L$L($L))",
                                 userMirror.enclosingClass.getQualifiedName(),
-                                KnitFileStrings.KNIT_PRESENTER_USER_POSTFIX, "presenter");
+                                KnitFileStrings.KNIT_PRESENTER_USER_POSTFIX, "instance");
                         requestMethodBuilder.endControlFlow();
                         String userText = userMirror.enclosingClass.getQualifiedName() +
                                 KnitFileStrings.KNIT_PRESENTER_USER_POSTFIX;
                         requestMethodBuilder.addStatement(
-                                "final $L user = ($L)userMap.get(presenter)",
+                                "final $L user = ($L)userMap.get(instance)",
                                 userText,
                                 userText);
 

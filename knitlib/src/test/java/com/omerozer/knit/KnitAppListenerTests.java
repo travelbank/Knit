@@ -51,7 +51,9 @@ public class KnitAppListenerTests {
     @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
-        when(knit.findPresenterForView(any(Object.class))).thenReturn(internalPresenter);
+        EntityInstance<InternalPresenter> presenterEntityInstance = new EntityInstance<>();
+        presenterEntityInstance.set(internalPresenter);
+        when(knit.findPresenterForView(any(Object.class))).thenReturn(presenterEntityInstance);
         this.configuration = new Configuration();
         this.configuration.orientation = 1;
         when(resources.getConfiguration()).thenReturn(configuration);
@@ -89,14 +91,16 @@ public class KnitAppListenerTests {
     @Test
     public void destroyComponentTests(){
         knitAppListener.onActivityDestroyed(testActivity);
-        verify(knit).destoryComponent(viewCaptor.capture());
+        verify(knit).destroyComponent(viewCaptor.capture());
         assertEquals(testActivity,viewCaptor.getValue());
         Mockito.reset(testActivity);
         Mockito.reset(knit);
-        when(knit.findPresenterForView(any(Object.class))).thenReturn(internalPresenter);
+        EntityInstance<InternalPresenter> presenterEntityInstance = new EntityInstance<>();
+        presenterEntityInstance.set(internalPresenter);
+        when(knit.findPresenterForView(any(Object.class))).thenReturn(presenterEntityInstance);
         when(testActivity.isFinishing()).thenReturn(false);
         knitAppListener.onActivityDestroyed(testActivity);
-        verify(knit,never()).destoryComponent(viewCaptor.capture());
+        verify(knit,never()).destroyComponent(viewCaptor.capture());
     }
 
 }

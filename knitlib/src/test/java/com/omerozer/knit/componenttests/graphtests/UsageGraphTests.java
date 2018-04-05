@@ -113,14 +113,12 @@ public class UsageGraphTests {
     public void startViewComponentTest(){
         usageGraph.startViewAndItsComponents(new View1());
         verify(modelManager,times(TestEnv.totalModels())).registerModelComponentTag(any(ComponentTag.class));
-        //+4 because we load them in setup also
         verify(modelLoader,times(TestEnv.totalModels()+4)).loadModel(internalModelCaptor.capture());
         assertEquals(TestEnv.totalModels()+TestEnv.totalPresentersWithDependencies(),usageGraph.activeEntities().size());
         assertTrue(internalModelCaptor.getAllValues().contains(TestModel_Model.class));
         assertTrue(internalModelCaptor.getAllValues().contains(TestModel2_Model.class));
         assertTrue(internalModelCaptor.getAllValues().contains(UmbrellaModel_Model.class));
         assertTrue(internalModelCaptor.getAllValues().contains(TestSingleton_Model.class));
-        //+1 because we load them in setup also
         verify(presenterLoader,times(TestEnv.totalPresentersWithDependencies()+1)).loadPresenter(internalPresenterCaptor.capture());
         assertEquals(TestPresenter_Presenter.class,internalPresenterCaptor.getValue());
         verify(testModel).onCreate();

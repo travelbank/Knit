@@ -80,6 +80,7 @@ public class KnitFileStrings {
     public static final ClassName TYPE_NAME_CONSUMER = ClassName.bestGuess("com.omerozer.knit.schedulers.Consumer");
     public static final ClassName TYPE_NAME_SCHEDULER_ENUM = ClassName.bestGuess("com.omerozer.knit.schedulers.KnitSchedulers");
     public static final ClassName TYPE_NAME_KNIT_MESSAGE = ClassName.bestGuess("com.omerozer.knit.KnitMessage");
+    public static final ClassName TYPE_NAME_ENTITY = ClassName.bestGuess("com.omerozer.knit.EntityInstance");
 
 
     //CONTRACT

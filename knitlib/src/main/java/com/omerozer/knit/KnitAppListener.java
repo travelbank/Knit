@@ -8,11 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-
-import java.lang.ref.WeakReference;
-import java.util.WeakHashMap;
 
 /**
  * Created by omerozer on 2/18/18.
@@ -46,30 +42,30 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
     public void onActivityStarted(Activity activity) {
         if(knit.findPresenterForView(activity)!=null){
             if(returnedToView(activity)){
-                knit.findPresenterForView(activity).onReturnToView();
+                knit.findPresenterForView(activity).get().onReturnToView();
             }
-            knit.findPresenterForView(activity).onViewStart();
+            knit.findPresenterForView(activity).get().onViewStart();
         }
     }
 
     @Override
     public void onActivityResumed(Activity activity) {
         if(knit.findPresenterForView(activity)!=null) {
-            knit.findPresenterForView(activity).onViewResume();
+            knit.findPresenterForView(activity).get().onViewResume();
         }
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
         if(knit.findPresenterForView(activity)!=null) {
-            knit.findPresenterForView(activity).onViewPause();
+            knit.findPresenterForView(activity).get().onViewPause();
         }
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
         if(knit.findPresenterForView(activity)!=null) {
-            knit.findPresenterForView(activity).onViewStop();
+            knit.findPresenterForView(activity).get().onViewStop();
         }
     }
 
@@ -81,7 +77,7 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
     @Override
     public void onActivityDestroyed(Activity activity) {
         if(activity.isFinishing()){
-            knit.destoryComponent(activity);
+            knit.destroyComponent(activity);
             return;
         }
         knit.releaseViewFromComponent(activity);
@@ -113,7 +109,7 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
                 @Override
                 public void onFragmentDestroyed(FragmentManager fm, Fragment f) {
                     super.onFragmentDestroyed(fm, f);
-                    knit.destoryComponent(f);
+                    knit.destroyComponent(f);
                 }
             };
         }
@@ -136,7 +132,7 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
                 public void onFragmentDestroyed(android.app.FragmentManager fm,
                         android.app.Fragment f) {
                     super.onFragmentDestroyed(fm, f);
-                    knit.destoryComponent(f);
+                    knit.destroyComponent(f);
                 }
             };
         }

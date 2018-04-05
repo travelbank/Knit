@@ -1,10 +1,10 @@
 package com.omerozer.knit.components.graph;
 
+import com.omerozer.knit.EntityInstance;
 import com.omerozer.knit.InternalModel;
 import com.omerozer.knit.InternalPresenter;
 import com.omerozer.knit.KnitInterface;
 import com.omerozer.knit.KnitMessage;
-import com.omerozer.knit.MemoryEntity;
 import com.omerozer.knit.MessagePool;
 import com.omerozer.knit.MessageTrain;
 import com.omerozer.knit.ModelMapInterface;
@@ -27,7 +27,7 @@ import java.util.Set;
  * Receives all components from {@link ModelMapInterface} and {@link ViewToPresenterMapInterface}, assigns a {@link ComponentTag} to each one then inserts them
  * into the graph via {@link EntityNode}s . In the tree hierarchy, Entities annotated with {@link com.omerozer.knit.KnitView} will be at the top. The initialization of
  * the views will trigger the initialization of the entities that the view requires. {@link com.omerozer.knit.KnitView} -> {@link com.omerozer.knit.Presenter} -> {@link com.omerozer.knit.Model}.
- * Initialized components will be put into a {@link Map<ComponentTag,MemoryEntity>} that holds their instances until they're released.
+ * Initialized components will be put into a {@link Map<ComponentTag,EntityInstance>} that holds their instances until they're released.
  *
  * Each of the annotated entities will have an internal counterpart that Knit uses.
  * {@link com.omerozer.knit.KnitView} -> As is
@@ -67,7 +67,7 @@ public class UsageGraph {
 
     private Map<ComponentTag, Class<?>> tagToClazzMap;
 
-    private Map<ComponentTag, MemoryEntity> instanceMap;
+    private Map<ComponentTag, EntityInstance> instanceMap;
 
     private Set<ComponentTag> activeModelTags;
 
@@ -118,20 +118,23 @@ public class UsageGraph {
             tagToClazzMap.put(presenterTag, presenterClass);
             EntityNode presenterEntityNode = new EntityNode(presenterTag, EntityType.PRESENTER);
             graphBase.get(viewTag).next.add(presenterEntityNode);
+            instanceMap.put(presenterTag,new EntityInstance<InternalPresenter>());
             for (String updating : viewToPresenterMap.getUpdatingValues(presenterClass)) {
                 Iterator<Class<? extends InternalModel>> modelOuterItr = models.iterator();
                 while (modelOuterItr.hasNext()) {
                     Class<? extends InternalModel> modelClazz = modelOuterItr.next();
-                       createModelTag(modelClazz);
+                    createModelTag(modelClazz);
                     if (generatedValuesMap.get(modelClazz).contains(updating)) {
-                        EntityNode node = new EntityNode(clazzToTagMap.get(modelClazz), EntityType.MODEL);
+                        EntityNode node = new EntityNode(clazzToTagMap.get(modelClazz),
+                                EntityType.MODEL);
                         Iterator<Class<? extends InternalModel>> modelInnerItr = models.iterator();
                         while (modelInnerItr.hasNext()) {
                             Class<? extends InternalModel> innerClazz = modelInnerItr.next();
-                            for(String req: requiredValues.get(modelClazz)){
-                                if(generatedValuesMap.get(innerClazz).contains(req)){
+                            for (String req : requiredValues.get(modelClazz)) {
+                                if (generatedValuesMap.get(innerClazz).contains(req)) {
                                     createModelTag(innerClazz);
-                                    EntityNode reqM = new EntityNode(clazzToTagMap.get(innerClazz), EntityType.MODEL);
+                                    EntityNode reqM = new EntityNode(clazzToTagMap.get(innerClazz),
+                                            EntityType.MODEL);
                                     node.next.add(reqM);
                                 }
                             }
@@ -147,83 +150,86 @@ public class UsageGraph {
 
     }
 
-    private void createModelTag(Class<? extends InternalModel> clazz){
+    private void createModelTag(Class<? extends InternalModel> clazz) {
         if (!clazzToTagMap.containsKey(clazz)) {
             ComponentTag modelTag = ComponentTag.getNewTag();
             clazzToTagMap.put(clazz, modelTag);
-            counterMap.put(modelTag, modelMap.isModelSingleton(clazz)?new SingletonUserCounter() : new UserCounter());
+            counterMap.put(modelTag, modelMap.isModelSingleton(clazz) ? new SingletonUserCounter()
+                    : new UserCounter());
             tagToClazzMap.put(modelTag, clazz);
+            instanceMap.put(modelTag,new EntityInstance<InternalModel>());
         }
     }
 
 
 
-    /**
-     *  Returns a {@link Collection} of entities currently living in the memory.
-      * @return entities currently living in the memory.
-     */
-    public Collection<MemoryEntity> activeEntities(){
+
+            /**
+             *  Returns a {@link Collection} of entities currently living in the memory.
+             * @return entities currently living in the memory.
+             */
+    public Collection<EntityInstance> activeEntities() {
         return instanceMap.values();
     }
 
-
-
-    /**
-     * Returns {@link InternalModel} associated with the given {@link ComponentTag}.
-     * @param componentTag Tag that is being searched for.
-     * @return returning the model associated with the tag.
-     */
-    public InternalModel getModelWithTag(ComponentTag componentTag){
-        return (InternalModel) instanceMap.get(componentTag);
+            /**
+             * Returns {@link InternalModel} associated with the given {@link ComponentTag}.
+             * @param componentTag Tag that is being searched for.
+             * @return returning the model associated with the tag.
+             * @see EntityInstance
+             */
+    public EntityInstance<InternalModel> getModelWithTag(ComponentTag componentTag) {
+        return instanceMap.get(componentTag);
     }
 
-    /**
-     * Returns {@link InternalPresenter} associated with the given {@link ComponentTag}.
-     * @param componentTag Tag that is being searched for.
-     * @return returning the presenter associated with the tag.
-     */
-    public InternalPresenter getPresenterTag(ComponentTag componentTag){
-        return (InternalPresenter) instanceMap.get(componentTag);
-    }
-
-
-
-    /**
-     * Finds the internal counterpart({@link InternalPresenter}) of a {@link com.omerozer.knit.KnitPresenter} instance.
-     * @param presenterObject {@link com.omerozer.knit.KnitPresenter} object exposed to the developer.
-     * @return {@link} returning the internal part Knit uses.
-     * @see UsageGraph
-     */
-    public InternalPresenter getPresenterForObject(Object presenterObject){
-        return (InternalPresenter) instanceMap.get(clazzToTagMap.get(viewToPresenterMap.getPresenterClassForPresenter(presenterObject.getClass())));
+            /**
+             * Returns {@link InternalPresenter} associated with the given {@link ComponentTag}.
+             * @param componentTag Tag that is being searched for.
+             * @return returning the presenter associated with the tag.
+             */
+    public EntityInstance<InternalPresenter> getPresenterTag(ComponentTag componentTag) {
+        return instanceMap.get(componentTag);
     }
 
 
-
-    /**
-     * Finds {@link InternalPresenter} for a view object .
-     * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment}).
-     * @return {@link InternalPresenter} returning the presenter for the object.
-     */
-    public InternalPresenter getPresenterForView(Object viewObject){
-        return (InternalPresenter)instanceMap.get(clazzToTagMap.get(viewToPresenterMap.getPresenterClassForView(viewObject.getClass())));
+            /**
+             * Finds the internal counterpart({@link InternalPresenter}) of a {@link com.omerozer.knit.KnitPresenter} instance.
+             * @param presenterObject {@link com.omerozer.knit.KnitPresenter} object exposed to the developer.
+             * @return {@link} returning the internal part Knit uses.
+             * @see UsageGraph
+             */
+    public EntityInstance getPresenterForObject(Object presenterObject) {
+        return instanceMap.get(clazzToTagMap.get(
+                viewToPresenterMap.getPresenterClassForPresenter(presenterObject.getClass())));
     }
 
 
-    /**
-     * Attaches a view object to an underlying presenter({@link InternalPresenter}.
-     * Increments the {@link UserCounter} for each entity.
-     * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment})
-     */
-    public void attachViewToComponent(Object viewObject){
-        if(!graphBase.containsKey(clazzToTagMap.get(viewObject.getClass()))){
+        /**
+         * Finds {@link InternalPresenter} for a view object .
+         * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment}).
+         * @return {@link InternalPresenter} returning the presenter for the object.
+         */
+    public EntityInstance getPresenterForView(Object viewObject) {
+        return instanceMap.get(clazzToTagMap.get(
+                viewToPresenterMap.getPresenterClassForView(viewObject.getClass())));
+    }
+
+
+        /**
+         * Attaches a view object to an underlying presenter({@link InternalPresenter}.
+         * Increments the {@link UserCounter} for each entity.
+         * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment})
+         */
+    public void attachViewToComponent(Object viewObject) {
+        if (!graphBase.containsKey(clazzToTagMap.get(viewObject.getClass()))) {
             return;
         }
 
-        for(EntityNode presenter:graphBase.get(clazzToTagMap.get(viewObject.getClass())).next){
-            if(instanceMap.containsKey(presenter.tag)){
-                ((InternalPresenter) instanceMap.get(presenter.tag)).onViewApplied(viewObject);
-            }
+        for (EntityNode presenter : graphBase.get(clazzToTagMap.get(viewObject.getClass())).next) {
+                if (instanceMap.get(presenter.tag).isAvailable()) {
+                    ((InternalPresenter) instanceMap.get(presenter.tag).get()).onViewApplied(
+                            viewObject);
+                }
         }
     }
 
@@ -231,26 +237,28 @@ public class UsageGraph {
     /**
      * Calls the {@code .onViewReleased()} on the presenter of the viewObject.
      * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment})
-     * @see MemoryEntity
+     * @see EntityInstance
+     * @see com.omerozer.knit.MemoryEntity
      */
     public void releaseViewFromComponent(Object viewObject){
         if(!graphBase.containsKey(clazzToTagMap.get(viewObject.getClass()))){
             return;
         }
-        for(EntityNode presenter:graphBase.get(clazzToTagMap.get(viewObject.getClass())).next){
-            if(instanceMap.containsKey(presenter.tag)){
-                ((InternalPresenter) instanceMap.get(presenter.tag)).onCurrentViewReleased();
+        for (EntityNode presenter : graphBase.get(clazzToTagMap.get(viewObject.getClass())).next) {
+            if(instanceMap.get(presenter.tag).isAvailable()){
+                ((InternalPresenter) instanceMap.get(presenter.tag).get()).onCurrentViewReleased();
             }
         }
     }
 
-    private boolean isComponentCreated(Object viewObject){
-        if(!graphBase.containsKey(clazzToTagMap.get(viewObject.getClass()))){
+    private boolean isComponentCreated(Object viewObject) {
+        if (!graphBase.containsKey(clazzToTagMap.get(viewObject.getClass()))) {
             return false;
         }
-        for(EntityNode entityNode:graphBase.get(clazzToTagMap.get(viewObject.getClass())).next){
-            if(instanceMap.containsKey(entityNode.tag)){
+        for (EntityNode entityNode : graphBase.get(clazzToTagMap.get(viewObject.getClass())).next) {
+            if(instanceMap.get(entityNode.tag).isAvailable()){
                 return true;
+
             }
         }
         return false;
@@ -261,16 +269,17 @@ public class UsageGraph {
      * For each entity that's initialized, an {@code .onCreate()} method is called.
      * Increments the {@link UserCounter} for each entity.
      * @param viewObject View object (Either a {@link android.app.Activity} or a {@link android.app.Fragment}).
-     * @see MemoryEntity
+     * @see EntityInstance
+     * @see com.omerozer.knit.MemoryEntity
      */
     public void startViewAndItsComponents(Object viewObject) {
-        if(isComponentCreated(viewObject)){
+        if (isComponentCreated(viewObject)) {
             attachViewToComponent(viewObject);
             return;
         }
 
         Class<?> clazz = viewObject.getClass();
-        if(!clazzToTagMap.containsKey(clazz)){
+        if (!clazzToTagMap.containsKey(clazz)) {
             return;
         }
         recurseTraverseTheGraphAndStartIfNeeded(clazzToTagMap.get(clazz), viewObject);
@@ -284,7 +293,7 @@ public class UsageGraph {
     private void recurseForStart(EntityNode entityNode, Object viewObject) {
         //DFS to create models first
 
-        if(entityNode==null){
+        if (entityNode == null) {
             return;
         }
 
@@ -296,7 +305,7 @@ public class UsageGraph {
             case MODEL:
                 if (!counterMap.get(entityNode.tag).isUsed()) {
                     InternalModel internalModel = knitModelLoader.loadModel(tagToClazzMap.get(entityNode.tag));
-                    instanceMap.put(entityNode.tag, internalModel);
+                    instanceMap.get(entityNode.tag).set(internalModel);
                     activeModelTags.add(entityNode.tag);
                     modelManager.registerModelComponentTag(entityNode.tag);
                     internalModel.onCreate();
@@ -306,22 +315,23 @@ public class UsageGraph {
             case PRESENTER:
                 InternalPresenter internalPresenter;
                 if (!counterMap.get(entityNode.tag).isUsed()) {
-                    internalPresenter = knitPresenterLoader.loadPresenter(tagToClazzMap.get(entityNode.tag));
-                    instanceMap.put(entityNode.tag, internalPresenter);
+                    internalPresenter = knitPresenterLoader.loadPresenter(
+                            tagToClazzMap.get(entityNode.tag));
+                    instanceMap.get(entityNode.tag).set(internalPresenter);
                     activePresenterTags.add(entityNode.tag);
                     internalPresenter.onCreate();
                 }
-                internalPresenter = ((InternalPresenter) instanceMap.get(entityNode.tag));
+                internalPresenter = ((InternalPresenter) instanceMap.get(entityNode.tag).get());
                 internalPresenter.onViewApplied(viewObject);
-                handleMessageDelivery(internalPresenter,entityNode.tag);
+                handleMessageDelivery(internalPresenter, entityNode.tag);
                 break;
         }
         counterMap.get(entityNode.tag).use();
 
     }
 
-    private void handleMessageDelivery(InternalPresenter presenter,ComponentTag tag){
-        if(messageTrain.hasMessage(tagToClazzMap.get(tag))){
+    private void handleMessageDelivery(InternalPresenter presenter, ComponentTag tag) {
+        if (messageTrain.hasMessage(tagToClazzMap.get(tag))) {
             KnitMessage message = messageTrain.getMessageForView(tagToClazzMap.get(tag));
             presenter.receiveMessage(message);
             messagePool.pool(message);
@@ -331,7 +341,7 @@ public class UsageGraph {
     /**
      * Decrements {@link UserCounter} of all entities depended on this view. If the counter reaches to 0, destroys them calling {@code .onDestroy()}
      * @param viewObject
-     * @see MemoryEntity
+     * @see com.omerozer.knit.MemoryEntity
      */
     public void stopViewAndItsComponents(Object viewObject) {
         recurseTraverseTheGraphAndDestroyIfNeeded(clazzToTagMap.get(viewObject.getClass()));
@@ -344,7 +354,7 @@ public class UsageGraph {
 
     private void recurseForFinish(EntityNode entityNode) {
 
-        if(entityNode==null){
+        if (entityNode == null) {
             return;
         }
 
@@ -356,18 +366,18 @@ public class UsageGraph {
         counterMap.get(entityNode.tag).release();
         switch (entityNode.type) {
             case MODEL:
-                if(!counterMap.get(entityNode.tag).isUsed()){
-                    instanceMap.get(entityNode.tag).onDestroy();
-                    instanceMap.remove(entityNode.tag);
+                if (!counterMap.get(entityNode.tag).isUsed()) {
+                    instanceMap.get(entityNode.tag).get().onDestroy();
                     activeModelTags.remove(entityNode.tag);
                     modelManager.unregisterComponentTag(entityNode.tag);
+                    instanceMap.get(entityNode.tag).nullify();
                 }
                 break;
             case PRESENTER:
                 if (!counterMap.get(entityNode.tag).isUsed()) {
-                    instanceMap.get(entityNode.tag).onDestroy();
-                    instanceMap.remove(entityNode.tag);
+                    instanceMap.get(entityNode.tag).get().onDestroy();
                     activePresenterTags.remove(entityNode.tag);
+                    instanceMap.get(entityNode.tag).nullify();
                 }
                 break;
         }

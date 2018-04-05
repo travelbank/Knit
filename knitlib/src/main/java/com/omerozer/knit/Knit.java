@@ -83,16 +83,16 @@ public class Knit implements KnitInterface {
        userGraph.releaseViewFromComponent(viewObject);
     }
 
-    void destoryComponent(Object viewObject){
+    void destroyComponent(Object viewObject){
         userGraph.stopViewAndItsComponents(viewObject);
     }
 
-    public InternalPresenter findPresenterForView(Object viewObject) {
+    public EntityInstance<InternalPresenter> findPresenterForView(Object viewObject) {
         return userGraph.getPresenterForView(viewObject);
     }
 
-    public InternalPresenter findPresenterForParent(Object parentPresenter) {
-        return userGraph.getPresenterForObject(parentPresenter);
+    public EntityInstance<InternalPresenter> findPresenterForParent(Object parentPresenter) {
+        return (EntityInstance<InternalPresenter>) userGraph.getPresenterForObject(parentPresenter);
     }
 
     @Override

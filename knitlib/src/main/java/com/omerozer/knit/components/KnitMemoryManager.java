@@ -4,6 +4,7 @@ import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.res.Configuration;
 
+import com.omerozer.knit.EntityInstance;
 import com.omerozer.knit.MemoryEntity;
 import com.omerozer.knit.components.graph.UsageGraph;
 
@@ -38,8 +39,8 @@ public class KnitMemoryManager implements ComponentCallbacks2 {
 
     private void handleMemoryLevel(int i) {
         if (i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) {
-            for (MemoryEntity entity : usageGraph.activeEntities()) {
-                entity.onMemoryLow();
+            for (EntityInstance entity : usageGraph.activeEntities()) {
+                entity.get().onMemoryLow();
             }
         }
     }

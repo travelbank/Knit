@@ -18,7 +18,7 @@ public final class MockEvents {
     public static void fireMockClickEvent(String tag,KnitPresenterTest presenterTest){
         KnitOnClickEvent event = onClickEventPool.getObject();
         event.setTag(tag);
-        presenterTest.getInternalObject().handle(onClickEventPool,event,NullValues.NULL_MODEL);
+        presenterTest.getInternalObject().handle(onClickEventPool,event,NullValues.NULL_MODEL.get());
     }
 
 }

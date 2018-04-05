@@ -16,9 +16,9 @@ import java.lang.ref.WeakReference;
 
 public abstract class KnitPresenter<T> implements PresenterInterface,MessageReceiver {
 
-    private WeakReference<Object> viewObjectRef;
-
     private Knit knitInstance;
+
+    private WeakReference<Object> viewObjectRef;
 
     private InternalModel modelManager;
 
@@ -28,6 +28,8 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
 
     public void setKnit(Knit knit) {
         this.knitInstance = knit;
+        this.modelManager = knit.getModelManager();
+        this.navigator = knit.getNavigator();
     }
 
     @Override
@@ -40,32 +42,26 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
     }
 
     protected void request(String data,KnitSchedulers runOn, KnitSchedulers consumeOn,Object... params) {
-        InternalPresenter instance = knitInstance.findPresenterForParent(this);
-        getModelManager().request(data, runOn, consumeOn ,instance, params);
+        EntityInstance<InternalPresenter> instance = knitInstance.findPresenterForParent(this);
+        modelManager.request(data, runOn, consumeOn ,instance, params);
     }
 
     protected void request(String data,Object... params) {
-        InternalPresenter instance = knitInstance.findPresenterForParent(this);
-        getModelManager().request(data, KnitSchedulers.IMMEDIATE, KnitSchedulers.IMMEDIATE ,instance, params);
+        EntityInstance<InternalPresenter> instance = knitInstance.findPresenterForParent(this);
+        modelManager.request(data, KnitSchedulers.IMMEDIATE, KnitSchedulers.IMMEDIATE ,instance, params);
     }
 
     protected void inputData(String data, Object... params) {
-        getModelManager().input(data, params);
+        modelManager.input(data, params);
     }
 
     protected T getContract() {
         if(contract == null){
-            contract = knitInstance.findPresenterForParent(this).getContract();
+            contract = knitInstance.findPresenterForParent(this).get().getContract();
         }
         return (T) contract;
     }
 
-    protected InternalModel getModelManager() {
-        if(modelManager == null){
-            modelManager = knitInstance.findPresenterForParent(this).getModelManager();
-        }
-        return modelManager;
-    }
 
     void setModelManager(InternalModel modelManager) {
         this.modelManager = modelManager;
@@ -79,12 +75,7 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
         this.contract = contract;
     }
 
-    protected KnitNavigator getNavigator() {
-        if(navigator == null){
-            navigator =  knitInstance.findPresenterForParent(this).getNavigator();
-        }
-        return navigator;
-    }
+    protected KnitNavigator getNavigator() {return navigator;}
 
     @Override
     public void onCreate() {
@@ -149,6 +140,7 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
     public void onViewResult(int requestCode, int resultCode, Intent data) {
 
     }
+
     protected KnitMessage newMessage(){
         return knitInstance.getMessagePool().getObject();
     }

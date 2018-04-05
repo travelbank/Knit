@@ -60,7 +60,7 @@ public class ViewEvents {
                 KnitOnClickEvent event = onClickEventPool.getObject();
                 event.setTag(tag);
                 event.setViewWeakReference(view);
-                knit.findPresenterForView(carrierObject).handle(onClickEventPool, event, knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(onClickEventPool, event, knit.getModelManager());
             }
         });
     }
@@ -78,7 +78,7 @@ public class ViewEvents {
                 event.setI(i);
                 event.setI1(i1);
                 event.setI2(i2);
-                knit.findPresenterForView(carrierObject).handle(onTextChangedEventPool, event,
+                knit.findPresenterForView(carrierObject).get().handle(onTextChangedEventPool, event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
             }
@@ -114,7 +114,7 @@ public class ViewEvents {
                 event.setI(i);
                 event.setI1(i1);
                 event.setI2(i2);
-                knit.findPresenterForView(carrierObject).handle(onTextChangedEventPool, event,
+                knit.findPresenterForView(carrierObject).get().handle(onTextChangedEventPool, event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
             }
@@ -147,7 +147,7 @@ public class ViewEvents {
                 event.setTag(tag);
                 event.setState(KnitTextChangedEvent.State.AFTER);
                 event.setAfterEditable(editable);
-                knit.findPresenterForView(carrierObject).handle(onTextChangedEventPool, event,
+                knit.findPresenterForView(carrierObject).get().handle(onTextChangedEventPool, event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
             }
@@ -163,7 +163,7 @@ public class ViewEvents {
                 KnitOnFocusChangedEvent event = onFocusChangedEventPool.getObject();
                 event.setTag(tag);
                 event.setFocus(b);
-                knit.findPresenterForView(carrierObject).handle(onFocusChangedEventPool, event, knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(onFocusChangedEventPool, event, knit.getModelManager());
             }
         });
     }
@@ -175,7 +175,7 @@ public class ViewEvents {
                 KnitOnRefreshEvent event = onSwipeRefreshEventPool.getObject();
                 event.setTag(tag);
                 event.setViewWeakReference(view);
-                knit.findPresenterForView(carrierObject).handle(onSwipeRefreshEventPool, event, knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(onSwipeRefreshEventPool, event, knit.getModelManager());
             }
         });
     }
@@ -187,7 +187,7 @@ public class ViewEvents {
                 KnitOnSwitchToggleEvent event = onSwitchToggleEventPool.getObject();
                 event.setTag(tag);
                 event.setToggle(isChecked);
-                knit.findPresenterForView(carrierObject).handle(onSwitchToggleEventPool,event,knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(onSwitchToggleEventPool,event,knit.getModelManager());
             }
         });
     }
@@ -196,12 +196,12 @@ public class ViewEvents {
         GenericEvent genericEvent = genericEventPool.getObject();
         genericEvent.setTag(tag);
         genericEvent.setParams(params);
-        knit.findPresenterForView(carrierObject).handle(genericEventPool, genericEvent, knit.getModelManager());
+        knit.findPresenterForView(carrierObject).get().handle(genericEventPool, genericEvent, knit.getModelManager());
     }
 
 
     public void onViewResult(Object carrierObject,int requestCode,int resultCode,Intent data){
-        knit.findPresenterForView(carrierObject).onViewResult(requestCode,resultCode,data);
+        knit.findPresenterForView(carrierObject).get().onViewResult(requestCode,resultCode,data);
     }
 
 
