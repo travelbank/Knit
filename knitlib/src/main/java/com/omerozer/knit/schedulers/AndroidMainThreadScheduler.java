@@ -76,7 +76,7 @@ public class AndroidMainThreadScheduler implements SchedulerInterface {
     }
 
     /**
-     * This does nothing as it doesn't hold any other dependencies.
+     * This does nothing as this Scheduler doesn't hold any other dependencies.
      */
     @Override
     public void shutDown() {
@@ -97,7 +97,7 @@ public class AndroidMainThreadScheduler implements SchedulerInterface {
 
     /**
      * If the task currently being executed is done ,it returns {@code true}. Otherwise {@code false}.
-     * @return
+     * @return whether or not the task is done.
      */
     @Override
     public boolean isDone() {
