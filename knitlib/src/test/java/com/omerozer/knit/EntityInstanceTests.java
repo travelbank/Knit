@@ -37,6 +37,15 @@ public class EntityInstanceTests {
         assertFalse(instance.isAvailable());
         instance.set(model);
         assertTrue(instance.isAvailable());
+        instance.nullify();
+        assertFalse(instance.isAvailable());
+    }
+
+    @Test
+    public void instanceOfTest(){
+        InternalModel model = new TestModel_Model(new TestSchedulers());
+        instance.set(model);
+        assertTrue(instance.instanceOf(TestModel_Model.class));
     }
 
 

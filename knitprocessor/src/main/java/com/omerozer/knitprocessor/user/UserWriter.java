@@ -6,6 +6,7 @@ import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
@@ -22,6 +23,9 @@ import javax.lang.model.element.VariableElement;
  */
 
 public class UserWriter extends KnitClassWriter {
+
+    ParameterizedTypeName entityInstanceName = ParameterizedTypeName.get(KnitFileStrings.TYPE_NAME_ENTITY,ClassName.bestGuess(KnitFileStrings.KNIT_PRESENTER));
+
     void write(Filer filer, UserMirror userMirror) {
 
         TypeSpec.Builder clazzBuilder = TypeSpec
@@ -33,13 +37,14 @@ public class UserWriter extends KnitClassWriter {
         addKnitWarning(clazzBuilder);
 
         FieldSpec parentField = FieldSpec
-                .builder(TypeName.get(userMirror.enclosingClass.asType()), "parent")
+                .builder(entityInstanceName, "parent")
                 .addModifiers(Modifier.PRIVATE)
                 .build();
 
         createConstructor(clazzBuilder,userMirror);
         createExposedMethodsMethod(clazzBuilder,userMirror);
         createGetterMethods(clazzBuilder,userMirror);
+        createCastParentMethod(clazzBuilder,userMirror);
 
         clazzBuilder.addField(parentField);
 
@@ -70,12 +75,13 @@ public class UserWriter extends KnitClassWriter {
             MethodSpec.Builder userBuilder = MethodSpec
                     .methodBuilder("use_" + methodElement.getSimpleName().toString())
                     .addModifiers(Modifier.PUBLIC);
+            userBuilder.beginControlFlow("if(parent.isAvailable())");
             int c = 0;
             for (VariableElement variableElement : methodElement.getParameters()) {
                 userBuilder.addParameter(TypeName.get(variableElement.asType()), "v" + c++);
             }
             StringBuilder paramsBlock = new StringBuilder();
-            paramsBlock.append("parent.");
+            paramsBlock.append("castParent().");
             paramsBlock.append(methodElement.getSimpleName());
             paramsBlock.append("(");
             for (int i = 0; i < c; i++) {
@@ -87,15 +93,26 @@ public class UserWriter extends KnitClassWriter {
             }
             paramsBlock.append(")");
             userBuilder.addStatement(paramsBlock.toString());
+            userBuilder.endControlFlow();
             builder.addMethod(userBuilder.build());
         }
+    }
+
+    private void createCastParentMethod(TypeSpec.Builder builder, UserMirror userMirror){
+        MethodSpec getterMethod = MethodSpec
+                .methodBuilder("castParent")
+                .addModifiers(Modifier.PRIVATE)
+                .returns(ClassName.bestGuess(userMirror.enclosingClass.getQualifiedName().toString()))
+                .addStatement("return ($L)this.parent.get()",userMirror.enclosingClass.getQualifiedName())
+                .build();
+        builder.addMethod(getterMethod);
     }
 
     private void createConstructor(TypeSpec.Builder builder, UserMirror userMirror){
         builder.addMethod(MethodSpec
                 .constructorBuilder()
                 .addModifiers(Modifier.PUBLIC)
-                .addParameter(ClassName.bestGuess(KnitFileStrings.KNIT_PRESENTER), "parent")
-                .addStatement("this.parent =("+ userMirror.enclosingClass.getQualifiedName()  + ")parent").build());
+                .addParameter(entityInstanceName, "parent")
+                .addStatement("this.parent = parent").build());
     }
 }

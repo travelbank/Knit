@@ -5,7 +5,6 @@ import com.omerozer.knit.InternalModel;
 import com.omerozer.knit.InternalPresenter;
 import com.omerozer.knit.KnitInterface;
 import com.omerozer.knit.KnitMessage;
-import com.omerozer.knit.MemoryEntity;
 import com.omerozer.knit.MessagePool;
 import com.omerozer.knit.MessageTrain;
 import com.omerozer.knit.ModelMapInterface;
@@ -295,16 +294,16 @@ public class UsageGraph {
             case MODEL:
                 if (!counterMap.get(entityNode.tag).isUsed()) {
                     instanceMap.get(entityNode.tag).get().onDestroy();
-                    instanceMap.remove(entityNode.tag);
                     activeModelTags.remove(entityNode.tag);
                     modelManager.unregisterComponentTag(entityNode.tag);
+                    instanceMap.get(entityNode.tag).nullify();
                 }
                 break;
             case PRESENTER:
                 if (!counterMap.get(entityNode.tag).isUsed()) {
                     instanceMap.get(entityNode.tag).get().onDestroy();
-                    instanceMap.remove(entityNode.tag);
                     activePresenterTags.remove(entityNode.tag);
+                    instanceMap.get(entityNode.tag).nullify();
                 }
                 break;
         }

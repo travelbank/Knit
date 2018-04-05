@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class EntityInstance<T extends MemoryEntity> {
 
     private AtomicReference<T> reference;
+    private Class<? extends MemoryEntity> clazz;
 
     public EntityInstance(){
         this.reference = new AtomicReference<>();
@@ -27,7 +28,12 @@ public class EntityInstance<T extends MemoryEntity> {
     }
 
     public void set(T memoryEntity){
-        reference.set(memoryEntity);
+        this.reference.set(memoryEntity);
+        this.clazz = memoryEntity.getClass();
+    }
+
+    public boolean instanceOf(Class<?> inc){
+        return clazz.equals(inc);
     }
 
 }
