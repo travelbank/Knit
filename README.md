@@ -176,9 +176,9 @@ LifeCycle Management:
 
 Components initializations are triggered by the initialization of the views. Once a view is created, then first , all models it requires will be created, then it's presenter. The presenter and views are tied together(1to1). However, each presenter may require multiple models. Initialization is done by keeping a track of usage of each component(Reference count). Every time a view that depends ona  model is initialized. The refernce counts for those models will be incremented. If it goes up to 1 from 0. it will be initialized and `onCreate()` will be called. If the view is destroyed and model no longer is needed, the reference count will be decremented. If it gets to 0 , it will be destroyed and `onDestroy()` will be called. 
 
-Knit will automatically determine your dependencies by going scanning your presenter class for `ModelEvent` and marking the models that generate the values that are required by your presenter as a dependency. So when the view is created, these models will also be initialized for you. However, if your presenter simply inputs data and does not listen for any, then you'll have to add these data fields to your `Presenter` annotation such as ```java @Presenter(value = {MyActivity.class}, needs={TestModel.DATA})``` . This will allow Knit to know that ```TestModel``` is indeed a dependency for `MyActivity` .
+Knit will automatically determine your dependencies by going scanning your presenter class for `ModelEvent` and marking the models that generate the values that are required by your presenter as a dependency. So when the view is created, these models will also be initialized for you. However, if your presenter simply inputs data and does not listen for any, then you'll have to add these data fields to your `Presenter` annotation such as ``` @Presenter(value = {MyActivity.class}, needs={TestModel.DATA})``` . This will allow Knit to know that ```TestModel``` is indeed a dependency for `MyActivity` .
 
-To utilize "Umbrella" models. You'll have to do something similar and add these data fields to your model's `Collects` tag such as ```java @Collects(value = "umbrella" , needs = {"data1","data2"})```. This way Knit will find models that generates these data fields and mark them as a dependency for your "Umbrella" model.
+To utilize "Umbrella" models. You'll have to do something similar and add these data fields to your model's `Collects` tag such as ``` @Collects(value = "umbrella" , needs = {"data1","data2"})```. This way Knit will find models that generates these data fields and mark them as a dependency for your "Umbrella" model.
 
 Singleton models will be initialized lazily. Meaning they won't be booted until a view that depends on them is created.Once booted, they'll never be cleared so be careful with these.
 
@@ -189,6 +189,7 @@ Component Communication:
 Knit is an event based framework. Meaning all components communicate via events. The only exception being presenter to view communication. The reason for this is the need to keep views as less verbose as possible. View is wrapper around by a Contract. This contract then is exposed to the presenter.
 All Non-Android specific and non-private methods of the view will be automatically added to the contract by the KnitProcessor. For everything else. Events will be used. Since the presenter is the intermediate between the views and the models, it will listen to both ```ViewEvents``` and ```ModelEvents```.
 To listen to a model, simply create a non-private method and annotate it with a ```ModelEvent``` that has the data tag that you'd like to listen to . The method should only accept the associated ```KnitResponse``` as a param. Doing this will also allow Knit to add the Model that generates that data as a dependency for your view. 
+
 
 ![Component Communication](https://github.com/travelbank/Knit/blob/master/docs/KnitComponentsPng.png)
 
