@@ -100,16 +100,29 @@ public class UsageGraph {
     private Map<ComponentTag, EntityNode> graphBase;
 
     /**
-     * {@link Map} that maps Component classes to their associated {@link ComponentTag}
+     * {@link Map} that maps Component classes to their associated {@link ComponentTag}s.
      */
     private Map<Class<?>, ComponentTag> clazzToTagMap;
 
+    /**
+     * {@link Map} that maps Component classes to their associated {@link Class}s.
+     */
     private Map<ComponentTag, Class<?>> tagToClazzMap;
 
+    /**
+     * {@link Map} that maps Component classes to their associated {@link EntityInstance}s.
+     * By default the instances will return null. Only once the component is initialized, it will return an actual instance .
+     */
     private Map<ComponentTag, EntityInstance> instanceMap;
 
+    /**
+     * A {@link Set} of {@link ComponentTag}s for the models currently active in the memory.
+     */
     private Set<ComponentTag> activeModelTags;
 
+    /**
+     * A {@link Set} of {@link ComponentTag}s for the presenters currently active in the memory.
+     */
     private Set<ComponentTag> activePresenterTags;
 
 
@@ -132,6 +145,12 @@ public class UsageGraph {
         createGraph();
     }
 
+    /**
+     * This is the method that creates the graph. Extracts generated values from {@link ModelMapInterface}, extract required values from {@link ViewToPresenterMapInterface}.
+     * Even though the entry point of all components is the creation of a view, the graph does not need to hold any kind of view data other than it's presenter. So the base of the graph
+     * consists of presenter data. Based on the required values of each presenter , it finds the model that generates those values, Then recursively checks if that model depends on another model(Umbrella Model).
+     * If the model indeed depends on another, then it will recurse until dependency graph is created.
+     */
     private void createGraph() {
         List<Class<? extends InternalModel>> models = modelMap.getAll();
         List<Class<?>> views = extractViews(viewToPresenterMap.getAllViews());
@@ -173,6 +192,14 @@ public class UsageGraph {
 
     }
 
+    /**
+     *
+     * @param modelClazz
+     * @param modelNode
+     * @param models
+     * @param generatedValuesMap
+     * @param requiredValuesMap
+     */
     private void recurseAndCreateModel(Class<? extends InternalModel> modelClazz ,EntityNode modelNode,
             List<Class<? extends InternalModel>> models,
             Map<Class<? extends InternalModel>, List<String>> generatedValuesMap,
