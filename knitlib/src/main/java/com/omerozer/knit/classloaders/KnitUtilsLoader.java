@@ -57,6 +57,11 @@ public class KnitUtilsLoader {
         return null;
     }
 
+    /**
+     * Finds the constructor for {@code ViewToPresenterMap} created by KnitProcessor.
+     * @param clazz Class object that provides the class loader. Should always be Knit.class.
+     * @return returns the constructor required.
+     */
     private Constructor<?> getViewToPresenterConstructor(Class<?> clazz) {
 
         ClassLoader classLoader = clazz.getClassLoader();

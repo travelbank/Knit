@@ -52,24 +52,56 @@ import java.util.Set;
 
 public class UsageGraph {
 
+
+    /**
+     * UsageGraph needs this class to determine presenter dependencies.
+     */
     private ViewToPresenterMapInterface viewToPresenterMap;
 
+    /**
+     * UsageGraph needs this class to determine model dependencies.
+     */
     private ModelMapInterface modelMap;
 
+    /**
+     * Modelmanager needed to handle {@link ComponentTag} registrations/unregistrations
+     */
     private ModelManager modelManager;
 
+    /**
+     * KnitModelLoader is used when initializing {@link InternalModel}s on the graph.
+     */
     private KnitModelLoader knitModelLoader;
 
+    /**
+     * KnitPresenterLoader is used when initializing {@link InternalPresenter}s on the graph.
+     */
     private KnitPresenterLoader knitPresenterLoader;
 
+    /**
+     * Message train delivers messages from one presenter to another. Since usagegraph is the class that is reponsible for their initialization,
+     * it needs an instance of the {@link MessageTrain} also.
+     */
     private MessageTrain messageTrain;
 
+    /**
+     * {@link MessagePool} holds the messages for the {@link MessageTrain} to the usagegraph needs this also.
+     */
     private MessagePool messagePool;
 
+    /**
+     * {@link Map} that holds {@link UserCounter} for {@link ComponentTag}
+     */
     private Map<ComponentTag, UserCounter> counterMap;
 
+    /**
+     * These are all presenters as they are the entry points of usagegraph.
+     */
     private Map<ComponentTag, EntityNode> graphBase;
 
+    /**
+     * {@link Map} that maps Component classes to their associated {@link ComponentTag}
+     */
     private Map<Class<?>, ComponentTag> clazzToTagMap;
 
     private Map<ComponentTag, Class<?>> tagToClazzMap;
