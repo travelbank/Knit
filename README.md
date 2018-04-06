@@ -60,16 +60,34 @@ public class RestLayer extends KnitModel {
         DaggerModelsComponent.create().inject(this);
     }
 
-    @Generates(GET_REPOS)
-    Generator1<List<Repo>,String> getRepos = new Generator1<List<Repo>,String>() {
+    @Collects(value = "umbrella" , needs = {"testN","test"})
+    Generator0<String> collector = new Generator0<String>() {
+
         @Override
-        public List<Repo> generate(String s) {
-            try {
-                return apiManager.accessCalls().listRepos(s).execute().body();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
+        public KnitResponse<String> generate() {
+            Log.d("KNIT_TEST","UMBRELLA CALL");
+            KnitResponse<String> t1 = requestImmediately("testN","YAHH");
+            KnitResponse<String> t2 = requestImmediately("test");
+            String result = t1.getBody() + "=/=" + t2.getBody();
+            return new KnitResponse<String>(result);
+        }
+    };
+
+    @Inputs("input")
+    Inputter1<String> stringInputter = new Inputter1<String>() {
+        @Override
+        public void input(String param1) {
+
+        }
+    };
+    
+    @Generates("test")
+    public Generator0<String> generateTestString = new Generator0<String>() {
+
+        @Override
+        public KnitResponse<String> generate() {
+            Log.d("KNIT_TEST","TEST CALL");
+            return new KnitResponse<>("TEEEESST STRING");
         }
     };
 }
