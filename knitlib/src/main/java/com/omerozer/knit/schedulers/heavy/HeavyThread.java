@@ -19,12 +19,25 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class HeavyThread extends IntentService {
 
+    /**
+     * Key for the task type inside the start {@link Intent}
+     */
     private static final String TASK_TYPE_KEY = "TASK_TYPE_KEY";
 
+    /**
+     * Runnable task type.
+     */
     public static final int RUNNABLE = 1;
+
+    /**
+     * Callable task type.
+     */
     public static final int CALLABLE = 2;
 
 
+    /**
+     * {@link Map} that maps thread Ids to their own {@link ConcurrentLinkedQueue}s of {@link TaskPackage}.
+     */
     private static Map<String,ConcurrentLinkedQueue<TaskPackage>> taskMap;
 
     /**
@@ -41,14 +54,29 @@ public abstract class HeavyThread extends IntentService {
         context.startService(intent);
     }
 
+    /**
+     * Static initialization of the taskMap}
+     */
     static {
         taskMap = new ConcurrentHashMap<>();
     }
 
+
+    /**
+     * Polls the next task from the queue for the given thread id.
+     * @param threadId Given thread id .
+     * @return Next task wrapper around {@link TaskPackage}
+     */
     private static TaskPackage getNextTask(String threadId){
         return taskMap.get(threadId).poll();
     }
 
+
+    /**
+     * Returns the task queue for the given thread id.
+     * @param threadId Given thread id .
+     * @return Task queue for the given thread id.
+     */
     private static Queue<TaskPackage> getTaskQueueForThread(String threadId){
         if(!taskMap.containsKey(threadId)) {
             taskMap.put(threadId, new ConcurrentLinkedQueue<TaskPackage>());
@@ -67,6 +95,9 @@ public abstract class HeavyThread extends IntentService {
         return getTaskQueueForThread(threadId).size();
     }
 
+    /**
+     * Unique thread id for the current thread.
+     */
     private String threadId;
 
     public HeavyThread(String name) {
