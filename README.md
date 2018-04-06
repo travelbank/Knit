@@ -182,7 +182,7 @@ To utilize "Umbrella" models. You'll have to do something similar and add these 
 
 Singleton models will be initialized lazily. Meaning they won't be booted until a view that depends on them is created.Once booted, they'll never be cleared so be careful with these.
 
-![Component Lifecycles](https://github.com/OmerUygurOzer/Knit/blob/master/docs/KnitLifecyclesPng.png)
+![Component Lifecycles](https://github.com/travelbank/Knit/blob/master/docs/KnitLifecyclesPng.png)
 
 Component Communication:
 
@@ -190,7 +190,7 @@ Knit is an event based framework. Meaning all components communicate via events.
 All Non-Android specific and non-private methods of the view will be automatically added to the contract by the KnitProcessor. For everything else. Events will be used. Since the presenter is the intermediate between the views and the models, it will listen to both ```ViewEvents``` and ```ModelEvents```.
 To listen to a model, simply create a non-private method and annotate it with a ```ModelEvent``` that has the data tag that you'd like to listen to . The method should only accept the associated ```KnitResponse``` as a param. Doing this will also allow Knit to add the Model that generates that data as a dependency for your view. 
 
-![Component Communication](https://github.com/OmerUygurOzer/Knit/blob/master/docs/KnitComponentsPng.png)
+![Component Communication](https://github.com/travelbank/Knit/blob/master/docs/KnitComponentsPng.png)
 
 
 Concurrency:
