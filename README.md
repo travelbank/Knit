@@ -60,16 +60,34 @@ public class RestLayer extends KnitModel {
         DaggerModelsComponent.create().inject(this);
     }
 
-    @Generates(GET_REPOS)
-    Generator1<List<Repo>,String> getRepos = new Generator1<List<Repo>,String>() {
+    @Collects(value = "umbrella" , needs = {"testN","test"})
+    Generator0<String> collector = new Generator0<String>() {
+
         @Override
-        public List<Repo> generate(String s) {
-            try {
-                return apiManager.accessCalls().listRepos(s).execute().body();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
+        public KnitResponse<String> generate() {
+            Log.d("KNIT_TEST","UMBRELLA CALL");
+            KnitResponse<String> t1 = requestImmediately("testN","YAHH");
+            KnitResponse<String> t2 = requestImmediately("test");
+            String result = t1.getBody() + "=/=" + t2.getBody();
+            return new KnitResponse<String>(result);
+        }
+    };
+
+    @Inputs("input")
+    Inputter1<String> stringInputter = new Inputter1<String>() {
+        @Override
+        public void input(String param1) {
+
+        }
+    };
+    
+    @Generates("test")
+    public Generator0<String> generateTestString = new Generator0<String>() {
+
+        @Override
+        public KnitResponse<String> generate() {
+            Log.d("KNIT_TEST","TEST CALL");
+            return new KnitResponse<>("TEEEESST STRING");
         }
     };
 }
@@ -172,13 +190,27 @@ Component Initialization:
 
 Components are initialized by Knit framework on demand as it will be explained below. Presenters and Models have lifecycle callbacks we are all familiar with such as ```onCreate()``` ,```onDestroy()``` . Knit is smart in managing lifecycles of the components but it is still your duty to free up heavy objects on do any kind of `unsubscribe` operation inside ```onDestroy()``` . 
 
-Memory Management:
+LifeCycle Management:
 
-Components are initialized on a top down basis top being your view and bottom being models required. Each view has a `component` it's associated with. This component will have a presenter and models. The presenter and views are tied together(1to1). However, each presenter may require multiple models. All components inside the associated `component` will be initialized. Initialized is done by keeping a track of usage of each component. Everytime a model is required for instance, it's usage count will be incremented. If it goes up to 1 from 0. it will be initialized and `onCreate()` will be called. If the component is marked for killing and model no longer is needed, the usage count will be decremented. If it gets to 0 , it will be destroyed and `onDestroy()` will be called. To help you visualize it, check out this image below.
+Components initializations are triggered by the initialization of the views. Once a view is created, then first , all models it requires will be created, then it's presenter. The presenter and views are tied together(1to1). However, each presenter may require multiple models. Initialization is done by keeping a track of usage of each component(Reference count). Every time a view that depends ona  model is initialized. The refernce counts for those models will be incremented. If it goes up to 1 from 0. it will be initialized and `onCreate()` will be called. If the view is destroyed and model no longer is needed, the reference count will be decremented. If it gets to 0 , it will be destroyed and `onDestroy()` will be called. 
 
-![Usage Tree](https://github.com/OmerUygurOzer/Knit/blob/master/UsageTree.png)
+Knit will automatically determine your dependencies by going scanning your presenter class for `ModelEvent` and marking the models that generate the values that are required by your presenter as a dependency. So when the view is created, these models will also be initialized for you. However, if your presenter simply inputs data and does not listen for any, then you'll have to add these data fields to your `Presenter` annotation such as ``` @Presenter(value = {MyActivity.class}, needs={TestModel.DATA})``` . This will allow Knit to know that ```TestModel``` is indeed a dependency for `MyActivity` .
 
-This tree-like structure is called a `UsageTree`. When View1 is shown, Presenter 1 , Misc and Rest models will be created and their `usage count`s will be incremented to 1. So when View2 is shown, they won't be re-created. Their `usage count`s will just be incremented to 2 but the Umbrella and Database models will be initialized and their `usage count`s will be set to 1. When View2 is destroyed however, only Presenter2 , Umbrella and Database models will be destroyed since their `usage count`s will be decremented to 0 . Misc and Rest models will still have a `usage count` of 0 and stay alive.
+To utilize "Umbrella" models. You'll have to do something similar and add these data fields to your model's `Collects` tag such as ``` @Collects(value = "umbrella" , needs = {"data1","data2"})```. This way Knit will find models that generates these data fields and mark them as a dependency for your "Umbrella" model.
+
+Singleton models will be initialized lazily. Meaning they won't be booted until a view that depends on them is created.Once booted, they'll never be cleared so be careful with these.
+
+![Component Lifecycles](https://github.com/travelbank/Knit/blob/master/docs/KnitLifecyclesPng.png)
+
+Component Communication:
+
+Knit is an event based framework. Meaning all components communicate via events. The only exception being presenter to view communication. The reason for this is the need to keep views as less verbose as possible. View is wrapper around by a Contract. This contract then is exposed to the presenter.
+All Non-Android specific and non-private methods of the view will be automatically added to the contract by the KnitProcessor. For everything else. Events will be used. Since the presenter is the intermediate between the views and the models, it will listen to both ```ViewEvents``` and ```ModelEvents```.
+To listen to a model, simply create a non-private method and annotate it with a ```ModelEvent``` that has the data tag that you'd like to listen to . The method should only accept the associated ```KnitResponse``` as a param. Doing this will also allow Knit to add the Model that generates that data as a dependency for your view. 
+
+
+![Component Communication](https://github.com/travelbank/Knit/blob/master/docs/KnitComponentsPng.png)
+
 
 Concurrency:
 
