@@ -13,7 +13,7 @@ import com.omerozer.knit.inputters.Inputter1;
 /**
  * Created by omerozer on 2/14/18.
  */
-@Model
+
 public class UmbrellaModel extends KnitModel {
 
 
