@@ -24,7 +24,14 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
      */
     private Knit knit;
 
+    /**
+     * Listener for fragment({@link Fragment} life cycle events
+     */
     private FragmentManager.FragmentLifecycleCallbacks supportFragmentCallbacks;
+
+    /**
+     * Listener for fragment({@link android.app.Fragment} life cycle events
+     */
     private android.app.FragmentManager.FragmentLifecycleCallbacks fragmentCallbacks;
 
     KnitAppListener(Knit knit) {
