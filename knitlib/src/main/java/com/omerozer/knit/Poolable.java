@@ -1,8 +1,7 @@
 package com.omerozer.knit;
 
 /**
- * Objects that can be re-used without being destroyed and recreated can implement Poolable.
- * See {@link MemoryPool}
+ * Created by omerozer on 3/16/18.
  */
 
 public interface Poolable {

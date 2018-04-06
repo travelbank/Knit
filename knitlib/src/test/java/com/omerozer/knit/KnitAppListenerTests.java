@@ -72,7 +72,7 @@ public class KnitAppListenerTests {
         verify(knit).initViewDependencies(viewCaptor.capture());
         assertEquals(testActivity.getClass(),viewCaptor.getValue().getClass());
 //        verify(fragmentManager).registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacksArgumentCaptor.capture(),booleanCaptor.capture());
-//        assertEquals(knitAppListener.getFragmentCallbacks(),fragmentLifecycleCallbacksArgumentCaptor.getValue());
+//        assertEquals(knitAppListener.getoFragmentCallbacks(),fragmentLifecycleCallbacksArgumentCaptor.getValue());
 //        assertTrue(booleanCaptor.getValue());
     }
 
