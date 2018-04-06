@@ -16,9 +16,23 @@ import java.util.Set;
  */
 
 public class EntityNode {
+
+    /**
+     * {@link ComponentTag} for the contained entity.
+     */
     public ComponentTag tag;
+
+    /**
+     * Type of the contained entity.
+     */
     public EntityType type;
+
+    /**
+     * Entity nodes this node depends on.
+     */
     public Set<EntityNode> next = new LinkedHashSet<>();
+
+
     public EntityNode(ComponentTag componentTag,EntityType entityType){
         this.tag = componentTag;
         this.type = entityType;

@@ -15,9 +15,24 @@ import java.util.concurrent.atomic.AtomicReference;
 public class AndroidMainThreadScheduler implements SchedulerInterface {
 
 
+    /**
+     *  {@link AtomicReference}  for {@link SchedulerInterface} that will be handling the consume task.
+     */
     private AtomicReference<SchedulerInterface> target;
+
+    /**
+     * {@link AtomicReference} for {@link Consumer} that will be handling result of the task.
+     */
     private AtomicReference<Consumer> resultConsumer;
+
+    /**
+     * {@link AtomicReference} for whether this scheduler task is done
+     */
     private AtomicBoolean isDone;
+
+    /**
+     * {@link MainHandlerSupplier} that supplies the handler to run tasks on the main/UI thread.
+     */
     private MainHandlerSupplierInterface mainHandlerSupplier;
 
     public AndroidMainThreadScheduler(MainHandlerSupplierInterface mainHandlerSupplier){

@@ -28,6 +28,9 @@ public final class ComponentTag {
         baseTag = Short.MIN_VALUE;
     }
 
+    /**
+     * Unique {@link Short} value as an identifier.
+     */
     private Short tag;
 
     private ComponentTag(Short tag){

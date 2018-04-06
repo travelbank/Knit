@@ -26,14 +26,24 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ModelManager extends InternalModel {
 
+    /**
+     * {@link UsageGraph} instance to fetch active model {@link ComponentTag}s.
+     */
     private UsageGraph usageGraph;
 
+    /**
+     * {@link Map} that maps generated values to the {@link ComponentTag} of the {@link InternalModel} that generates it.
+     */
     private Map<String, ComponentTag> valueToModelMap;
 
     public ModelManager() {
         this.valueToModelMap = new ConcurrentHashMap<>();
     }
 
+    /**
+     * Setter for {@link UsageGraph}
+     * @param usageGraph {@link UsageGraph} instance to be set.
+     */
     public void setUsageGraph(UsageGraph usageGraph) {
         this.usageGraph = usageGraph;
     }
