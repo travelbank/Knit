@@ -12,10 +12,30 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class IOScheduler implements SchedulerInterface {
 
+
+    /**
+     * Object that contains the thread pool that runs the assigned tasks.
+     */
     private KnitIOThreadPool knitIOThreadPool;
+
+    /**
+     * {@link android.os.HandlerThread} that receives results from {@link KnitIOThreadPool}.
+     */
     private KnitIOReceiverThread knitIOReceiverThread;
+
+    /**
+     *  {@link AtomicReference}  for {@link SchedulerInterface} that will be handling the consume task.
+     */
     private AtomicReference<SchedulerInterface> target;
+
+    /**
+     * {@link AtomicReference} for {@link Consumer} that will be handling result of the task.
+     */
     private AtomicReference<Consumer> resultConsumer;
+
+    /**
+     * {@link AtomicReference} for whether this scheduler task is done
+     */
     private AtomicBoolean isDone;
 
     public IOScheduler(KnitIOThreadPool ioThreadPool,KnitIOReceiverThread receiverThread){

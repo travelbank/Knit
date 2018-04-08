@@ -14,12 +14,34 @@ import java.util.concurrent.Callable;
 
 public class TaskPackage {
 
+    /**
+     * Constant {@link TaskPackage} for empty tasks.
+     */
     public static final TaskPackage EMPTY = new TaskPackage();
 
+    /**
+     * {@link SchedulerInterface} that is sending this package
+     */
     private SchedulerInterface current;
+
+    /**
+     * {@link SchedulerInterface} that is going to handle consumer task once the current task is complete.
+     */
     private SchedulerInterface target;
+
+    /**
+     * {@link Consumer} class that will handle the result of the task.
+     */
     private Consumer consumer;
+
+    /**
+     * {@link Runnable} that contains the task.
+     */
     private Runnable runnable;
+
+    /**
+     * {@link Callable} that contains the task and generates a result.
+     */
     private Callable callable;
 
     /**

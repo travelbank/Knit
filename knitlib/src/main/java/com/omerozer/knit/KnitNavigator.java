@@ -14,7 +14,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Created by omerozer on 2/13/18.
+ * Class that handles Navigation. Main navigation points are activities. Sub-activity navigation such as fragments and views should be handled from within
+ * the activity as they can not exist without an activity.
  */
 
 public class KnitNavigator {

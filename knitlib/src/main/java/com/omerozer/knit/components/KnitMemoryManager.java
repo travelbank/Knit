@@ -13,12 +13,15 @@ import java.util.Set;
 
 /**
  * This class is used to subscribe to Android OS's {@link ComponentCallbacks2} to listen to memory
- * updates. When memory gets low , {@code .onMemoryLow()} call back on all active {@link MemoryEntity}s gets called
+ * updates. When memory gets low , {@link MemoryEntity#onMemoryLow()} call back on all active {@link MemoryEntity}s gets called
  * @author Omer Ozer
  */
 
 public class KnitMemoryManager implements ComponentCallbacks2 {
 
+    /**
+     * {@link UsageGraph} instance to fetch active components.
+     */
     private UsageGraph usageGraph;
 
     public KnitMemoryManager(UsageGraph usageGraph) {
@@ -53,7 +56,7 @@ public class KnitMemoryManager implements ComponentCallbacks2 {
 
 
     /**
-     * Simply goes over all active {@link MemoryEntity}s and calls the {@code .onMemoryLow()} method
+     * Simply goes over all active {@link MemoryEntity}s and calls the {@link ComponentCallbacks2} method
      * @param i Memory level
      */
     private void handleMemoryLevel(int i) {
