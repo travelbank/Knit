@@ -22,7 +22,7 @@ public final class ComponentTag {
     }
 
     /**
-     * Resets baseTag to {@code Short.MIN_VALUE}
+     * Resets {@link this#baseTag} to {@code Short.MIN_VALUE}
      */
     public static void reset(){
         baseTag = Short.MIN_VALUE;
