@@ -3,39 +3,66 @@ package com.omerozer.knit;
 import java.util.Stack;
 
 /**
- * Created by omerozer on 3/16/18.
+ * A pool of objects that can be reset instead of being destroyed and recreated to reduce
+ * allocation overhead. When an object is needed it will only be created if the pool is empty.
+ * Objects that are no longer needed are reset and returned to the pool of available objects.
+ *
+ * @author Vincent Williams
  */
 
 public abstract class MemoryPool<T extends Poolable> {
     private static final int MAX = 5;
 
-    Stack<T> events;
+    /**
+     * Pool of available objects
+     */
+    Stack<T> objects;
 
-    public MemoryPool(){
-        events = new Stack<>();
+    public MemoryPool() {
+        objects = new Stack<>();
     }
 
-    public T getObject(){
-        if(events.isEmpty()){
+    /**
+     * Returns an object from the pool, or creates a new one if the pool is empty
+     *
+     * @return Poolable object.
+     */
+    public T getObject() {
+        if (objects.isEmpty()) {
             return createNewInstance();
         }
-        return events.pop();
+        return objects.pop();
     }
 
-    public void pool(T event){
-        event.recycle();
-        if(events.size()< getMaxPoolSize()){
-            events.push(event);
+    /**
+     * Recycle an object and send it back to the pool
+     *
+     * @param object Object to be pooled
+     */
+    public void pool(T object) {
+        object.recycle();
+        if (objects.size() < getMaxPoolSize()) {
+            objects.push(object);
         }
     }
 
+    /**
+     * @return New poolable object
+     */
     protected abstract T createNewInstance();
 
-    public int availableObjects(){
-        return events.size();
+
+    /**
+     * @return Number of available objects in the pool
+     */
+    public int availableObjects() {
+        return objects.size();
     }
 
-    protected int getMaxPoolSize(){
+    /**
+     * @return Max pool capacity
+     */
+    protected int getMaxPoolSize() {
         return MAX;
     }
 }

@@ -1,7 +1,5 @@
 package com.omerozer.knit.schedulers;
 
-import android.support.v4.util.Pools;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
