@@ -28,8 +28,14 @@ public class KnitModelLoader {
      */
     private Map<Class<?>, Constructor<?>> cache;
 
+    /**
+     * Required by models.
+     */
     private SchedulerProvider schedulerProvider;
 
+    /**
+     * {@link KnitUtilsLoader} loads {@code ModelMap} into this. {@code ModelMap} extends {@link ModelMapInterface}
+     */
     private ModelMapInterface modelMap;
 
     public KnitModelLoader(KnitInterface knit) {

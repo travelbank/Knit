@@ -3,28 +3,38 @@ package com.omerozer.knit.schedulers;
 import android.os.Handler;
 import android.os.Looper;
 
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 /**
- * Created by omerozer on 3/27/18.
+ * Class that holds an instance to Android Main Thread Handler. Mainly required for better testability.
+ *
+ * @author Omer Ozer
  */
 
-public class MainHandlerSupplier implements MainHandlerSupplierInterface {
+class MainHandlerSupplier implements MainHandlerSupplierInterface {
 
+    /**
+     * {@link Handler} instance to the Main Thread.
+     */
     private Handler handler = new Handler(Looper.getMainLooper());
 
-    private final Object lock = new Object();
-
+    /**
+     * Accepts tasks to be posted to {@link Handler}.
+     * @param runnable {@link Runnable} tasks.
+     */
     @Override
     public void post(Runnable runnable){
-        synchronized (lock){
-            handler.post(runnable);
-        }
+        handler.post(runnable);
     }
 
+    /**
+     * Access main thread {@link Handler}.
+     * @return Main thread {@link Handler}.
+     */
     @Override
     public Handler getMainHandler(){
-        synchronized (lock){
             return handler;
-        }
     }
 
 }

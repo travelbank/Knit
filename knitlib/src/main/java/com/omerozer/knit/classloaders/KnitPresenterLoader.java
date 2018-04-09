@@ -25,10 +25,19 @@ public class KnitPresenterLoader {
      */
     private Map<Class<?>, Constructor<?>> cache;
 
+    /**
+     * Required Knit environment instance
+     */
     private KnitInterface knitInstance;
 
+    /**
+     * Navigator instance. Gets passed onto Presenters.
+     */
     private KnitNavigator navigator;
 
+    /**
+     * Internal model that all presenters holds an instance to.
+     */
     private InternalModel modelManager;
 
     public KnitPresenterLoader(KnitInterface knit) {
