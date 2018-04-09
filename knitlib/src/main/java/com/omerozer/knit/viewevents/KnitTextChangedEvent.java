@@ -4,7 +4,7 @@ import android.text.Editable;
 import android.view.View;
 
 /**
- * {@link ViewEventEnv} for simple {@link android.text.TextWatcher#onTextChanged(CharSequence, int, int, int)} events.
+ * {@link ViewEventEnv} for simple {@link android.text.TextWatcher} events.
  *
  * @see ViewEventEnv
  * @author Omer Ozer
