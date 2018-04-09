@@ -1,11 +1,16 @@
 package com.omerozer.knit.viewevents;
 
 /**
- * Created by Omer Ozer on 3/13/2018.
+ * {@link ViewEventEnv} that can be tailored to fire various type of events.
+ *
+ * @author Omer Ozer
  */
 
 public class GenericEvent extends ViewEventEnv {
 
+    /**
+     * Object array. Container for all params.
+     */
     private Object[] params;
 
     public GenericEvent(String tag,Object... data) {
@@ -14,14 +19,26 @@ public class GenericEvent extends ViewEventEnv {
 
     public GenericEvent(){}
 
+    /**
+     * Getter for {@link this#params}
+     * @return
+     */
     public Object[] getParams() {
         return params;
     }
 
+    /**
+     * Setter for {@link this#params}
+     * @param params
+     */
     public void setParams(Object... params) {
         this.params = params;
     }
 
+    /**
+     * Getter for {@link this#params}
+     * @return
+     */
     public Object[] getData(){
         return params;
     }
