@@ -14,17 +14,27 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Created by omerozer on 2/13/18.
+ * Class that handles Navigation accross all views.
+ * Instance is stored inside {@link Knit} and is often accessed inside {@link KnitPresenter#getNavigator()}.
+ *
+ * @author Omer Ozer
  */
 
 public class KnitNavigator {
 
+    /**
+     * Shared {@link Knit} instance.
+     */
     private KnitInterface knitInterface;
 
     public KnitNavigator(KnitInterface knitInterface) {
         this.knitInterface = knitInterface;
     }
 
+    /**
+     * Stubbing initialization for when navigation to an activity is needed.
+     * @return Stubber class for Activity navigation {@link ActivityNavigator}.
+     */
     public ActivityNavigator toActivity() {
         return new ActivityNavigator();
     }
@@ -67,6 +77,7 @@ public class KnitNavigator {
             return target;
         }
     }
+
 
 
 }

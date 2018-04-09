@@ -12,7 +12,7 @@ public class SingletonUserCounter extends UserCounter {
     private boolean isUsed = false;
 
     /**
-     * Instead of incrementing the count, uses a flag instead. Once {@code .use()} is called,  {@code boolean isUsed} turns {@code true} and is never released afterwards
+     * Instead of incrementing the count, uses a flag instead. Once {@link UserCounter#use()} is called,  {@code boolean isUsed} turns {@code true} and is never released afterwards
      * How many usages it has does not matter since it is a 'Singleton' and won't be released for GC clean up.
      */
     @Override

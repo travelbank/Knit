@@ -27,7 +27,13 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by omerozer on 3/16/18.
+ *
+ * A hub for all view events. All view events are fired through this class.
+ * Instance is contained inside {@link Knit}. Often accessed inside classes annotated with {@link KnitView},
+ * Events fired will be received by the {@link KnitPresenter} inside the method that is tagged with the associated tag of the {@link com.omerozer.knit.viewevents.ViewEventEnv}
+ * that is being fired.
+ *
+ * @author Omer Ozer
  */
 
 public class ViewEvents {

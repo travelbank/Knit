@@ -1,7 +1,12 @@
 package com.omerozer.knit;
 
 /**
- * Created by omerozer on 2/13/18.
+ *
+ * Base class that provides callbacks to all Models.
+ *
+ * @see MemoryEntity
+ *
+ * @author Omer Ozer
  */
 
 public interface ModelInterface extends MemoryEntity {}

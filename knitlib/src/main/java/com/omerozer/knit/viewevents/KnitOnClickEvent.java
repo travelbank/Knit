@@ -3,8 +3,12 @@ package com.omerozer.knit.viewevents;
 import android.view.View;
 
 /**
- * Created by omerozer on 2/7/18.
+ * {@link ViewEventEnv} for simple {@link View.OnClickListener#onClick(View)} events.
+ *
+ * @see ViewEventEnv
+ * @author Omer Ozer
  */
+
 
 public class KnitOnClickEvent extends ViewEventEnv {
 
