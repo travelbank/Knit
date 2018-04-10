@@ -19,16 +19,15 @@ Features:
 7. Navigation is supported as outlined here : [Navigation in the context of MVP](https://medium.com/@nikita.kozlov/navigation-in-the-context-of-mvp-f474ed313901)  
 8. Easy integration with other libraries such as Dagger.
 
-Version 1.1
+Version 1.2
 
-- Supports multiple threads for generators to be executed on
-- Usage tree for components
+- Fragment navigation support on presenters
+- Atomic entity instances prevents NPE's & leaks caused by un-finished async tasks.
 - Support for reporting errors from Generators added
 - Test Kit added to make testing easy
-- Smarter life-cycle callbacks(Removed Knit.show(view), Knit.dismiss(view))
-- Access to view through contract is now null safe. Threads won't fire an NPE even if component is killed
 - Support for individual handlers for View events
 - Bug fixes
+- Full API documentation
 
 ### Adding Knit to the project:
 ```
