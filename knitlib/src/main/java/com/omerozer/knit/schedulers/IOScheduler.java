@@ -1,11 +1,6 @@
 package com.omerozer.knit.schedulers;
 
-import android.os.Handler;
-import android.os.HandlerThread;
-
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -46,7 +41,6 @@ public class IOScheduler implements SchedulerInterface {
 
     @Override
     public void start() {
-        EVICTOR_THREAD.registerScheduler(this);
         this.knitIOReceiverThread.start();
     }
 

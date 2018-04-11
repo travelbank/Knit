@@ -5,7 +5,6 @@ import static com.omerozer.knit.schedulers.heavy.HeavyThread.handleTask;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 
 import com.omerozer.knit.Knit;
 import com.omerozer.knit.schedulers.Consumer;
@@ -14,10 +13,6 @@ import com.omerozer.knit.schedulers.SchedulerInterface;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  *
@@ -128,11 +123,10 @@ public class HeavyTaskScheduler implements SchedulerInterface {
     }
 
     /**
-     * Starts the scheduler. Also registers in to the {@link com.omerozer.knit.schedulers.EvictorThread}
+     * Starts the scheduler. Might need to do stuff here if creating a custom scheduler.
      */
     @Override
     public void start() {
-        EVICTOR_THREAD.registerScheduler(this);
     }
 
     /**
@@ -160,7 +154,6 @@ public class HeavyTaskScheduler implements SchedulerInterface {
 
     /**
      * If there are no {@link HeavyThread} running actively. This will return {@code true}.
-     * If {@code true} then {@link com.omerozer.knit.schedulers.EvictorThread} will shut down and evict this scheduler.
      * @return Whether this scheduler has any tasks running or not.
      */
     @Override

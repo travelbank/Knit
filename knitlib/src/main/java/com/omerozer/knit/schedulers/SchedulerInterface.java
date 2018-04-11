@@ -8,8 +8,6 @@ import java.util.concurrent.Callable;
 
 public interface SchedulerInterface {
 
-    EvictorThread EVICTOR_THREAD = new EvictorThread();
-
     <T>void  submit(Callable<T> callable);
     void submit(Runnable runnable);
     void start();

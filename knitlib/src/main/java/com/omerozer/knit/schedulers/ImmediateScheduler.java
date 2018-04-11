@@ -52,7 +52,7 @@ public class ImmediateScheduler implements SchedulerInterface {
 
     @Override
     public void start() {
-        EVICTOR_THREAD.registerScheduler(this);
+
     }
 
     @Override
