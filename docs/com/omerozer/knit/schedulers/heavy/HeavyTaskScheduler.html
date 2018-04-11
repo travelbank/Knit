@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html" target="_top">Frames</a></li>
@@ -91,7 +91,7 @@ var activeTableTab = "activeTableTab";
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">com.omerozer.knit.schedulers.heavy</div>
+<div class="subTitle">com.travelbank.knit.schedulers.heavy</div>
 <h2 title="Class HeavyTaskScheduler" class="title">Class HeavyTaskScheduler</h2>
 </div>
 <div class="contentContainer">
@@ -99,7 +99,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>com.omerozer.knit.schedulers.heavy.HeavyTaskScheduler</li>
+<li>com.travelbank.knit.schedulers.heavy.HeavyTaskScheduler</li>
 </ul>
 </li>
 </ul>
@@ -108,25 +108,25 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a></dd>
+<dd><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">HeavyTaskScheduler</span>
 extends java.lang.Object
-implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a></pre>
-<div class="block">This is a <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers"><code>SchedulerInterface</code></a> that is meant to handle heavy weight tasks such as
+implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a></pre>
+<div class="block">This is a <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers"><code>SchedulerInterface</code></a> that is meant to handle heavy weight tasks such as
  downloading large files/images. Tasks will be run on an Android <code>IntentService</code>.
- Knit creates a pool (<code>PriorityQueue</code>) of 4 <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyThread</code></a> s which are <code>IntentService</code>s.
+ Knit creates a pool (<code>PriorityQueue</code>) of 4 <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyThread</code></a> s which are <code>IntentService</code>s.
  The pool prioritizes these bases on the number of current running tasks. The next task will always
- run on the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyThread</code></a> with the least number of tasks running.</div>
+ run on the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyThread</code></a> with the least number of tasks running.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyThread</code></a>, 
-<a href="../../../../../com/omerozer/knit/schedulers/heavy/HThread1.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HThread1</code></a>, 
-<a href="../../../../../com/omerozer/knit/schedulers/heavy/HThread2.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HThread2</code></a>, 
-<a href="../../../../../com/omerozer/knit/schedulers/heavy/HThread3.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HThread3</code></a>, 
-<a href="../../../../../com/omerozer/knit/schedulers/heavy/HThread4.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HThread4</code></a></dd>
+<dd><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyThread</code></a>,
+<a href="../../../../../com/omerozer/knit/schedulers/heavy/HThread1.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HThread1</code></a>,
+<a href="../../../../../com/omerozer/knit/schedulers/heavy/HThread2.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HThread2</code></a>,
+<a href="../../../../../com/omerozer/knit/schedulers/heavy/HThread3.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HThread3</code></a>,
+<a href="../../../../../com/omerozer/knit/schedulers/heavy/HThread4.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HThread4</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -148,7 +148,7 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>private static class&nbsp;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a></span></code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a></span></code>
 <div class="block">Wrapper class that holds a thread id and the type of the thread.</div>
 </td>
 </tr>
@@ -168,15 +168,15 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private static java.util.PriorityQueue&lt;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&gt;</code></td>
+<td class="colFirst"><code>private static java.util.PriorityQueue&lt;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#avaiableThreads">avaiableThreads</a></span></code>
-<div class="block"><code>PriorityQueue</code> for all <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a>s.</div>
+<div class="block"><code>PriorityQueue</code> for all <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a>s.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.omerozer.knit.schedulers">Consumer</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.travelbank.knit.schedulers">Consumer</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#consumer">consumer</a></span></code>
-<div class="block"><a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.omerozer.knit.schedulers"><code>Consumer</code></a> instance that will handle how consume is done on the target <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers"><code>SchedulerInterface</code></a></div>
+<div class="block"><a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.travelbank.knit.schedulers"><code>Consumer</code></a> instance that will handle how consume is done on the target <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers"><code>SchedulerInterface</code></a></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -212,13 +212,13 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <tr class="rowColor">
 <td class="colFirst"><code>private static java.lang.Object</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#queueLock">queueLock</a></span></code>
-<div class="block">Synchronization lock for <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a> <code>PriorityQueue</code>.</div>
+<div class="block">Synchronization lock for <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a> <code>PriorityQueue</code>.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#target">target</a></span></code>
-<div class="block"><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers"><code>SchedulerInterface</code></a> that will be running the consume task when the task here is complete.</div>
+<div class="block"><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers"><code>SchedulerInterface</code></a> that will be running the consume task when the task here is complete.</div>
 </td>
 </tr>
 </table>
@@ -254,28 +254,28 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#getLeastBusyThread--">getLeastBusyThread</a></span>()</code>
 <div class="block">Returns the least busy thread.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>private static java.util.Comparator&lt;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&gt;</code></td>
+<td class="colFirst"><code>private static java.util.Comparator&lt;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#getThreadPriorityComparator--">getThreadPriorityComparator</a></span>()</code>
-<div class="block">Getter for <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a> <code>Comparator</code></div>
+<div class="block">Getter for <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a> <code>Comparator</code></div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#isDone--">isDone</a></span>()</code>
-<div class="block">If there are no <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyThread</code></a> running actively.</div>
+<div class="block">If there are no <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyThread</code></a> running actively.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#setTargetAndConsumer-com.omerozer.knit.schedulers.SchedulerInterface-com.omerozer.knit.schedulers.Consumer-">setTargetAndConsumer</a></span>(<a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a>&nbsp;schedulerInterface,
-                    <a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.omerozer.knit.schedulers">Consumer</a>&nbsp;consumer)</code>
-<div class="block">Sets the target <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers"><code>SchedulerInterface</code></a> which will run the consume task.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#setTargetAndConsumer-com.omerozer.knit.schedulers.SchedulerInterface-com.omerozer.knit.schedulers.Consumer-">setTargetAndConsumer</a></span>(<a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a>&nbsp;schedulerInterface,
+                    <a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.travelbank.knit.schedulers">Consumer</a>&nbsp;consumer)</code>
+<div class="block">Sets the target <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers"><code>SchedulerInterface</code></a> which will run the consume task.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -293,13 +293,13 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#submit-java.util.concurrent.Callable-">submit</a></span>(java.util.concurrent.Callable&lt;T&gt;&nbsp;callable)</code>
-<div class="block">Creates a <a href="../../../../../com/omerozer/knit/schedulers/heavy/TaskPackage.html" title="class in com.omerozer.knit.schedulers.heavy"><code>TaskPackage</code></a> to be sent to the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyThread</code></a>.</div>
+<div class="block">Creates a <a href="../../../../../com/omerozer/knit/schedulers/heavy/TaskPackage.html" title="class in com.travelbank.knit.schedulers.heavy"><code>TaskPackage</code></a> to be sent to the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyThread</code></a>.</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html#submit-java.lang.Runnable-">submit</a></span>(java.lang.Runnable&nbsp;runnable)</code>
-<div class="block">Creates a <a href="../../../../../com/omerozer/knit/schedulers/heavy/TaskPackage.html" title="class in com.omerozer.knit.schedulers.heavy"><code>TaskPackage</code></a> to be sent to the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyThread</code></a>.</div>
+<div class="block">Creates a <a href="../../../../../com/omerozer/knit/schedulers/heavy/TaskPackage.html" title="class in com.travelbank.knit.schedulers.heavy"><code>TaskPackage</code></a> to be sent to the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyThread</code></a>.</div>
 </td>
 </tr>
 </table>
@@ -387,7 +387,7 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <li class="blockList">
 <h4>queueLock</h4>
 <pre>private static final&nbsp;java.lang.Object queueLock</pre>
-<div class="block">Synchronization lock for <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a> <code>PriorityQueue</code>.</div>
+<div class="block">Synchronization lock for <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a> <code>PriorityQueue</code>.</div>
 </li>
 </ul>
 <a name="avaiableThreads">
@@ -396,8 +396,8 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <ul class="blockList">
 <li class="blockList">
 <h4>avaiableThreads</h4>
-<pre>private static final&nbsp;java.util.PriorityQueue&lt;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&gt; avaiableThreads</pre>
-<div class="block"><code>PriorityQueue</code> for all <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a>s. Priority is determined by the number of active running tasks. <code>PriorityQueue.poll()</code> will always return the thread with the lowers
+<pre>private static final&nbsp;java.util.PriorityQueue&lt;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&gt; avaiableThreads</pre>
+<div class="block"><code>PriorityQueue</code> for all <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a>s. Priority is determined by the number of active running tasks. <code>PriorityQueue.poll()</code> will always return the thread with the lowers
  number of active running tasks.</div>
 </li>
 </ul>
@@ -407,8 +407,8 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <ul class="blockList">
 <li class="blockList">
 <h4>target</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a> target</pre>
-<div class="block"><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers"><code>SchedulerInterface</code></a> that will be running the consume task when the task here is complete.</div>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a> target</pre>
+<div class="block"><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers"><code>SchedulerInterface</code></a> that will be running the consume task when the task here is complete.</div>
 </li>
 </ul>
 <a name="consumer">
@@ -417,8 +417,8 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <ul class="blockList">
 <li class="blockList">
 <h4>consumer</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.omerozer.knit.schedulers">Consumer</a> consumer</pre>
-<div class="block"><a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.omerozer.knit.schedulers"><code>Consumer</code></a> instance that will handle how consume is done on the target <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers"><code>SchedulerInterface</code></a></div>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.travelbank.knit.schedulers">Consumer</a> consumer</pre>
+<div class="block"><a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.travelbank.knit.schedulers"><code>Consumer</code></a> instance that will handle how consume is done on the target <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers"><code>SchedulerInterface</code></a></div>
 </li>
 </ul>
 <a name="context">
@@ -462,11 +462,11 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <ul class="blockList">
 <li class="blockList">
 <h4>getThreadPriorityComparator</h4>
-<pre>private static&nbsp;java.util.Comparator&lt;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&gt;&nbsp;getThreadPriorityComparator()</pre>
-<div class="block">Getter for <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a> <code>Comparator</code></div>
+<pre>private static&nbsp;java.util.Comparator&lt;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&gt;&nbsp;getThreadPriorityComparator()</pre>
+<div class="block">Getter for <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a> <code>Comparator</code></div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Comparator that compares how busy <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a>s are..</dd>
+<dd>Comparator that compares how busy <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a>s are..</dd>
 </dl>
 </li>
 </ul>
@@ -477,10 +477,10 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <li class="blockList">
 <h4>submit</h4>
 <pre>public&nbsp;&lt;T&gt;&nbsp;void&nbsp;submit(java.util.concurrent.Callable&lt;T&gt;&nbsp;callable)</pre>
-<div class="block">Creates a <a href="../../../../../com/omerozer/knit/schedulers/heavy/TaskPackage.html" title="class in com.omerozer.knit.schedulers.heavy"><code>TaskPackage</code></a> to be sent to the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyThread</code></a>.</div>
+<div class="block">Creates a <a href="../../../../../com/omerozer/knit/schedulers/heavy/TaskPackage.html" title="class in com.travelbank.knit.schedulers.heavy"><code>TaskPackage</code></a> to be sent to the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyThread</code></a>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#submit-java.util.concurrent.Callable-">submit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a></code></dd>
+<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#submit-java.util.concurrent.Callable-">submit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a></code></dd>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - Type of that the callable returns.</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -495,10 +495,10 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <li class="blockList">
 <h4>submit</h4>
 <pre>public&nbsp;void&nbsp;submit(java.lang.Runnable&nbsp;runnable)</pre>
-<div class="block">Creates a <a href="../../../../../com/omerozer/knit/schedulers/heavy/TaskPackage.html" title="class in com.omerozer.knit.schedulers.heavy"><code>TaskPackage</code></a> to be sent to the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyThread</code></a>.</div>
+<div class="block">Creates a <a href="../../../../../com/omerozer/knit/schedulers/heavy/TaskPackage.html" title="class in com.travelbank.knit.schedulers.heavy"><code>TaskPackage</code></a> to be sent to the <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyThread</code></a>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#submit-java.lang.Runnable-">submit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a></code></dd>
+<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#submit-java.lang.Runnable-">submit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>runnable</code> - <code>Runnable</code> task that's being passed.</dd>
 </dl>
@@ -510,11 +510,11 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <ul class="blockList">
 <li class="blockList">
 <h4>getLeastBusyThread</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&nbsp;getLeastBusyThread()</pre>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy">HeavyTaskScheduler.AvailableThread</a>&nbsp;getLeastBusyThread()</pre>
 <div class="block">Returns the least busy thread. It is determined by the <code>PriorityQueue</code> that compares their total number of active running tasks.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the least busy thread that is wrapper in a <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a>.</dd>
+<dd>the least busy thread that is wrapper in a <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyTaskScheduler.AvailableThread</code></a>.</dd>
 </dl>
 </li>
 </ul>
@@ -528,7 +528,7 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <div class="block">Starts the scheduler. Might need to do stuff here if creating a custom scheduler.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#start--">start</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a></code></dd>
+<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#start--">start</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -542,27 +542,27 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <div class="block">Shuts down the Scheduler.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#shutDown--">shutDown</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a></code></dd>
+<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#shutDown--">shutDown</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a></code></dd>
 </dl>
 </li>
 </ul>
-<a name="setTargetAndConsumer-com.omerozer.knit.schedulers.SchedulerInterface-com.omerozer.knit.schedulers.Consumer-">
+<a name="setTargetAndConsumer-com.travelbank.knit.schedulers.SchedulerInterface-com.travelbank.knit.schedulers.Consumer-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setTargetAndConsumer</h4>
-<pre>public&nbsp;&lt;T&gt;&nbsp;void&nbsp;setTargetAndConsumer(<a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a>&nbsp;schedulerInterface,
-                                     <a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.omerozer.knit.schedulers">Consumer</a>&nbsp;consumer)</pre>
-<div class="block">Sets the target <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers"><code>SchedulerInterface</code></a> which will run the consume task.</div>
+<pre>public&nbsp;&lt;T&gt;&nbsp;void&nbsp;setTargetAndConsumer(<a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a>&nbsp;schedulerInterface,
+                                     <a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.travelbank.knit.schedulers">Consumer</a>&nbsp;consumer)</pre>
+<div class="block">Sets the target <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers"><code>SchedulerInterface</code></a> which will run the consume task.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#setTargetAndConsumer-com.omerozer.knit.schedulers.SchedulerInterface-com.omerozer.knit.schedulers.Consumer-">setTargetAndConsumer</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a></code></dd>
+<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#setTargetAndConsumer-com.omerozer.knit.schedulers.SchedulerInterface-com.omerozer.knit.schedulers.Consumer-">setTargetAndConsumer</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a></code></dd>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - Type that the consumer will receive.</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>schedulerInterface</code> - Target scheduler to run the consume task.</dd>
-<dd><code>consumer</code> - <a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.omerozer.knit.schedulers"><code>Consumer</code></a> object that contains the way consume will occur.</dd>
+<dd><code>consumer</code> - <a href="../../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.travelbank.knit.schedulers"><code>Consumer</code></a> object that contains the way consume will occur.</dd>
 </dl>
 </li>
 </ul>
@@ -573,10 +573,10 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <li class="blockList">
 <h4>isDone</h4>
 <pre>public&nbsp;boolean&nbsp;isDone()</pre>
-<div class="block">If there are no <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.omerozer.knit.schedulers.heavy"><code>HeavyThread</code></a> running actively. This will return <code>true</code>.</div>
+<div class="block">If there are no <a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyThread.html" title="class in com.travelbank.knit.schedulers.heavy"><code>HeavyThread</code></a> running actively. This will return <code>true</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#isDone--">isDone</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a></code></dd>
+<dd><code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html#isDone--">isDone</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Whether this scheduler has any tasks running or not.</dd>
 </dl>
@@ -610,7 +610,7 @@ implements <a href="../../../../../com/omerozer/knit/schedulers/SchedulerInterfa
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.omerozer.knit.schedulers.heavy"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.AvailableThread.html" title="class in com.travelbank.knit.schedulers.heavy"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?com/omerozer/knit/schedulers/heavy/HeavyTaskScheduler.html" target="_top">Frames</a></li>

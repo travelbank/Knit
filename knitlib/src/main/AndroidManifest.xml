@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.omerozer.knit">
+          package="com.travelbank.knit">
 
 
     <application>
-        <service android:name=".schedulers.heavy.HThread1"/>
-        <service android:name=".schedulers.heavy.HThread2"/>
-        <service android:name=".schedulers.heavy.HThread3"/>
-        <service android:name=".schedulers.heavy.HThread4"/>
+        <service android:name="com.travelbank.knit.schedulers.heavy.HThread1"/>
+        <service android:name="com.travelbank.knit.schedulers.heavy.HThread2"/>
+        <service android:name="com.travelbank.knit.schedulers.heavy.HThread3"/>
+        <service android:name="com.travelbank.knit.schedulers.heavy.HThread4"/>
     </application>
 
 </manifest>
