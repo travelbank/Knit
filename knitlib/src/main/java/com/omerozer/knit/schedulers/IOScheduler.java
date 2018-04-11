@@ -73,7 +73,6 @@ public class IOScheduler implements SchedulerInterface {
      */
     @Override
     public void start() {
-        EVICTOR_THREAD.registerScheduler(this);
         this.knitIOReceiverThread.start();
     }
 

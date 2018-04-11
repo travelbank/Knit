@@ -14,10 +14,6 @@ import java.util.concurrent.Callable;
 
 public interface SchedulerInterface {
 
-    /**
-     * Determines which schedulers are finished and should be evicted.
-     */
-    EvictorThread EVICTOR_THREAD = new EvictorThread();
 
 
     /**

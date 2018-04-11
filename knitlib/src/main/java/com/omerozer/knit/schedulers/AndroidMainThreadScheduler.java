@@ -83,11 +83,11 @@ public class AndroidMainThreadScheduler implements SchedulerInterface {
     }
 
     /**
-     * Starts the scheduler. Also registers in to the {@link com.omerozer.knit.schedulers.EvictorThread}
+     * Starts the scheduler. Might need to do stuff here if creating a custom scheduler.
      */
     @Override
     public void start() {
-        EVICTOR_THREAD.registerScheduler(this);
+
     }
 
     /**
