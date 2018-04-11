@@ -1,9 +1,13 @@
 package com.omerozer.knit.viewevents;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
 /**
- * Created by omerozer on 3/13/18.
+ * {@link ViewEventEnv} for simple {@link SwipeRefreshLayout.OnRefreshListener#onRefresh()} events.
+ *
+ * @see ViewEventEnv
+ * @author Omer Ozer
  */
 
 public class KnitOnRefreshEvent extends ViewEventEnv {

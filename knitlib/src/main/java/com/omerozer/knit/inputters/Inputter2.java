@@ -1,7 +1,12 @@
 package com.omerozer.knit.inputters;
 
 /**
- * Created by omerozer on 2/15/18.
+ * These are inputter classes that generate no response. They should be used as setters. They provide no async services.
+ * To register them with Knit , annotate them with {@link com.omerozer.knit.Inputs}.
+ *
+ * Inputter that accepts 2 parameter.
+ *
+ * @author Omer Ozer
  */
 
 public interface Inputter2<A,T> {

@@ -13,6 +13,17 @@ package com.omerozer.knit.schedulers;
  */
 
 public interface Consumer<T> {
+
+    /**
+     * Callback that consumes the result of the task ran inside a {@link SchedulerInterface}
+     * @param t type of the result
+     */
     void consume(T t);
+
+
+    /**
+     * Callback that is called if the task errors.
+     * @param throwable
+     */
     void error(Throwable throwable);
 }

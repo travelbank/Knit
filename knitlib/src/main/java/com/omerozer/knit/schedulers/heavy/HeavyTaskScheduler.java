@@ -33,12 +33,35 @@ import java.util.concurrent.Callable;
 
 public class HeavyTaskScheduler implements SchedulerInterface {
 
+    /**
+     * Thread Id - 1
+     */
     static final String HEAVY_THREAD_NAME1 = "knit_heavy_thread1";
+
+    /**
+     * Thread Id - 2
+     */
     static final String HEAVY_THREAD_NAME2 = "knit_heavy_thread2";
+
+    /**
+     * Thread Id - 3
+     */
     static final String HEAVY_THREAD_NAME3 = "knit_heavy_thread3";
+
+    /**
+     * Thread Id - 4
+     */
     static final String HEAVY_THREAD_NAME4 = "knit_heavy_thread4";
 
+    /**
+     * Synchronization lock for {@link AvailableThread} {@link PriorityQueue}.
+     */
     private static final Object queueLock;
+
+    /**
+     * {@link PriorityQueue} for all {@link AvailableThread}s. Priority is determined by the number of active running tasks. {@link PriorityQueue#poll()} will always return the thread with the lowers
+     * number of active running tasks.
+     */
     private static final PriorityQueue<AvailableThread> avaiableThreads;
 
     /**
@@ -53,6 +76,9 @@ public class HeavyTaskScheduler implements SchedulerInterface {
         avaiableThreads.offer(new AvailableThread(HThread4.class, HEAVY_THREAD_NAME4));
     }
 
+    /**
+     * Wrapper class that holds a thread id and the type of the thread.
+     */
     private static class AvailableThread{
         public Class<? extends HeavyThread> clazz;
         public String threadId;
@@ -64,6 +90,10 @@ public class HeavyTaskScheduler implements SchedulerInterface {
 
     }
 
+    /**
+     * Getter for {@link AvailableThread} {@link Comparator}
+     * @return Comparator that compares how busy {@link AvailableThread}s are..
+     */
     private static Comparator<AvailableThread> getThreadPriorityComparator(){
         return new Comparator<AvailableThread>() {
             @Override
@@ -75,9 +105,19 @@ public class HeavyTaskScheduler implements SchedulerInterface {
         };
     }
 
-
+    /**
+     * {@link SchedulerInterface} that will be running the consume task when the task here is complete.
+     */
     private SchedulerInterface target;
+
+    /**
+     * {@link Consumer} instance that will handle how consume is done on the target {@link SchedulerInterface}
+     */
     private Consumer consumer;
+
+    /**
+     * {@link Context} app level context.
+     */
     private Context context;
 
     public HeavyTaskScheduler() {
@@ -114,6 +154,10 @@ public class HeavyTaskScheduler implements SchedulerInterface {
         handleTask(availableThread.threadId, taskPackage, context, availableThread.clazz);
     }
 
+    /**
+     * Returns the least busy thread. It is determined by the {@link PriorityQueue} that compares their total number of active running tasks.
+     * @return the least busy thread that is wrapper in a {@link AvailableThread}.
+     */
     private AvailableThread getLeastBusyThread(){
         synchronized (queueLock) {
             AvailableThread availableThread = avaiableThreads.poll();

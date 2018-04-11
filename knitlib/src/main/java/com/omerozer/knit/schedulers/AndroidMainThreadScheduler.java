@@ -15,9 +15,24 @@ import java.util.concurrent.atomic.AtomicReference;
 public class AndroidMainThreadScheduler implements SchedulerInterface {
 
 
+    /**
+     *  {@link AtomicReference}  for {@link SchedulerInterface} that will be handling the consume task.
+     */
     private AtomicReference<SchedulerInterface> target;
+
+    /**
+     * {@link AtomicReference} for {@link Consumer} that will be handling result of the task.
+     */
     private AtomicReference<Consumer> resultConsumer;
+
+    /**
+     * {@link AtomicReference} for whether this scheduler task is done
+     */
     private AtomicBoolean isDone;
+
+    /**
+     * {@link MainHandlerSupplier} that supplies the handler to run tasks on the main/UI thread.
+     */
     private MainHandlerSupplierInterface mainHandlerSupplier;
 
     public AndroidMainThreadScheduler(MainHandlerSupplierInterface mainHandlerSupplier){
@@ -76,7 +91,7 @@ public class AndroidMainThreadScheduler implements SchedulerInterface {
     }
 
     /**
-     * This does nothing as it doesn't hold any other dependencies.
+     * This does nothing as this Scheduler doesn't hold any other dependencies.
      */
     @Override
     public void shutDown() {
@@ -97,7 +112,7 @@ public class AndroidMainThreadScheduler implements SchedulerInterface {
 
     /**
      * If the task currently being executed is done ,it returns {@code true}. Otherwise {@code false}.
-     * @return
+     * @return whether or not the task is done.
      */
     @Override
     public boolean isDone() {
