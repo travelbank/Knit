@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.omerozer.knit.schedulers"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../com/omerozer/knit/schedulers/ImmediateScheduler.html" title="class in com.omerozer.knit.schedulers"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.travelbank.knit.schedulers"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../com/omerozer/knit/schedulers/ImmediateScheduler.html" title="class in com.travelbank.knit.schedulers"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?com/omerozer/knit/schedulers/EvictorThread.html" target="_top">Frames</a></li>
@@ -91,7 +91,7 @@ var activeTableTab = "activeTableTab";
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">com.omerozer.knit.schedulers</div>
+<div class="subTitle">com.travelbank.knit.schedulers</div>
 <h2 title="Class EvictorThread" class="title">Class EvictorThread</h2>
 </div>
 <div class="contentContainer">
@@ -99,7 +99,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>com.omerozer.knit.schedulers.EvictorThread</li>
+<li>com.travelbank.knit.schedulers.EvictorThread</li>
 </ul>
 </li>
 </ul>
@@ -116,11 +116,11 @@ var activeTableTab = "activeTableTab";
 extends java.lang.Object
 implements java.lang.Runnable</pre>
 <div class="block">This is the thread responsible for eviction of the schedulers. It will iterate over all registered
- <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.omerozer.knit.schedulers"><code>Schedulers</code></a> 10x / second and shut down the ones that are done.
+ <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.travelbank.knit.schedulers"><code>Schedulers</code></a> 10x / second and shut down the ones that are done.
 
- This thread starts running the moment a <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.omerozer.knit.schedulers"><code>Schedulers</code></a> is fired and will be killed 20seconds after.
- Each <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.omerozer.knit.schedulers"><code>Schedulers</code></a> started within that 20 seconds will push the ending further without the need for
- restarting of the thread. If there are no <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.omerozer.knit.schedulers"><code>Schedulers</code></a> activity for 20 seconds straight, this thread will die.</div>
+ This thread starts running the moment a <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.travelbank.knit.schedulers"><code>Schedulers</code></a> is fired and will be killed 20seconds after.
+ Each <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.travelbank.knit.schedulers"><code>Schedulers</code></a> started within that 20 seconds will push the ending further without the need for
+ restarting of the thread. If there are no <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.travelbank.knit.schedulers"><code>Schedulers</code></a> activity for 20 seconds straight, this thread will die.</div>
 </li>
 </ul>
 </div>
@@ -152,7 +152,7 @@ implements java.lang.Runnable</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/omerozer/knit/schedulers/EvictorThread.html#isRunning">isRunning</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private java.util.Set&lt;<a href="../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.Set&lt;<a href="../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/omerozer/knit/schedulers/EvictorThread.html#schedulers">schedulers</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -201,14 +201,14 @@ implements java.lang.Runnable</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/omerozer/knit/schedulers/EvictorThread.html#registerScheduler-com.omerozer.knit.schedulers.SchedulerInterface-">registerScheduler</a></span>(<a href="../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a>&nbsp;scheduler)</code>
-<div class="block">Registers another <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.omerozer.knit.schedulers"><code>Schedulers</code></a>.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/omerozer/knit/schedulers/EvictorThread.html#registerScheduler-com.omerozer.knit.schedulers.SchedulerInterface-">registerScheduler</a></span>(<a href="../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a>&nbsp;scheduler)</code>
+<div class="block">Registers another <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.travelbank.knit.schedulers"><code>Schedulers</code></a>.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/omerozer/knit/schedulers/EvictorThread.html#run--">run</a></span>()</code>
-<div class="block">Iterates over all registered <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.omerozer.knit.schedulers"><code>Schedulers</code></a> to kill the ones that are 'done'.</div>
+<div class="block">Iterates over all registered <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.travelbank.knit.schedulers"><code>Schedulers</code></a> to kill the ones that are 'done'.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -317,7 +317,7 @@ implements java.lang.Runnable</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>schedulers</h4>
-<pre>private&nbsp;java.util.Set&lt;<a href="../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a>&gt; schedulers</pre>
+<pre>private&nbsp;java.util.Set&lt;<a href="../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a>&gt; schedulers</pre>
 </li>
 </ul>
 </li>
@@ -352,7 +352,7 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>start</h4>
 <pre>void&nbsp;start()</pre>
-<div class="block">Starts the thread. Will keep running for 20 seconds unless another <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.omerozer.knit.schedulers"><code>Schedulers</code></a> is registered.</div>
+<div class="block">Starts the thread. Will keep running for 20 seconds unless another <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.travelbank.knit.schedulers"><code>Schedulers</code></a> is registered.</div>
 </li>
 </ul>
 <a name="stop--">
@@ -365,14 +365,14 @@ implements java.lang.Runnable</pre>
 <div class="block">Stops the thread.</div>
 </li>
 </ul>
-<a name="registerScheduler-com.omerozer.knit.schedulers.SchedulerInterface-">
+<a name="registerScheduler-com.travelbank.knit.schedulers.SchedulerInterface-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>registerScheduler</h4>
-<pre>public&nbsp;void&nbsp;registerScheduler(<a href="../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.omerozer.knit.schedulers">SchedulerInterface</a>&nbsp;scheduler)</pre>
-<div class="block">Registers another <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.omerozer.knit.schedulers"><code>Schedulers</code></a>. This will either start this thread or rebase the start time.
+<pre>public&nbsp;void&nbsp;registerScheduler(<a href="../../../../com/omerozer/knit/schedulers/SchedulerInterface.html" title="interface in com.travelbank.knit.schedulers">SchedulerInterface</a>&nbsp;scheduler)</pre>
+<div class="block">Registers another <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.travelbank.knit.schedulers"><code>Schedulers</code></a>. This will either start this thread or rebase the start time.
  This thread will always get killed 20seconds after the last time this method was called.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -387,7 +387,7 @@ implements java.lang.Runnable</pre>
 <li class="blockList">
 <h4>run</h4>
 <pre>public&nbsp;void&nbsp;run()</pre>
-<div class="block">Iterates over all registered <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.omerozer.knit.schedulers"><code>Schedulers</code></a> to kill the ones that are 'done'.</div>
+<div class="block">Iterates over all registered <a href="../../../../com/omerozer/knit/schedulers/Schedulers.html" title="class in com.travelbank.knit.schedulers"><code>Schedulers</code></a> to kill the ones that are 'done'.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>run</code>&nbsp;in interface&nbsp;<code>java.lang.Runnable</code></dd>
@@ -430,8 +430,8 @@ implements java.lang.Runnable</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.omerozer.knit.schedulers"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../com/omerozer/knit/schedulers/ImmediateScheduler.html" title="class in com.omerozer.knit.schedulers"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../com/omerozer/knit/schedulers/Consumer.html" title="interface in com.travelbank.knit.schedulers"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../com/omerozer/knit/schedulers/ImmediateScheduler.html" title="class in com.travelbank.knit.schedulers"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?com/omerozer/knit/schedulers/EvictorThread.html" target="_top">Frames</a></li>

@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../com/omerozer/knit/components/graph/SingletonUserCounter.html" title="class in com.omerozer.knit.components.graph"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../com/omerozer/knit/components/graph/SingletonUserCounter.html" title="class in com.travelbank.knit.components.graph"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?com/omerozer/knit/components/graph/UsageGraph.html" target="_top">Frames</a></li>
@@ -91,7 +91,7 @@ var activeTableTab = "activeTableTab";
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">com.omerozer.knit.components.graph</div>
+<div class="subTitle">com.travelbank.knit.components.graph</div>
 <h2 title="Class UsageGraph" class="title">Class UsageGraph</h2>
 </div>
 <div class="contentContainer">
@@ -99,7 +99,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>com.omerozer.knit.components.graph.UsageGraph</li>
+<li>com.travelbank.knit.components.graph.UsageGraph</li>
 </ul>
 </li>
 </ul>
@@ -112,26 +112,26 @@ var activeTableTab = "activeTableTab";
 extends java.lang.Object</pre>
 <div class="block">This is the core of smart life-cycle management of all components. This class creates a
  dependency tree with all components created by KnitProcessor.
- Receives all components from <a href="../../../../../com/omerozer/knit/ModelMapInterface.html" title="interface in com.omerozer.knit"><code>ModelMapInterface</code></a> and <a href="../../../../../com/omerozer/knit/ViewToPresenterMapInterface.html" title="interface in com.omerozer.knit"><code>ViewToPresenterMapInterface</code></a>,
- assigns a <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a> to each one then inserts them
- into the graph via <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph"><code>EntityNode</code></a>s . In the tree hierarchy, Entities annotated with <code>KnitView</code> will be at the top. The initialization of
+ Receives all components from <a href="../../../../../com/omerozer/knit/ModelMapInterface.html" title="interface in com.travelbank.knit"><code>ModelMapInterface</code></a> and <a href="../../../../../com/omerozer/knit/ViewToPresenterMapInterface.html" title="interface in com.travelbank.knit"><code>ViewToPresenterMapInterface</code></a>,
+ assigns a <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a> to each one then inserts them
+ into the graph via <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph"><code>EntityNode</code></a>s . In the tree hierarchy, Entities annotated with <code>KnitView</code> will be at the top. The initialization of
  the views will trigger the initialization of the entities that the view requires. <code>KnitView</code> -> <code>Presenter</code> -> <code>Model</code>.
  Initialized components will be put into a <code>Map<ComponentTag,EntityInstance></code> that holds
  their instances until they're released.
 
  Each of the annotated entities will have an internal counterpart that Knit uses.
  <code>KnitView</code> -> As is
- <code>Presenter</code> -> <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.omerozer.knit"><code>KnitPresenter</code></a> -> <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>
- <code>Model</code> -> <a href="../../../../../com/omerozer/knit/KnitModel.html" title="class in com.omerozer.knit"><code>KnitModel</code></a> -> <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a>
+ <code>Presenter</code> -> <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.travelbank.knit"><code>KnitPresenter</code></a> -> <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>
+ <code>Model</code> -> <a href="../../../../../com/omerozer/knit/KnitModel.html" title="class in com.travelbank.knit"><code>KnitModel</code></a> -> <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a>
 
 
- However the initialization will be done in a bottom-up manner. Meaning <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a>s
- will be created first. Then <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a></div>
+ However the initialization will be done in a bottom-up manner. Meaning <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a>s
+ will be created first. Then <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a>, 
-<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>, 
-<a href="../../../../../com/omerozer/knit/components/ModelManager.html" title="class in com.omerozer.knit.components"><code>ModelManager</code></a></dd>
+<dd><a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a>,
+<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>,
+<a href="../../../../../com/omerozer/knit/components/ModelManager.html" title="class in com.travelbank.knit.components"><code>ModelManager</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -152,85 +152,85 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private java.util.Set&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.Set&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#activeModelTags">activeModelTags</a></span></code>
-<div class="block">A <code>Set</code> of <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>s for the models currently active in the memory.</div>
+<div class="block">A <code>Set</code> of <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>s for the models currently active in the memory.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private java.util.Set&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.Set&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#activePresenterTags">activePresenterTags</a></span></code>
-<div class="block">A <code>Set</code> of <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>s for the presenters currently active in the memory.</div>
+<div class="block">A <code>Set</code> of <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>s for the presenters currently active in the memory.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private java.util.Map&lt;java.lang.Class&lt;?&gt;,<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.Map&lt;java.lang.Class&lt;?&gt;,<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#clazzToTagMap">clazzToTagMap</a></span></code>
-<div class="block"><code>Map</code> that maps Component classes to their associated <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>s.</div>
+<div class="block"><code>Map</code> that maps Component classes to their associated <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>s.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph">UserCounter</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph">UserCounter</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#counterMap">counterMap</a></span></code>
-<div class="block"><code>Map</code> that holds <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph"><code>UserCounter</code></a> for <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a></div>
+<div class="block"><code>Map</code> that holds <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph"><code>UserCounter</code></a> for <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a></div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph">EntityNode</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph">EntityNode</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#graphBase">graphBase</a></span></code>
 <div class="block">These are all presenters as they are the entry points of usagegraph.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#instanceMap">instanceMap</a></span></code>
-<div class="block"><code>Map</code> that maps Component classes to their associated <a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit"><code>EntityInstance</code></a>s.</div>
+<div class="block"><code>Map</code> that maps Component classes to their associated <a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit"><code>EntityInstance</code></a>s.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/classloaders/KnitModelLoader.html" title="class in com.omerozer.knit.classloaders">KnitModelLoader</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/classloaders/KnitModelLoader.html" title="class in com.travelbank.knit.classloaders">KnitModelLoader</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#knitModelLoader">knitModelLoader</a></span></code>
-<div class="block">KnitModelLoader is used when initializing <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a>s on the graph.</div>
+<div class="block">KnitModelLoader is used when initializing <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a>s on the graph.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/classloaders/KnitPresenterLoader.html" title="class in com.omerozer.knit.classloaders">KnitPresenterLoader</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/classloaders/KnitPresenterLoader.html" title="class in com.travelbank.knit.classloaders">KnitPresenterLoader</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#knitPresenterLoader">knitPresenterLoader</a></span></code>
-<div class="block">KnitPresenterLoader is used when initializing <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>s on the graph.</div>
+<div class="block">KnitPresenterLoader is used when initializing <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>s on the graph.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/MessagePool.html" title="class in com.omerozer.knit">MessagePool</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/MessagePool.html" title="class in com.travelbank.knit">MessagePool</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#messagePool">messagePool</a></span></code>
-<div class="block"><a href="../../../../../com/omerozer/knit/MessagePool.html" title="class in com.omerozer.knit"><code>MessagePool</code></a> holds the messages for the <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.omerozer.knit"><code>MessageTrain</code></a> to the usagegraph needs this also.</div>
+<div class="block"><a href="../../../../../com/omerozer/knit/MessagePool.html" title="class in com.travelbank.knit"><code>MessagePool</code></a> holds the messages for the <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.travelbank.knit"><code>MessageTrain</code></a> to the usagegraph needs this also.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.omerozer.knit">MessageTrain</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.travelbank.knit">MessageTrain</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#messageTrain">messageTrain</a></span></code>
 <div class="block">Message train delivers messages from one presenter to another.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/components/ModelManager.html" title="class in com.omerozer.knit.components">ModelManager</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/components/ModelManager.html" title="class in com.travelbank.knit.components">ModelManager</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#modelManager">modelManager</a></span></code>
-<div class="block">Modelmanager needed to handle <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a> registrations/unregistrations</div>
+<div class="block">Modelmanager needed to handle <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a> registrations/unregistrations</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/ModelMapInterface.html" title="interface in com.omerozer.knit">ModelMapInterface</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/ModelMapInterface.html" title="interface in com.travelbank.knit">ModelMapInterface</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#modelMap">modelMap</a></span></code>
 <div class="block">UsageGraph needs this class to determine model dependencies.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>,java.lang.Class&lt;?&gt;&gt;</code></td>
+<td class="colFirst"><code>private java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>,java.lang.Class&lt;?&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#tagToClazzMap">tagToClazzMap</a></span></code>
 <div class="block"><code>Map</code> that maps Component classes to their associated <code>Class</code>s.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/ViewToPresenterMapInterface.html" title="interface in com.omerozer.knit">ViewToPresenterMapInterface</a></code></td>
+<td class="colFirst"><code>private <a href="../../../../../com/omerozer/knit/ViewToPresenterMapInterface.html" title="interface in com.travelbank.knit">ViewToPresenterMapInterface</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#viewToPresenterMap">viewToPresenterMap</a></span></code>
 <div class="block">UsageGraph needs this class to determine presenter dependencies.</div>
 </td>
@@ -250,7 +250,7 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#UsageGraph-com.omerozer.knit.KnitInterface-">UsageGraph</a></span>(<a href="../../../../../com/omerozer/knit/KnitInterface.html" title="interface in com.omerozer.knit">KnitInterface</a>&nbsp;knitInstance)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#UsageGraph-com.omerozer.knit.KnitInterface-">UsageGraph</a></span>(<a href="../../../../../com/omerozer/knit/KnitInterface.html" title="interface in com.travelbank.knit">KnitInterface</a>&nbsp;knitInstance)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -268,7 +268,7 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Collection&lt;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.Collection&lt;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#activeEntities--">activeEntities</a></span>()</code>
 <div class="block">Returns a <code>Collection</code> of entities currently living in the memory.</div>
 </td>
@@ -276,7 +276,7 @@ extends java.lang.Object</pre>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#attachViewToComponent-java.lang.Object-">attachViewToComponent</a></span>(java.lang.Object&nbsp;viewObject)</code>
-<div class="block">Attaches a view object to an underlying presenter(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>.</div>
+<div class="block">Attaches a view object to an underlying presenter(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -287,8 +287,8 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>private void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#createModelTag-java.lang.Class-">createModelTag</a></span>(java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;&nbsp;clazz)</code>
-<div class="block">Creates all required objects that <a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html" title="class in com.omerozer.knit.components.graph"><code>UsageGraph</code></a> uses for the given <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a> class.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#createModelTag-java.lang.Class-">createModelTag</a></span>(java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;&nbsp;clazz)</code>
+<div class="block">Creates all required objects that <a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html" title="class in com.travelbank.knit.components.graph"><code>UsageGraph</code></a> uses for the given <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a> class.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -298,34 +298,34 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&lt;<a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#getModelWithTag-com.omerozer.knit.components.ComponentTag-">getModelWithTag</a></span>(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;componentTag)</code>
-<div class="block">Returns <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a> associated with the given <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>.</div>
+<td class="colFirst"><code><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&lt;<a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#getModelWithTag-com.omerozer.knit.components.ComponentTag-">getModelWithTag</a></span>(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;componentTag)</code>
+<div class="block">Returns <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a> associated with the given <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a></code></td>
+<td class="colFirst"><code><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#getPresenterForObject-java.lang.Object-">getPresenterForObject</a></span>(java.lang.Object&nbsp;presenterObject)</code>
-<div class="block">Finds the internal counterpart(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>) of a <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.omerozer.knit"><code>KnitPresenter</code></a> instance.</div>
+<div class="block">Finds the internal counterpart(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>) of a <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.travelbank.knit"><code>KnitPresenter</code></a> instance.</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a></code></td>
+<td class="colFirst"><code><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#getPresenterForView-java.lang.Object-">getPresenterForView</a></span>(java.lang.Object&nbsp;viewObject)</code>
-<div class="block">Finds <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a> for a view object .</div>
+<div class="block">Finds <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a> for a view object .</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&lt;<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit">InternalPresenter</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#getPresenterTag-com.omerozer.knit.components.ComponentTag-">getPresenterTag</a></span>(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;componentTag)</code>
-<div class="block">Returns <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a> associated with the given <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>.</div>
+<td class="colFirst"><code><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&lt;<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit">InternalPresenter</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#getPresenterTag-com.omerozer.knit.components.ComponentTag-">getPresenterTag</a></span>(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;componentTag)</code>
+<div class="block">Returns <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a> associated with the given <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>.</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>private void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#handleMessageDelivery-com.omerozer.knit.InternalPresenter-com.omerozer.knit.components.ComponentTag-">handleMessageDelivery</a></span>(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit">InternalPresenter</a>&nbsp;presenter,
-                     <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;tag)</code>
-<div class="block">This method delivers the message sent from one <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a> to another.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#handleMessageDelivery-com.omerozer.knit.InternalPresenter-com.omerozer.knit.components.ComponentTag-">handleMessageDelivery</a></span>(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit">InternalPresenter</a>&nbsp;presenter,
+                     <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;tag)</code>
+<div class="block">This method delivers the message sent from one <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a> to another.</div>
 </td>
 </tr>
 <tr id="i10" class="altColor">
@@ -336,36 +336,36 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>private void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseAndCreateModel-java.lang.Class-com.omerozer.knit.components.graph.EntityNode-java.util.List-java.util.Map-java.util.Map-">recurseAndCreateModel</a></span>(java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;&nbsp;modelClazz,
-                     <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph">EntityNode</a>&nbsp;modelNode,
-                     java.util.List&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;&gt;&nbsp;models,
-                     java.util.Map&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;generatedValuesMap,
-                     java.util.Map&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;requiredValuesMap)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseAndCreateModel-java.lang.Class-com.omerozer.knit.components.graph.EntityNode-java.util.List-java.util.Map-java.util.Map-">recurseAndCreateModel</a></span>(java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;&nbsp;modelClazz,
+                     <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph">EntityNode</a>&nbsp;modelNode,
+                     java.util.List&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;&gt;&nbsp;models,
+                     java.util.Map&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;generatedValuesMap,
+                     java.util.Map&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;requiredValuesMap)</code>
 <div class="block">This is the recursive method that creates the model dependencies.</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>private void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseForFinish-com.omerozer.knit.components.graph.EntityNode-">recurseForFinish</a></span>(<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph">EntityNode</a>&nbsp;entityNode)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseForFinish-com.omerozer.knit.components.graph.EntityNode-">recurseForFinish</a></span>(<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph">EntityNode</a>&nbsp;entityNode)</code>
 <div class="block">Recursive method that releases all components.</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>private void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseForStart-com.omerozer.knit.components.graph.EntityNode-java.lang.Object-">recurseForStart</a></span>(<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph">EntityNode</a>&nbsp;entityNode,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseForStart-com.omerozer.knit.components.graph.EntityNode-java.lang.Object-">recurseForStart</a></span>(<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph">EntityNode</a>&nbsp;entityNode,
                java.lang.Object&nbsp;viewObject)</code>
 <div class="block">Recursive method that initializes all components and stores their instances.</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>private void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseTraverseTheGraphAndDestroyIfNeeded-com.omerozer.knit.components.ComponentTag-">recurseTraverseTheGraphAndDestroyIfNeeded</a></span>(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;tag)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseTraverseTheGraphAndDestroyIfNeeded-com.omerozer.knit.components.ComponentTag-">recurseTraverseTheGraphAndDestroyIfNeeded</a></span>(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;tag)</code>
 <div class="block">Entry method for <code>this#recurseForFinish(EntityNode)</code> method.</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>private void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseTraverseTheGraphAndStartIfNeeded-com.omerozer.knit.components.ComponentTag-java.lang.Object-">recurseTraverseTheGraphAndStartIfNeeded</a></span>(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;tag,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#recurseTraverseTheGraphAndStartIfNeeded-com.omerozer.knit.components.ComponentTag-java.lang.Object-">recurseTraverseTheGraphAndStartIfNeeded</a></span>(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;tag,
                                        java.lang.Object&nbsp;viewObject)</code>
 <div class="block">Entry method for <code>this#recurseForStart(EntityNode, Object)</code> method.</div>
 </td>
@@ -379,13 +379,13 @@ extends java.lang.Object</pre>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#startViewAndItsComponents-java.lang.Object-">startViewAndItsComponents</a></span>(java.lang.Object&nbsp;viewObject)</code>
-<div class="block">Attaches a view object to an underlying presenter(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a> & required <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a>s).</div>
+<div class="block">Attaches a view object to an underlying presenter(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a> & required <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a>s).</div>
 </td>
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html#stopViewAndItsComponents-java.lang.Object-">stopViewAndItsComponents</a></span>(java.lang.Object&nbsp;viewObject)</code>
-<div class="block">Decrements <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph"><code>UserCounter</code></a> of all entities depended on this view.</div>
+<div class="block">Decrements <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph"><code>UserCounter</code></a> of all entities depended on this view.</div>
 </td>
 </tr>
 </table>
@@ -416,7 +416,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>viewToPresenterMap</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/ViewToPresenterMapInterface.html" title="interface in com.omerozer.knit">ViewToPresenterMapInterface</a> viewToPresenterMap</pre>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/ViewToPresenterMapInterface.html" title="interface in com.travelbank.knit">ViewToPresenterMapInterface</a> viewToPresenterMap</pre>
 <div class="block">UsageGraph needs this class to determine presenter dependencies.</div>
 </li>
 </ul>
@@ -426,7 +426,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>modelMap</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/ModelMapInterface.html" title="interface in com.omerozer.knit">ModelMapInterface</a> modelMap</pre>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/ModelMapInterface.html" title="interface in com.travelbank.knit">ModelMapInterface</a> modelMap</pre>
 <div class="block">UsageGraph needs this class to determine model dependencies.</div>
 </li>
 </ul>
@@ -436,8 +436,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>modelManager</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/components/ModelManager.html" title="class in com.omerozer.knit.components">ModelManager</a> modelManager</pre>
-<div class="block">Modelmanager needed to handle <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a> registrations/unregistrations</div>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/components/ModelManager.html" title="class in com.travelbank.knit.components">ModelManager</a> modelManager</pre>
+<div class="block">Modelmanager needed to handle <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a> registrations/unregistrations</div>
 </li>
 </ul>
 <a name="knitModelLoader">
@@ -446,8 +446,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>knitModelLoader</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/classloaders/KnitModelLoader.html" title="class in com.omerozer.knit.classloaders">KnitModelLoader</a> knitModelLoader</pre>
-<div class="block">KnitModelLoader is used when initializing <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a>s on the graph.</div>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/classloaders/KnitModelLoader.html" title="class in com.travelbank.knit.classloaders">KnitModelLoader</a> knitModelLoader</pre>
+<div class="block">KnitModelLoader is used when initializing <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a>s on the graph.</div>
 </li>
 </ul>
 <a name="knitPresenterLoader">
@@ -456,8 +456,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>knitPresenterLoader</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/classloaders/KnitPresenterLoader.html" title="class in com.omerozer.knit.classloaders">KnitPresenterLoader</a> knitPresenterLoader</pre>
-<div class="block">KnitPresenterLoader is used when initializing <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>s on the graph.</div>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/classloaders/KnitPresenterLoader.html" title="class in com.travelbank.knit.classloaders">KnitPresenterLoader</a> knitPresenterLoader</pre>
+<div class="block">KnitPresenterLoader is used when initializing <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>s on the graph.</div>
 </li>
 </ul>
 <a name="messageTrain">
@@ -466,9 +466,9 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>messageTrain</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.omerozer.knit">MessageTrain</a> messageTrain</pre>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.travelbank.knit">MessageTrain</a> messageTrain</pre>
 <div class="block">Message train delivers messages from one presenter to another. Since usagegraph is the class that is reponsible for their initialization,
- it needs an instance of the <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.omerozer.knit"><code>MessageTrain</code></a> also.</div>
+ it needs an instance of the <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.travelbank.knit"><code>MessageTrain</code></a> also.</div>
 </li>
 </ul>
 <a name="messagePool">
@@ -477,8 +477,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>messagePool</h4>
-<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/MessagePool.html" title="class in com.omerozer.knit">MessagePool</a> messagePool</pre>
-<div class="block"><a href="../../../../../com/omerozer/knit/MessagePool.html" title="class in com.omerozer.knit"><code>MessagePool</code></a> holds the messages for the <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.omerozer.knit"><code>MessageTrain</code></a> to the usagegraph needs this also.</div>
+<pre>private&nbsp;<a href="../../../../../com/omerozer/knit/MessagePool.html" title="class in com.travelbank.knit">MessagePool</a> messagePool</pre>
+<div class="block"><a href="../../../../../com/omerozer/knit/MessagePool.html" title="class in com.travelbank.knit"><code>MessagePool</code></a> holds the messages for the <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.travelbank.knit"><code>MessageTrain</code></a> to the usagegraph needs this also.</div>
 </li>
 </ul>
 <a name="counterMap">
@@ -487,8 +487,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>counterMap</h4>
-<pre>private&nbsp;java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph">UserCounter</a>&gt; counterMap</pre>
-<div class="block"><code>Map</code> that holds <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph"><code>UserCounter</code></a> for <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a></div>
+<pre>private&nbsp;java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph">UserCounter</a>&gt; counterMap</pre>
+<div class="block"><code>Map</code> that holds <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph"><code>UserCounter</code></a> for <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a></div>
 </li>
 </ul>
 <a name="graphBase">
@@ -497,7 +497,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>graphBase</h4>
-<pre>private&nbsp;java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph">EntityNode</a>&gt; graphBase</pre>
+<pre>private&nbsp;java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph">EntityNode</a>&gt; graphBase</pre>
 <div class="block">These are all presenters as they are the entry points of usagegraph.</div>
 </li>
 </ul>
@@ -507,8 +507,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>clazzToTagMap</h4>
-<pre>private&nbsp;java.util.Map&lt;java.lang.Class&lt;?&gt;,<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&gt; clazzToTagMap</pre>
-<div class="block"><code>Map</code> that maps Component classes to their associated <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>s.</div>
+<pre>private&nbsp;java.util.Map&lt;java.lang.Class&lt;?&gt;,<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&gt; clazzToTagMap</pre>
+<div class="block"><code>Map</code> that maps Component classes to their associated <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>s.</div>
 </li>
 </ul>
 <a name="tagToClazzMap">
@@ -517,7 +517,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>tagToClazzMap</h4>
-<pre>private&nbsp;java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>,java.lang.Class&lt;?&gt;&gt; tagToClazzMap</pre>
+<pre>private&nbsp;java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>,java.lang.Class&lt;?&gt;&gt; tagToClazzMap</pre>
 <div class="block"><code>Map</code> that maps Component classes to their associated <code>Class</code>s.</div>
 </li>
 </ul>
@@ -527,8 +527,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>instanceMap</h4>
-<pre>private&nbsp;java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&gt; instanceMap</pre>
-<div class="block"><code>Map</code> that maps Component classes to their associated <a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit"><code>EntityInstance</code></a>s.
+<pre>private&nbsp;java.util.Map&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>,<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&gt; instanceMap</pre>
+<div class="block"><code>Map</code> that maps Component classes to their associated <a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit"><code>EntityInstance</code></a>s.
  By default the instances will return null. Only once the component is initialized, it will return an actual instance .</div>
 </li>
 </ul>
@@ -538,8 +538,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>activeModelTags</h4>
-<pre>private&nbsp;java.util.Set&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&gt; activeModelTags</pre>
-<div class="block">A <code>Set</code> of <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>s for the models currently active in the memory.</div>
+<pre>private&nbsp;java.util.Set&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&gt; activeModelTags</pre>
+<div class="block">A <code>Set</code> of <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>s for the models currently active in the memory.</div>
 </li>
 </ul>
 <a name="activePresenterTags">
@@ -548,8 +548,8 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>activePresenterTags</h4>
-<pre>private&nbsp;java.util.Set&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&gt; activePresenterTags</pre>
-<div class="block">A <code>Set</code> of <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>s for the presenters currently active in the memory.</div>
+<pre>private&nbsp;java.util.Set&lt;<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&gt; activePresenterTags</pre>
+<div class="block">A <code>Set</code> of <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>s for the presenters currently active in the memory.</div>
 </li>
 </ul>
 </li>
@@ -560,13 +560,13 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="UsageGraph-com.omerozer.knit.KnitInterface-">
+<a name="UsageGraph-com.travelbank.knit.KnitInterface-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>UsageGraph</h4>
-<pre>public&nbsp;UsageGraph(<a href="../../../../../com/omerozer/knit/KnitInterface.html" title="interface in com.omerozer.knit">KnitInterface</a>&nbsp;knitInstance)</pre>
+<pre>public&nbsp;UsageGraph(<a href="../../../../../com/omerozer/knit/KnitInterface.html" title="interface in com.travelbank.knit">KnitInterface</a>&nbsp;knitInstance)</pre>
 </li>
 </ul>
 </li>
@@ -584,7 +584,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>createGraph</h4>
 <pre>private&nbsp;void&nbsp;createGraph()</pre>
-<div class="block">This is the method that creates the graph. Extracts generated values from <a href="../../../../../com/omerozer/knit/ModelMapInterface.html" title="interface in com.omerozer.knit"><code>ModelMapInterface</code></a>, extract required values from <a href="../../../../../com/omerozer/knit/ViewToPresenterMapInterface.html" title="interface in com.omerozer.knit"><code>ViewToPresenterMapInterface</code></a>.
+<div class="block">This is the method that creates the graph. Extracts generated values from <a href="../../../../../com/omerozer/knit/ModelMapInterface.html" title="interface in com.travelbank.knit"><code>ModelMapInterface</code></a>, extract required values from <a href="../../../../../com/omerozer/knit/ViewToPresenterMapInterface.html" title="interface in com.travelbank.knit"><code>ViewToPresenterMapInterface</code></a>.
 <<<<<<< HEAD
  Even though the entry point of all components is the creation of a view, the graph does not need to hold any kind of view data other than it's presenter. So the base of the graph
  consists of presenter data. Based on the required values of each presenter , it finds the model that generates those values, Then recursively checks if that model depends on another model(Umbrella Model).
@@ -596,25 +596,25 @@ extends java.lang.Object</pre>
 >>>>>>> remotes/origin/docs</div>
 </li>
 </ul>
-<a name="recurseAndCreateModel-java.lang.Class-com.omerozer.knit.components.graph.EntityNode-java.util.List-java.util.Map-java.util.Map-">
+<a name="recurseAndCreateModel-java.lang.Class-com.travelbank.knit.components.graph.EntityNode-java.util.List-java.util.Map-java.util.Map-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>recurseAndCreateModel</h4>
-<pre>private&nbsp;void&nbsp;recurseAndCreateModel(java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;&nbsp;modelClazz,
-                                   <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph">EntityNode</a>&nbsp;modelNode,
-                                   java.util.List&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;&gt;&nbsp;models,
-                                   java.util.Map&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;generatedValuesMap,
-                                   java.util.Map&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;requiredValuesMap)</pre>
+<pre>private&nbsp;void&nbsp;recurseAndCreateModel(java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;&nbsp;modelClazz,
+                                   <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph">EntityNode</a>&nbsp;modelNode,
+                                   java.util.List&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;&gt;&nbsp;models,
+                                   java.util.Map&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;generatedValuesMap,
+                                   java.util.Map&lt;java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;requiredValuesMap)</pre>
 <div class="block">This is the recursive method that creates the model dependencies.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>modelClazz</code> - Model class that is being worked on</dd>
 <dd><code>modelNode</code> - Node for that contains the current model.</dd>
 <dd><code>models</code> - List of all models in the environment.</dd>
-<dd><code>generatedValuesMap</code> - <code>Map</code> of all values generated by each <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a></dd>
-<dd><code>requiredValuesMap</code> - <code>Map</code> of all values required by each <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a></dd>
+<dd><code>generatedValuesMap</code> - <code>Map</code> of all values generated by each <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a></dd>
+<dd><code>requiredValuesMap</code> - <code>Map</code> of all values required by each <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -624,12 +624,12 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>createModelTag</h4>
-<pre>private&nbsp;void&nbsp;createModelTag(java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;&nbsp;clazz)</pre>
-<div class="block">Creates all required objects that <a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html" title="class in com.omerozer.knit.components.graph"><code>UsageGraph</code></a> uses for the given <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a> class.
+<pre>private&nbsp;void&nbsp;createModelTag(java.lang.Class&lt;? extends <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;&nbsp;clazz)</pre>
+<div class="block">Creates all required objects that <a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html" title="class in com.travelbank.knit.components.graph"><code>UsageGraph</code></a> uses for the given <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a> class.
  If it already exists, then does nothing.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>clazz</code> - Given <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a> class.</dd>
+<dd><code>clazz</code> - Given <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a> class.</dd>
 </dl>
 </li>
 </ul>
@@ -639,7 +639,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>activeEntities</h4>
-<pre>public&nbsp;java.util.Collection&lt;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&gt;&nbsp;activeEntities()</pre>
+<pre>public&nbsp;java.util.Collection&lt;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&gt;&nbsp;activeEntities()</pre>
 <div class="block">Returns a <code>Collection</code> of entities currently living in the memory.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -647,32 +647,32 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="getModelWithTag-com.omerozer.knit.components.ComponentTag-">
+<a name="getModelWithTag-com.travelbank.knit.components.ComponentTag-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getModelWithTag</h4>
-<pre>public&nbsp;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&lt;<a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit">InternalModel</a>&gt;&nbsp;getModelWithTag(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;componentTag)</pre>
-<div class="block">Returns <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a> associated with the given <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>.</div>
+<pre>public&nbsp;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&lt;<a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit">InternalModel</a>&gt;&nbsp;getModelWithTag(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;componentTag)</pre>
+<div class="block">Returns <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a> associated with the given <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>componentTag</code> - Tag that is being searched for.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>returning the model associated with the tag.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit"><code>EntityInstance</code></a></dd>
+<dd><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit"><code>EntityInstance</code></a></dd>
 </dl>
 </li>
 </ul>
-<a name="getPresenterTag-com.omerozer.knit.components.ComponentTag-">
+<a name="getPresenterTag-com.travelbank.knit.components.ComponentTag-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getPresenterTag</h4>
-<pre>public&nbsp;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&lt;<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit">InternalPresenter</a>&gt;&nbsp;getPresenterTag(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;componentTag)</pre>
-<div class="block">Returns <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a> associated with the given <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components"><code>ComponentTag</code></a>.</div>
+<pre>public&nbsp;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&lt;<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit">InternalPresenter</a>&gt;&nbsp;getPresenterTag(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;componentTag)</pre>
+<div class="block">Returns <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a> associated with the given <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components"><code>ComponentTag</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>componentTag</code> - Tag that is being searched for.</dd>
@@ -687,16 +687,16 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getPresenterForObject</h4>
-<pre>public&nbsp;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&nbsp;getPresenterForObject(java.lang.Object&nbsp;presenterObject)</pre>
-<div class="block">Finds the internal counterpart(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>) of a <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.omerozer.knit"><code>KnitPresenter</code></a> instance.</div>
+<pre>public&nbsp;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&nbsp;getPresenterForObject(java.lang.Object&nbsp;presenterObject)</pre>
+<div class="block">Finds the internal counterpart(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>) of a <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.travelbank.knit"><code>KnitPresenter</code></a> instance.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>presenterObject</code> - <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.omerozer.knit"><code>KnitPresenter</code></a> object exposed to the
+<dd><code>presenterObject</code> - <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.travelbank.knit"><code>KnitPresenter</code></a> object exposed to the
                         developer.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd> returning the internal part Knit uses.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html" title="class in com.omerozer.knit.components.graph"><code>UsageGraph</code></a></dd>
+<dd><a href="../../../../../com/omerozer/knit/components/graph/UsageGraph.html" title="class in com.travelbank.knit.components.graph"><code>UsageGraph</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -706,13 +706,13 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getPresenterForView</h4>
-<pre>public&nbsp;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit">EntityInstance</a>&nbsp;getPresenterForView(java.lang.Object&nbsp;viewObject)</pre>
-<div class="block">Finds <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a> for a view object .</div>
+<pre>public&nbsp;<a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit">EntityInstance</a>&nbsp;getPresenterForView(java.lang.Object&nbsp;viewObject)</pre>
+<div class="block">Finds <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a> for a view object .</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>viewObject</code> - View object (Either a <code>Activity</code> or a <code>Fragment</code>).</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd><a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a> returning the presenter for the object.</dd>
+<dd><a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a> returning the presenter for the object.</dd>
 </dl>
 </li>
 </ul>
@@ -723,8 +723,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>attachViewToComponent</h4>
 <pre>public&nbsp;void&nbsp;attachViewToComponent(java.lang.Object&nbsp;viewObject)</pre>
-<div class="block">Attaches a view object to an underlying presenter(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>.
- Increments the <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph"><code>UserCounter</code></a> for each entity.</div>
+<div class="block">Attaches a view object to an underlying presenter(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>.
+ Increments the <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph"><code>UserCounter</code></a> for each entity.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>viewObject</code> - View object (Either a <code>Activity</code> or a <code>Fragment</code>)</dd>
@@ -743,8 +743,8 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>viewObject</code> - View object (Either a <code>Activity</code> or a <code>Fragment</code>)</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit"><code>EntityInstance</code></a>, 
-<a href="../../../../../com/omerozer/knit/MemoryEntity.html" title="interface in com.omerozer.knit"><code>MemoryEntity</code></a></dd>
+<dd><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit"><code>EntityInstance</code></a>,
+<a href="../../../../../com/omerozer/knit/MemoryEntity.html" title="interface in com.travelbank.knit"><code>MemoryEntity</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -762,7 +762,7 @@ extends java.lang.Object</pre>
  Checks the graph base for the particular view, returns false if it doesn't exists as this this means that view isn't a part
  of Knit domain(Does not have <code>KnitView</code> annotation).
 
- Otherwise iterates through all next fields of the <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph"><code>EntityNode</code></a> associated with that view and if there is an available
+ Otherwise iterates through all next fields of the <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph"><code>EntityNode</code></a> associated with that view and if there is an available
  instance, returns true. If not, returns false.</div>
 </li>
 </ul>
@@ -773,62 +773,62 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>startViewAndItsComponents</h4>
 <pre>public&nbsp;void&nbsp;startViewAndItsComponents(java.lang.Object&nbsp;viewObject)</pre>
-<div class="block">Attaches a view object to an underlying presenter(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a> & required <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a>s). Initializes them if they aren't already initialized.
+<div class="block">Attaches a view object to an underlying presenter(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a> & required <a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a>s). Initializes them if they aren't already initialized.
  For each entity that's initialized, an <a href="../../../../../com/omerozer/knit/MemoryEntity.html#onCreate--"><code>MemoryEntity.onCreate()</code></a> method is called.
- Increments the <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph"><code>UserCounter</code></a> for each entity.</div>
+ Increments the <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph"><code>UserCounter</code></a> for each entity.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>viewObject</code> - View object (Either a <code>Activity</code> or a <code>Fragment</code>).</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.omerozer.knit"><code>EntityInstance</code></a>, 
-<a href="../../../../../com/omerozer/knit/MemoryEntity.html" title="interface in com.omerozer.knit"><code>MemoryEntity</code></a></dd>
+<dd><a href="../../../../../com/omerozer/knit/EntityInstance.html" title="class in com.travelbank.knit"><code>EntityInstance</code></a>,
+<a href="../../../../../com/omerozer/knit/MemoryEntity.html" title="interface in com.travelbank.knit"><code>MemoryEntity</code></a></dd>
 </dl>
 </li>
 </ul>
-<a name="recurseTraverseTheGraphAndStartIfNeeded-com.omerozer.knit.components.ComponentTag-java.lang.Object-">
+<a name="recurseTraverseTheGraphAndStartIfNeeded-com.travelbank.knit.components.ComponentTag-java.lang.Object-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>recurseTraverseTheGraphAndStartIfNeeded</h4>
-<pre>private&nbsp;void&nbsp;recurseTraverseTheGraphAndStartIfNeeded(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;tag,
+<pre>private&nbsp;void&nbsp;recurseTraverseTheGraphAndStartIfNeeded(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;tag,
                                                      java.lang.Object&nbsp;viewObject)</pre>
-<div class="block">Entry method for <code>this#recurseForStart(EntityNode, Object)</code> method. Starts recursion for initializing all components(<a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a>,<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>)
+<div class="block">Entry method for <code>this#recurseForStart(EntityNode, Object)</code> method. Starts recursion for initializing all components(<a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a>,<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>)
  for a particular view.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>tag</code> - Tag of the given View.</dd>
-<dd><code>viewObject</code> - instance of the given view. This is only needed as this gets passed to the <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.omerozer.knit"><code>KnitPresenter</code></a> inside <a href="../../../../../com/omerozer/knit/PresenterInterface.html#onViewApplied-java.lang.Object-"><code>PresenterInterface.onViewApplied(java.lang.Object)</code></a> method.</dd>
+<dd><code>viewObject</code> - instance of the given view. This is only needed as this gets passed to the <a href="../../../../../com/omerozer/knit/KnitPresenter.html" title="class in com.travelbank.knit"><code>KnitPresenter</code></a> inside <a href="../../../../../com/omerozer/knit/PresenterInterface.html#onViewApplied-java.lang.Object-"><code>PresenterInterface.onViewApplied(java.lang.Object)</code></a> method.</dd>
 </dl>
 </li>
 </ul>
-<a name="recurseForStart-com.omerozer.knit.components.graph.EntityNode-java.lang.Object-">
+<a name="recurseForStart-com.travelbank.knit.components.graph.EntityNode-java.lang.Object-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>recurseForStart</h4>
-<pre>private&nbsp;void&nbsp;recurseForStart(<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph">EntityNode</a>&nbsp;entityNode,
+<pre>private&nbsp;void&nbsp;recurseForStart(<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph">EntityNode</a>&nbsp;entityNode,
                              java.lang.Object&nbsp;viewObject)</pre>
 <div class="block">Recursive method that initializes all components and stores their instances. Runs a DFS to start all models first.
  Also handles the lifecylce methods such as <a href="../../../../../com/omerozer/knit/MemoryEntity.html#onCreate--"><code>MemoryEntity.onCreate()</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>entityNode</code> - Entry point of the graph. <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph"><code>EntityNode</code></a> of a view.</dd>
+<dd><code>entityNode</code> - Entry point of the graph. <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph"><code>EntityNode</code></a> of a view.</dd>
 <dd><code>viewObject</code> - Instance of the view that is getting it's dependencies started.</dd>
 </dl>
 </li>
 </ul>
-<a name="handleMessageDelivery-com.omerozer.knit.InternalPresenter-com.omerozer.knit.components.ComponentTag-">
+<a name="handleMessageDelivery-com.travelbank.knit.InternalPresenter-com.travelbank.knit.components.ComponentTag-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>handleMessageDelivery</h4>
-<pre>private&nbsp;void&nbsp;handleMessageDelivery(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit">InternalPresenter</a>&nbsp;presenter,
-                                   <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;tag)</pre>
-<div class="block">This method delivers the message sent from one <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a> to another.
- Message is contained inside <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.omerozer.knit"><code>MessageTrain</code></a>.</div>
+<pre>private&nbsp;void&nbsp;handleMessageDelivery(<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit">InternalPresenter</a>&nbsp;presenter,
+                                   <a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;tag)</pre>
+<div class="block">This method delivers the message sent from one <a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a> to another.
+ Message is contained inside <a href="../../../../../com/omerozer/knit/MessageTrain.html" title="class in com.travelbank.knit"><code>MessageTrain</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>presenter</code> - Presenter instance that will be receiving the message.</dd>
@@ -843,41 +843,41 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>stopViewAndItsComponents</h4>
 <pre>public&nbsp;void&nbsp;stopViewAndItsComponents(java.lang.Object&nbsp;viewObject)</pre>
-<div class="block">Decrements <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph"><code>UserCounter</code></a> of all entities depended on this view. If the counter reaches
+<div class="block">Decrements <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph"><code>UserCounter</code></a> of all entities depended on this view. If the counter reaches
  to 0, destroys them calling <a href="../../../../../com/omerozer/knit/MemoryEntity.html#onDestroy--"><code>MemoryEntity.onDestroy()</code></a></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../com/omerozer/knit/MemoryEntity.html" title="interface in com.omerozer.knit"><code>MemoryEntity</code></a></dd>
+<dd><a href="../../../../../com/omerozer/knit/MemoryEntity.html" title="interface in com.travelbank.knit"><code>MemoryEntity</code></a></dd>
 </dl>
 </li>
 </ul>
-<a name="recurseTraverseTheGraphAndDestroyIfNeeded-com.omerozer.knit.components.ComponentTag-">
+<a name="recurseTraverseTheGraphAndDestroyIfNeeded-com.travelbank.knit.components.ComponentTag-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>recurseTraverseTheGraphAndDestroyIfNeeded</h4>
-<pre>private&nbsp;void&nbsp;recurseTraverseTheGraphAndDestroyIfNeeded(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.omerozer.knit.components">ComponentTag</a>&nbsp;tag)</pre>
-<div class="block">Entry method for <code>this#recurseForFinish(EntityNode)</code> method. Starts recursion for releasing all components(<a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.omerozer.knit"><code>InternalModel</code></a>,<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.omerozer.knit"><code>InternalPresenter</code></a>)
- for a particular view. If the <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph"><code>UserCounter</code></a> becomes 0 for a particular component,they get destroyed.</div>
+<pre>private&nbsp;void&nbsp;recurseTraverseTheGraphAndDestroyIfNeeded(<a href="../../../../../com/omerozer/knit/components/ComponentTag.html" title="class in com.travelbank.knit.components">ComponentTag</a>&nbsp;tag)</pre>
+<div class="block">Entry method for <code>this#recurseForFinish(EntityNode)</code> method. Starts recursion for releasing all components(<a href="../../../../../com/omerozer/knit/InternalModel.html" title="class in com.travelbank.knit"><code>InternalModel</code></a>,<a href="../../../../../com/omerozer/knit/InternalPresenter.html" title="class in com.travelbank.knit"><code>InternalPresenter</code></a>)
+ for a particular view. If the <a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph"><code>UserCounter</code></a> becomes 0 for a particular component,they get destroyed.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>tag</code> - Tag of the given View.</dd>
 </dl>
 </li>
 </ul>
-<a name="recurseForFinish-com.omerozer.knit.components.graph.EntityNode-">
+<a name="recurseForFinish-com.travelbank.knit.components.graph.EntityNode-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>recurseForFinish</h4>
-<pre>private&nbsp;void&nbsp;recurseForFinish(<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph">EntityNode</a>&nbsp;entityNode)</pre>
+<pre>private&nbsp;void&nbsp;recurseForFinish(<a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph">EntityNode</a>&nbsp;entityNode)</pre>
 <div class="block">Recursive method that releases all components. Runs a DFS to release all models first.
  Also handles the lifecycle methods such as <a href="../../../../../com/omerozer/knit/MemoryEntity.html#onDestroy--"><code>MemoryEntity.onDestroy()</code></a>. If</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>entityNode</code> - Entry point of the graph. <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.omerozer.knit.components.graph"><code>EntityNode</code></a> of a view.</dd>
+<dd><code>entityNode</code> - Entry point of the graph. <a href="../../../../../com/omerozer/knit/components/graph/EntityNode.html" title="class in com.travelbank.knit.components.graph"><code>EntityNode</code></a> of a view.</dd>
 </dl>
 </li>
 </ul>
@@ -924,8 +924,8 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../com/omerozer/knit/components/graph/SingletonUserCounter.html" title="class in com.omerozer.knit.components.graph"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.omerozer.knit.components.graph"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../com/omerozer/knit/components/graph/SingletonUserCounter.html" title="class in com.travelbank.knit.components.graph"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../com/omerozer/knit/components/graph/UserCounter.html" title="class in com.travelbank.knit.components.graph"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?com/omerozer/knit/components/graph/UsageGraph.html" target="_top">Frames</a></li>
