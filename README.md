@@ -40,9 +40,9 @@ allprojects {
 }
 
 dependencies {
-  implementation 'com.github.travelbank:knit:knitlib:v1.2.1'
-  annotationProcessor 'com.github.travelbank:nit:knitprocessor:v1.2.1'
-  testImplementation 'com.github.travelbank:knit:knittestkit:v1.2.1'
+    implementation 'com.github.travelbank.Knit:knitlib:v1.2.1'
+    annotationProcessor 'com.github.travelbank.Knit:knitprocessor:v1.2.1'
+    testImplementation 'com.github.travelbank.Knit:knittestkit:v1.2.1'
 }
 ```
 
