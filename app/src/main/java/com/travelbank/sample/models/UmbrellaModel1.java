@@ -3,10 +3,17 @@ package com.travelbank.sample.models;
 import android.util.Log;
 
 import com.travelbank.knit.Collects;
+import com.travelbank.knit.Generates;
 import com.travelbank.knit.KnitModel;
 import com.travelbank.knit.KnitResponse;
 import com.travelbank.knit.Model;
 import com.travelbank.knit.generators.Generator0;
+import com.travelbank.knit.generators.Generator1;
+import com.travelbank.knit.generators.Generator2;
+import com.travelbank.knit.generators.ValueGenerator;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by omerozer on 4/11/18.
@@ -22,7 +29,7 @@ public class UmbrellaModel1 extends KnitModel {
     }
 
     @Collects(value = "umbrella1" , needs = {"umbrella"})
-    Generator0<String> collector = new Generator0<String>() {
+    Generator0<String> generator = new Generator0<String>() {
 
         @Override
         public KnitResponse<String> generate() {
@@ -30,6 +37,15 @@ public class UmbrellaModel1 extends KnitModel {
             KnitResponse<String> t1 = requestImmediately("umbrella");
             String result = t1.getBody() + "=/=" + t1.getBody();
             return new KnitResponse<String>(result);
+        }
+    };
+
+    @Generates("asdasd")
+    Generator2<List<String>,Map<String,String>,String[]> testGen = new Generator2<List<String>,Map<String,String>,String[]>() {
+
+        @Override
+        public KnitResponse<List<String>> generate(Map<String, String> param1, String[] param2) {
+            return null;
         }
     };
 

@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
@@ -24,6 +25,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.tools.Diagnostic;
 
 /**
  * Created by omerozer on 2/5/18.
@@ -38,7 +40,7 @@ public class KnitModelProcessor extends AbstractProcessor {
     private KnitModelWriter modelWriter;
     private ModelExposerWriter modelExposerWriter;
     private ModelMapWriter modelMapWriter;
-    //public static Messager messager;
+    public static Messager messager;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
@@ -49,7 +51,7 @@ public class KnitModelProcessor extends AbstractProcessor {
         this.modelWriter = new KnitModelWriter();
         this.modelExposerWriter  = new ModelExposerWriter();
         this.modelMapWriter = new ModelMapWriter();
-        //messager = processingEnvironment.getMessager();
+        messager = processingEnvironment.getMessager();
     }
 
     @Override
