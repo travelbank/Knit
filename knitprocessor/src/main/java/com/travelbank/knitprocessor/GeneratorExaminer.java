@@ -4,8 +4,10 @@ import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.lang.model.element.VariableElement;
@@ -18,42 +20,17 @@ public class GeneratorExaminer {
 
 
     public static List<String> getGenerateTypes(VariableElement variableElement){
-
-        String typeString = variableElement.asType().toString();
-        typeString = typeString.substring(typeString.indexOf('<')+1,typeString.lastIndexOf(">"));
-        List<String> params = new ArrayList<>();
-
-        if(!typeString.contains(",")){
-            return Arrays.asList(typeString);
-        }
-
-        typeString+=",";
-
-        while (typeString.contains(",")){
-            params.add(typeString.substring(0,typeString.indexOf(',')));
-            typeString = typeString.substring(typeString.indexOf(',')+1,typeString.length());
-        }
-
-        return params;
+        return genGenerateTypes(variableElement.asType().toString());
     }
 
     public static List<String> genGenerateTypes(String type){
-        String typeString = type;
-        typeString = typeString.substring(typeString.indexOf('<')+1,typeString.lastIndexOf(">"));
-        List<String> params = new ArrayList<>();
 
-        if(!typeString.contains(",")){
-            return Arrays.asList(typeString);
+        if(isParameterized(type)){
+            String sub = type.substring(type.indexOf('<')+1,type.lastIndexOf(">"));
+            return Arrays.asList(sub.split(",(?=(?:[^<]*<[^>]*>)*[^>]*$)"));
         }
 
-        typeString+=",";
-
-        while (typeString.contains(",")){
-            params.add(typeString.substring(0,typeString.indexOf(',')));
-            typeString = typeString.substring(typeString.indexOf(',')+1,typeString.length());
-        }
-
-        return params;
+        return Collections.singletonList(type);
     }
 
     public static TypeName getName(String string){

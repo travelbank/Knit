@@ -10,4 +10,4 @@ package com.travelbank.knit.generators;
  * @author Omer Ozer
  */
 
-interface ValueGenerator {}
+public interface ValueGenerator {}
