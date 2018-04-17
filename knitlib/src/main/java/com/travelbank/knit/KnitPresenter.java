@@ -92,6 +92,17 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
         modelManager.request(data, KnitSchedulers.IMMEDIATE, KnitSchedulers.IMMEDIATE ,instance, params);
     }
 
+    /**
+     * Request method with no async support. Use this if you want to go around the event based system. Discouraged!
+     * No async support. Runs on the thread it is called on.
+     *
+     * @param data the tag of the data that is requested.
+     * @param params Extra parameters being passed to the {@link com.travelbank.knit.generators.ValueGenerator}
+     * @return {@link KnitResponse} being returned from the associated {@link com.travelbank.knit.generators.ValueGenerator}.
+     */
+    protected <A> KnitResponse<A> requestImmediately(String data, Object... params) {
+        return (KnitResponse<A>) modelManager.requestImmediately(data, params);
+    }
 
     /**
      * Used when simply inputting/storing data. Make sure your task doesn't need to return a response. No async support.
