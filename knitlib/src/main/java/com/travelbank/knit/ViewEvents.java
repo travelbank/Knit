@@ -354,11 +354,7 @@ public class ViewEvents {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                AdapterItemSelectedEvent event = getOnAdapterItemSelectedEventPool().getObject();
-                event.setTag(tag);
-                event.setIndex(AdapterItemSelectedEvent.NOTHING_SELECTED);
-                knit.findPresenterForView(carrierObject).get().handle(getOnAdapterItemSelectedEventPool(),
-                        event, knit.getModelManager());
+
             }
         });
 
