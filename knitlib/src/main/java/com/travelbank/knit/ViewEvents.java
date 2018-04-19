@@ -6,10 +6,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import com.travelbank.knit.viewevents.AdapterItemSelectedEvent;
+import com.travelbank.knit.viewevents.AdapterItemSelectedEventPool;
 import com.travelbank.knit.viewevents.GenericEvent;
 import com.travelbank.knit.viewevents.GenericEventPool;
 import com.travelbank.knit.viewevents.KnitOnClickEvent;
@@ -30,10 +33,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
  * A hub for all view events. All view events are fired through this class.
- * Instance is contained inside {@link Knit}. Often accessed inside classes annotated with {@link KnitView},
- * Events fired will be received by the {@link KnitPresenter} inside the method that is tagged with the associated tag of the {@link com.travelbank.knit.viewevents.ViewEventEnv}
+ * Instance is contained inside {@link Knit}. Often accessed inside classes annotated with {@link
+ * KnitView},
+ * Events fired will be received by the {@link KnitPresenter} inside the method that is tagged with
+ * the associated tag of the {@link com.travelbank.knit.viewevents.ViewEventEnv}
  * that is being fired.
  *
  * @author Omer Ozer
@@ -41,7 +45,7 @@ import java.util.Set;
 
 public class ViewEvents {
 
-    private static Map<View,Set<Object>> viewToListenersMap = new LinkedHashMap<>();
+    private static Map<View, Set<Object>> viewToListenersMap = new LinkedHashMap<>();
 
     private KnitOnClickEventPool onClickEventPool;
     private KnitOnTextChangedEventPool onTextChangedEventPool;
@@ -49,30 +53,31 @@ public class ViewEvents {
     private KnitSwipeRefreshLayoutEventPool onSwipeRefreshEventPool;
     private KnitOnSwitchToggleEventPool onSwitchToggleEventPool;
     private TabSelectionEventPool onTabSelectedEventPool;
+    private AdapterItemSelectedEventPool onAdapterItemSelectedEventPool;
     private GenericEventPool genericEventPool;
 
     private Knit knit;
 
-    public ViewEvents(Knit knit){
+    public ViewEvents(Knit knit) {
         this.knit = knit;
     }
 
     private KnitOnClickEventPool getOnClickEventPool() {
-        if(onClickEventPool==null){
+        if (onClickEventPool == null) {
             this.onClickEventPool = new KnitOnClickEventPool();
         }
         return onClickEventPool;
     }
 
     private KnitOnTextChangedEventPool getOnTextChangedEventPool() {
-        if(onTextChangedEventPool == null){
+        if (onTextChangedEventPool == null) {
             this.onTextChangedEventPool = new KnitOnTextChangedEventPool();
         }
         return onTextChangedEventPool;
     }
 
     private KnitOnFocusChangedEventPool getOnFocusChangedEventPool() {
-        if(onFocusChangedEventPool == null){
+        if (onFocusChangedEventPool == null) {
             this.onFocusChangedEventPool = new KnitOnFocusChangedEventPool();
         }
 
@@ -80,28 +85,35 @@ public class ViewEvents {
     }
 
     private KnitSwipeRefreshLayoutEventPool getOnSwipeRefreshEventPool() {
-        if(onSwipeRefreshEventPool == null){
+        if (onSwipeRefreshEventPool == null) {
             this.onSwipeRefreshEventPool = new KnitSwipeRefreshLayoutEventPool();
         }
         return onSwipeRefreshEventPool;
     }
 
     private KnitOnSwitchToggleEventPool getOnSwitchToggleEventPool() {
-        if(onSwitchToggleEventPool == null){
+        if (onSwitchToggleEventPool == null) {
             this.onSwitchToggleEventPool = new KnitOnSwitchToggleEventPool();
         }
         return onSwitchToggleEventPool;
     }
 
-    private TabSelectionEventPool getOnTabSelectedEventPool(){
-        if(onTabSelectedEventPool == null){
+    private TabSelectionEventPool getOnTabSelectedEventPool() {
+        if (onTabSelectedEventPool == null) {
             onTabSelectedEventPool = new TabSelectionEventPool();
         }
         return onTabSelectedEventPool;
     }
 
+    private AdapterItemSelectedEventPool getOnAdapterItemSelectedEventPool() {
+        if (onAdapterItemSelectedEventPool == null) {
+            onAdapterItemSelectedEventPool = new AdapterItemSelectedEventPool();
+        }
+        return onAdapterItemSelectedEventPool;
+    }
+
     private GenericEventPool getGenericEventPool() {
-        if(genericEventPool == null){
+        if (genericEventPool == null) {
             this.genericEventPool = new GenericEventPool();
         }
         return genericEventPool;
@@ -111,10 +123,11 @@ public class ViewEvents {
         view.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View view) {
-                KnitOnClickEvent event = onClickEventPool.getObject();
+                KnitOnClickEvent event = getOnClickEventPool().getObject();
                 event.setTag(tag);
                 event.setViewWeakReference(view);
-                knit.findPresenterForView(carrierObject).get().handle(getOnClickEventPool(), event, knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(getOnClickEventPool(), event,
+                        knit.getModelManager());
             }
         });
     }
@@ -132,7 +145,8 @@ public class ViewEvents {
                 event.setI(i);
                 event.setI1(i1);
                 event.setI2(i2);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTextChangedEventPool(), event,
+                knit.findPresenterForView(carrierObject).get().handle(getOnTextChangedEventPool(),
+                        event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
             }
@@ -168,7 +182,8 @@ public class ViewEvents {
                 event.setI(i);
                 event.setI1(i1);
                 event.setI2(i2);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTextChangedEventPool(), event,
+                knit.findPresenterForView(carrierObject).get().handle(getOnTextChangedEventPool(),
+                        event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
             }
@@ -201,7 +216,8 @@ public class ViewEvents {
                 event.setTag(tag);
                 event.setState(KnitTextChangedEvent.State.AFTER);
                 event.setAfterEditable(editable);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTextChangedEventPool(), event,
+                knit.findPresenterForView(carrierObject).get().handle(getOnTextChangedEventPool(),
+                        event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
             }
@@ -217,36 +233,40 @@ public class ViewEvents {
                 KnitOnFocusChangedEvent event = getOnFocusChangedEventPool().getObject();
                 event.setTag(tag);
                 event.setFocus(b);
-                knit.findPresenterForView(carrierObject).get().handle(getOnFocusChangedEventPool(), event, knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(getOnFocusChangedEventPool(),
+                        event, knit.getModelManager());
             }
         });
     }
 
-    public void onSwipeRefresh(final String tag, final Object carrierObject,final SwipeRefreshLayout view) {
+    public void onSwipeRefresh(final String tag, final Object carrierObject,
+            final SwipeRefreshLayout view) {
         view.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 KnitOnRefreshEvent event = getOnSwipeRefreshEventPool().getObject();
                 event.setTag(tag);
                 event.setViewWeakReference(view);
-                knit.findPresenterForView(carrierObject).get().handle(getOnSwipeRefreshEventPool(), event, knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(getOnSwipeRefreshEventPool(),
+                        event, knit.getModelManager());
             }
         });
     }
 
-    public void onSwitchToggled(final String tag, final Object carrierObject,final Switch view){
+    public void onSwitchToggled(final String tag, final Object carrierObject, final Switch view) {
         view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 KnitOnSwitchToggleEvent event = getOnSwitchToggleEventPool().getObject();
                 event.setTag(tag);
                 event.setToggle(isChecked);
-                knit.findPresenterForView(carrierObject).get().handle(getOnSwitchToggleEventPool(),event,knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(getOnSwitchToggleEventPool(),
+                        event, knit.getModelManager());
             }
         });
     }
 
-    public void onTabSelected(final String tag, final Object carrierObject, final TabLayout view){
+    public void onTabSelected(final String tag, final Object carrierObject, final TabLayout view) {
         view.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -254,7 +274,8 @@ public class ViewEvents {
                 event.setTag(tag);
                 event.setTab(tab);
                 event.setState(TabSelectedEvent.State.SELECTED);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),event,knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),
+                        event, knit.getModelManager());
             }
 
             @Override
@@ -269,7 +290,8 @@ public class ViewEvents {
         });
     }
 
-    public void onTabReselected(final String tag, final Object carrierObject, final TabLayout view){
+    public void onTabReselected(final String tag, final Object carrierObject,
+            final TabLayout view) {
         view.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -282,7 +304,8 @@ public class ViewEvents {
                 event.setTag(tag);
                 event.setTab(tab);
                 event.setState(TabSelectedEvent.State.RESELECTED);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),event,knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),
+                        event, knit.getModelManager());
             }
 
             @Override
@@ -292,7 +315,8 @@ public class ViewEvents {
         });
     }
 
-    public void onTabUnselected(final String tag, final Object carrierObject, final TabLayout view){
+    public void onTabUnselected(final String tag, final Object carrierObject,
+            final TabLayout view) {
         view.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -310,23 +334,39 @@ public class ViewEvents {
                 event.setTag(tag);
                 event.setTab(tab);
                 event.setState(TabSelectedEvent.State.UNSELECTED);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),event,knit.getModelManager());
+                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),
+                        event, knit.getModelManager());
             }
         });
     }
 
+    public void onAdapterItemSelected(final String tag, final Object carrierObject,
+            final AdapterView view) {
+        view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AdapterItemSelectedEvent event = getOnAdapterItemSelectedEventPool().getObject();
+                event.setTag(tag);
+                event.setIndex(position);
+                knit.findPresenterForView(carrierObject).get().handle(getOnAdapterItemSelectedEventPool(),
+                        event, knit.getModelManager());
+            }
+        });
 
-
-    public <T> void fireGenericEvent(String tag,Object carrierObject,Object... params){
-        GenericEvent genericEvent = getGenericEventPool().getObject();
-        genericEvent.setTag(tag);
-        genericEvent.setParams(params);
-        knit.findPresenterForView(carrierObject).get().handle(getGenericEventPool(), genericEvent, knit.getModelManager());
     }
 
 
-    public void onViewResult(Object carrierObject,int requestCode,int resultCode,Intent data){
-        knit.findPresenterForView(carrierObject).get().onViewResult(requestCode,resultCode,data);
+    public <T> void fireGenericEvent(String tag, Object carrierObject, Object... params) {
+        GenericEvent genericEvent = getGenericEventPool().getObject();
+        genericEvent.setTag(tag);
+        genericEvent.setParams(params);
+        knit.findPresenterForView(carrierObject).get().handle(getGenericEventPool(), genericEvent,
+                knit.getModelManager());
+    }
+
+
+    public void onViewResult(Object carrierObject, int requestCode, int resultCode, Intent data) {
+        knit.findPresenterForView(carrierObject).get().onViewResult(requestCode, resultCode, data);
     }
 
 
