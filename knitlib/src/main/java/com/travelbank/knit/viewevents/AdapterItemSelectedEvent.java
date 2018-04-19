@@ -9,6 +9,8 @@ package com.travelbank.knit.viewevents;
 
 public class AdapterItemSelectedEvent extends ViewEventEnv {
 
+    public static final int NOTHING_SELECTED = -1;
+
     /**
      * {@link String} key used to extract the index from {@link this#getDataBundle()}.
      */
