@@ -250,7 +250,7 @@ public class ViewEvents {
         view.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                TabSelectedEvent event = onTabSelectedEventPool.getObject();
+                TabSelectedEvent event = getOnTabSelectedEventPool().getObject();
                 event.setTag(tag);
                 event.setTab(tab);
                 event.setState(TabSelectedEvent.State.SELECTED);
@@ -278,7 +278,7 @@ public class ViewEvents {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                TabSelectedEvent event = onTabSelectedEventPool.getObject();
+                TabSelectedEvent event = getOnTabSelectedEventPool().getObject();
                 event.setTag(tag);
                 event.setTab(tab);
                 event.setState(TabSelectedEvent.State.RESELECTED);
@@ -306,7 +306,7 @@ public class ViewEvents {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                TabSelectedEvent event = onTabSelectedEventPool.getObject();
+                TabSelectedEvent event = getOnTabSelectedEventPool().getObject();
                 event.setTag(tag);
                 event.setTab(tab);
                 event.setState(TabSelectedEvent.State.UNSELECTED);

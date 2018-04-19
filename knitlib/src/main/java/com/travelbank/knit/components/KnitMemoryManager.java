@@ -9,7 +9,9 @@ import com.travelbank.knit.components.graph.UsageGraph;
 
 /**
  * This class is used to subscribe to Android OS's {@link ComponentCallbacks2} to listen to memory
- * updates. When memory gets low , {@link MemoryEntity#onMemoryLow()} call back on all active {@link MemoryEntity}s gets called
+ * updates. When memory gets low , {@link MemoryEntity#onMemoryLow()} call back on all active {@link
+ * MemoryEntity}s gets called
+ *
  * @author Omer Ozer
  */
 
@@ -25,8 +27,8 @@ public class KnitMemoryManager implements ComponentCallbacks2 {
     }
 
     /**
-     * @see ComponentCallbacks2
      * @param i Memory level
+     * @see ComponentCallbacks2
      */
     @Override
     public void onTrimMemory(int i) {
@@ -35,8 +37,8 @@ public class KnitMemoryManager implements ComponentCallbacks2 {
 
 
     /**
-     * @see  ComponentCallbacks2
      * @param configuration Configuration update
+     * @see ComponentCallbacks2
      */
     @Override
     public void onConfigurationChanged(Configuration configuration) {
@@ -52,13 +54,17 @@ public class KnitMemoryManager implements ComponentCallbacks2 {
 
 
     /**
-     * Simply goes over all active {@link MemoryEntity}s and calls the {@link ComponentCallbacks2} method
+     * Simply goes over all active {@link MemoryEntity}s and calls the {@link ComponentCallbacks2}
+     * method
+     *
      * @param i Memory level
      */
     private void handleMemoryLevel(int i) {
         if (i == ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) {
             for (EntityInstance entity : usageGraph.activeEntities()) {
-                entity.get().onMemoryLow();
+                if (entity.isAvailable()) {
+                    entity.get().onMemoryLow();
+                }
             }
         }
     }
