@@ -111,7 +111,7 @@ public class ViewEvents {
         view.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View view) {
-                KnitOnClickEvent event = onClickEventPool.getObject();
+                KnitOnClickEvent event = getOnClickEventPool().getObject();
                 event.setTag(tag);
                 event.setViewWeakReference(view);
                 knit.findPresenterForView(carrierObject).get().handle(getOnClickEventPool(), event, knit.getModelManager());
