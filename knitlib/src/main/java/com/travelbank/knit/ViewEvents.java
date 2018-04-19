@@ -1,6 +1,7 @@
 package com.travelbank.knit;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +22,8 @@ import com.travelbank.knit.viewevents.KnitOnSwitchToggleEventPool;
 import com.travelbank.knit.viewevents.KnitOnTextChangedEventPool;
 import com.travelbank.knit.viewevents.KnitSwipeRefreshLayoutEventPool;
 import com.travelbank.knit.viewevents.KnitTextChangedEvent;
+import com.travelbank.knit.viewevents.TabSelectedEvent;
+import com.travelbank.knit.viewevents.TabSelectionEventPool;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -45,18 +48,13 @@ public class ViewEvents {
     private KnitOnFocusChangedEventPool onFocusChangedEventPool;
     private KnitSwipeRefreshLayoutEventPool onSwipeRefreshEventPool;
     private KnitOnSwitchToggleEventPool onSwitchToggleEventPool;
+    private TabSelectionEventPool onTabSelectedEventPool;
     private GenericEventPool genericEventPool;
 
     private Knit knit;
 
     public ViewEvents(Knit knit){
         this.knit = knit;
-        this.onClickEventPool = new KnitOnClickEventPool();
-        this.onTextChangedEventPool = new KnitOnTextChangedEventPool();
-        this.onFocusChangedEventPool = new KnitOnFocusChangedEventPool();
-        this.onSwipeRefreshEventPool = new KnitSwipeRefreshLayoutEventPool();
-        this.onSwitchToggleEventPool = new KnitOnSwitchToggleEventPool();
-        this.genericEventPool = new GenericEventPool();
     }
 
     private KnitOnClickEventPool getOnClickEventPool() {
@@ -93,6 +91,13 @@ public class ViewEvents {
             this.onSwitchToggleEventPool = new KnitOnSwitchToggleEventPool();
         }
         return onSwitchToggleEventPool;
+    }
+
+    private TabSelectionEventPool getOnTabSelectedEventPool(){
+        if(onTabSelectedEventPool == null){
+            onTabSelectedEventPool = new TabSelectionEventPool();
+        }
+        return onTabSelectedEventPool;
     }
 
     private GenericEventPool getGenericEventPool() {
@@ -240,6 +245,77 @@ public class ViewEvents {
             }
         });
     }
+
+    public void onTabSelected(final String tag, final Object carrierObject, final TabLayout view){
+        view.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                TabSelectedEvent event = onTabSelectedEventPool.getObject();
+                event.setTag(tag);
+                event.setTab(tab);
+                event.setState(TabSelectedEvent.State.SELECTED);
+                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),event,knit.getModelManager());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    public void onTabReselected(final String tag, final Object carrierObject, final TabLayout view){
+        view.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                TabSelectedEvent event = onTabSelectedEventPool.getObject();
+                event.setTag(tag);
+                event.setTab(tab);
+                event.setState(TabSelectedEvent.State.RESELECTED);
+                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),event,knit.getModelManager());
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    public void onTabUnselected(final String tag, final Object carrierObject, final TabLayout view){
+        view.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                TabSelectedEvent event = onTabSelectedEventPool.getObject();
+                event.setTag(tag);
+                event.setTab(tab);
+                event.setState(TabSelectedEvent.State.UNSELECTED);
+                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),event,knit.getModelManager());
+            }
+        });
+    }
+
+
 
     public <T> void fireGenericEvent(String tag,Object carrierObject,Object... params){
         GenericEvent genericEvent = getGenericEventPool().getObject();

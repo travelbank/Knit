@@ -68,6 +68,13 @@ public class KnitNavigator {
          */
         private KnitMessage message;
 
+
+        /**
+         * Request code to be used if starting the activity for result;
+         * @see Activity#onActivityResult(int, int, Intent) ;
+         */
+        private int requestCode = Integer.MIN_VALUE;
+
         /**
          * Stubber/Setter for {@link this#from}
          * @param viewObject view instance.
@@ -88,6 +95,11 @@ public class KnitNavigator {
             return this;
         }
 
+        public ActivityNavigator forResult(int requestCode){
+            this.requestCode = requestCode;
+            return this;
+        }
+
         /**
          * Stubber/Setter for {@link this#message}
          * @param message Message to be delivered.
@@ -100,13 +112,19 @@ public class KnitNavigator {
 
         /**
          * Method that ends stubbing and starts the activity. Also sets the message on {@link MessageTrain} for the target view.
+         * If the {@link this#requestCode} is anything other than {@code Integer.MIN_VALUE}, than it will call {@link Activity#startActivityForResult(Intent, int)}.
          */
         public void go() {
             if (message != null) {
                 knitInterface.getMessageTrain().putMessageForView(knitInterface.getViewToPresenterMap().getPresenterClassForView(target), message);
             }
             Intent intent = new Intent(from.get(), target);
-            from.get().startActivity(intent);
+
+            if(requestCode==Integer.MIN_VALUE){
+                from.get().startActivity(intent);
+                return;
+            }
+            from.get().startActivityForResult(intent,requestCode);
         }
 
         /**
