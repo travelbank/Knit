@@ -342,14 +342,19 @@ public class ViewEvents {
 
     public void onAdapterItemSelected(final String tag, final Object carrierObject,
             final AdapterView view) {
-        view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        view.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 AdapterItemSelectedEvent event = getOnAdapterItemSelectedEventPool().getObject();
                 event.setTag(tag);
-                event.setIndex(position);
+                event.setIndex(i);
                 knit.findPresenterForView(carrierObject).get().handle(getOnAdapterItemSelectedEventPool(),
                         event, knit.getModelManager());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
