@@ -60,7 +60,7 @@ public class MainPresenter extends KnitPresenter<MainActivityContract> {
     public void handle(ViewEventEnv eventEnv) {
             getNavigator()
                     .toActivity()
-                    .from(getView())
+                    .fromParent(getView())
                     .setMessage(newMessage().putData("txt",getContract().get()))
                     .target(SecondActivity.class)
                     .go();
