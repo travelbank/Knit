@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -59,6 +60,16 @@ public class KnitNavigator {
         private WeakReference<Activity> from;
 
         /**
+         * Fragment reference that is firing the navigation
+         */
+        private WeakReference<Fragment> fragment;
+
+        /**
+         * Support Fragment reference that is firing the navigation
+         */
+        private WeakReference<android.support.v4.app.Fragment> fragmentV4;
+
+        /**
          * Activity to be started
          */
         private Class<? extends Activity> target;
@@ -80,8 +91,20 @@ public class KnitNavigator {
          * @param viewObject view instance.
          * return stubbed instance
          */
-        public ActivityNavigator from(Object viewObject){
+        public ActivityNavigator fromParent(Object viewObject){
             this.from = new WeakReference<Activity> (AndroidViewUtility.extractActivity(viewObject));
+            return this;
+        }
+
+        public ActivityNavigator fromFragment(Object viewObject){
+            this.from = new WeakReference<Activity>(AndroidViewUtility.extractActivity(viewObject));
+            this.fragment = new WeakReference<>((Fragment)viewObject);
+            return this;
+        }
+
+        public ActivityNavigator fromV4Fragment(Object viewObject){
+            this.from = new WeakReference<Activity>(AndroidViewUtility.extractActivity(viewObject));
+            this.fragmentV4 = new WeakReference<>((android.support.v4.app.Fragment)viewObject);
             return this;
         }
 
@@ -130,7 +153,23 @@ public class KnitNavigator {
             Intent intent = new Intent(from.get(), target);
 
             if(requestCode==Integer.MIN_VALUE){
+                if(fragmentV4!=null){
+                    fragmentV4.get().startActivity(intent);
+                    return;
+                }
+                if(fragment!=null){
+                    fragment.get().startActivity(intent);
+                    return;
+                }
                 from.get().startActivity(intent);
+                return;
+            }
+            if(fragmentV4!=null){
+                fragmentV4.get().startActivityForResult(intent,requestCode);
+                return;
+            }
+            if(fragment!=null){
+                fragment.get().startActivityForResult(intent,requestCode);
                 return;
             }
             from.get().startActivityForResult(intent,requestCode);
