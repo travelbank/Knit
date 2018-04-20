@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -90,6 +91,30 @@ public class AndroidViewUtility {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Extracts an {@link Activity} from an Android ui component such as {@link Fragment} or {@link android.view.View}.
+     * @param viewObject given view object.
+     * @return extracted {@link Activity}
+     */
+    static Activity extractActivity(Object viewObject){
+        if (viewObject instanceof Activity){
+            return (Activity) viewObject;
+        }
+
+        if(viewObject instanceof Fragment){
+            return ((Fragment)viewObject).getActivity();
+        }
+
+        if(viewObject instanceof android.support.v4.app.Fragment){
+            return ((android.support.v4.app.Fragment)viewObject).getActivity();
+        }
+
+        if(viewObject instanceof View){
+            return (Activity)((View)viewObject).getContext();
+        }
+        throw new RuntimeException("Knit: View object must be an Android UI/View such as Activity,Fragment,View.");
     }
 
 
