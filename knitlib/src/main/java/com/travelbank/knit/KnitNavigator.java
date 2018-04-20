@@ -81,7 +81,7 @@ public class KnitNavigator {
          * return stubbed instance
          */
         public ActivityNavigator from(Object viewObject){
-            this.from = new WeakReference<Activity> ((Activity)viewObject);
+            this.from = new WeakReference<Activity> (AndroidViewUtility.extractActivity(viewObject));
             return this;
         }
 
@@ -118,6 +118,15 @@ public class KnitNavigator {
             if (message != null) {
                 knitInterface.getMessageTrain().putMessageForView(knitInterface.getViewToPresenterMap().getPresenterClassForView(target), message);
             }
+
+            if(from==null){
+                throw new RuntimeException("Knit: `From` has not been set. ");
+            }
+
+            if(target==null){
+                throw new RuntimeException("Knit: 'Target' has not been set");
+            }
+
             Intent intent = new Intent(from.get(), target);
 
             if(requestCode==Integer.MIN_VALUE){
@@ -230,6 +239,15 @@ public class KnitNavigator {
          * Method that ends stubbing and starts the activity. Also sets the message on {@link MessageTrain} for the target view.
          */
         public void go(){
+
+            if(fragmentManager==null){
+                throw new RuntimeException("Knit: `From` has not been set. ");
+            }
+
+            if(target==null){
+                throw new RuntimeException("Knit: 'Target' has not been set");
+            }
+
             Fragment fragment = AndroidViewUtility.initFragment(target);
             if(message!=null){
                 knitInterface.getMessageTrain().putMessageForView(target,message);
@@ -318,6 +336,15 @@ public class KnitNavigator {
          * Method that ends stubbing and starts the activity. Also sets the message on {@link MessageTrain} for the target view.
          */
         public void go(){
+
+            if(fragmentManager==null){
+                throw new RuntimeException("Knit: `From` has not been set. ");
+            }
+
+            if(targetV4==null){
+                throw new RuntimeException("Knit: 'Target' has not been set");
+            }
+
             android.support.v4.app.Fragment fragment = AndroidViewUtility.initSupportFragment(targetV4);
             if(message!=null){
                 knitInterface.getMessageTrain().putMessageForView(targetV4,message);
