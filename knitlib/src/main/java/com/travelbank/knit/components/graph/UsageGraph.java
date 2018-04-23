@@ -218,13 +218,12 @@ public class UsageGraph {
             Map<Class<? extends InternalModel>, List<String>> generatedValuesMap,
             Map<Class<? extends InternalModel>, List<String>> requiredValuesMap) {
 
-        createModelTag(modelClazz);
-
         for(String req :requiredValuesMap.get(modelClazz)){
             for(Class<? extends InternalModel> model : models){
                 if(generatedValuesMap.get(model).contains(req)){
                     EntityNode node;
                     if(!clazzToNodeMap.containsKey(model)){
+                        createModelTag(model);
                         node = new EntityNode(clazzToTagMap.get(model), EntityType.MODEL);
                         recurseAndCreateModel(model,node,models,generatedValuesMap,requiredValuesMap);
                         clazzToNodeMap.put(model,node);
