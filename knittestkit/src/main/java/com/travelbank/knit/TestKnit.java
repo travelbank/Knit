@@ -65,4 +65,9 @@ public class TestKnit implements KnitInterface {
     public ModelMapInterface getModelMap() {
         return getUtilsLoader().getModelMap(Knit.class);
     }
+
+    @Override
+    public AttachmentMap getAttachmentMap() {
+        return new AttachmentMap();
+    }
 }

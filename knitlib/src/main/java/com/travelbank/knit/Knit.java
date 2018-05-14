@@ -109,6 +109,11 @@ public class Knit implements KnitInterface {
      */
     private ViewToPresenterMapInterface viewToPresenterMap;
 
+    /**
+     * Shared {@link AttachmentMap} instance that holds all attachments for views.
+     */
+    private AttachmentMap attachmentMap;
+
     private Knit(Application application){
         this.app = new WeakReference<Application>(application);
         this.modelManager = new ModelManager();
@@ -121,6 +126,7 @@ public class Knit implements KnitInterface {
         this.modelMap = knitUtilsLoader.getModelMap(Knit.class);
         this.viewToPresenterMap = knitUtilsLoader.getViewToPresenterMap(Knit.class);
         this.userGraph = new UsageGraph(this);
+        this.attachmentMap = new AttachmentMap();
         application.registerComponentCallbacks(new KnitMemoryManager(userGraph));
         application.registerActivityLifecycleCallbacks(new KnitAppListener(this));
     }
@@ -163,7 +169,7 @@ public class Knit implements KnitInterface {
      * @param viewObject given view object.
      * @return {@link EntityInstance} of the {@link KnitPresenter} for the given object.
      */
-    public EntityInstance<InternalPresenter> findPresenterForView(Object viewObject) {
+    EntityInstance<InternalPresenter> findPresenterForView(Object viewObject) {
         return userGraph.getPresenterForView(viewObject);
     }
 
@@ -172,8 +178,17 @@ public class Knit implements KnitInterface {
      * @param parentPresenter given {@link KnitPresenter}.
      * @return {@link EntityInstance} of the {@link KnitPresenter}.
      */
-    public EntityInstance<InternalPresenter> findPresenterForParent(Object parentPresenter) {
+    EntityInstance<InternalPresenter> findPresenterForParent(Object parentPresenter) {
         return (EntityInstance<InternalPresenter>) userGraph.getPresenterForObject(parentPresenter);
+    }
+
+    /**
+     * Returns {@link EntityInstance} of {@link InternalPresenter} of a view attachment .
+     * @param attachment given {@link Object} that is attached to the view.
+     * @return {@link EntityInstance} of the {@link KnitPresenter}.
+     */
+    EntityInstance<InternalPresenter> findPresenterForViewAttachment(Object attachment){
+        return null;
     }
 
     /**
@@ -270,5 +285,13 @@ public class Knit implements KnitInterface {
     @Override
     public ModelMapInterface getModelMap() {
         return modelMap;
+    }
+
+    /**
+     * @see KnitInterface
+     */
+    @Override
+    public AttachmentMap getAttachmentMap() {
+        return attachmentMap;
     }
 }

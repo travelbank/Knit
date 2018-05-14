@@ -51,6 +51,8 @@ public class KnitMock {
         ViewToPresenterMap viewToPresenterMap = ViewToPresenterMap.getMock();
         ModelMap modelMap = ModelMap.getMock();
 
+        AttachmentMap attachmentMap = Mockito.mock(AttachmentMap.class);
+
         when(knit.getModelManager()).thenReturn(Mockito.mock(ModelManager.class));
         when(knit.getNavigator()).thenReturn(Mockito.mock(KnitNavigator.class));
         when(knit.getSchedulerProvider()).thenReturn(Mockito.mock(SchedulerProvider.class));
@@ -61,6 +63,7 @@ public class KnitMock {
         when(knit.getMessagePool()).thenReturn(messagePool);
         when(knit.getViewToPresenterMap()).thenReturn(viewToPresenterMap);
         when(knit.getModelMap()).thenReturn(modelMap);
+        when(knit.getAttachmentMap()).thenReturn(attachmentMap);
         return knit;
     }
 

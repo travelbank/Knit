@@ -126,7 +126,7 @@ public class ViewEvents {
                 KnitOnClickEvent event = getOnClickEventPool().getObject();
                 event.setTag(tag);
                 event.setViewWeakReference(view);
-                knit.findPresenterForView(carrierObject).get().handle(getOnClickEventPool(), event,
+                findPresenterForCarrier(carrierObject).get().handle(getOnClickEventPool(), event,
                         knit.getModelManager());
             }
         });
@@ -145,7 +145,7 @@ public class ViewEvents {
                 event.setI(i);
                 event.setI1(i1);
                 event.setI2(i2);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTextChangedEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(getOnTextChangedEventPool(),
                         event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
@@ -182,7 +182,7 @@ public class ViewEvents {
                 event.setI(i);
                 event.setI1(i1);
                 event.setI2(i2);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTextChangedEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(getOnTextChangedEventPool(),
                         event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
@@ -216,7 +216,7 @@ public class ViewEvents {
                 event.setTag(tag);
                 event.setState(KnitTextChangedEvent.State.AFTER);
                 event.setAfterEditable(editable);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTextChangedEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(getOnTextChangedEventPool(),
                         event,
                         knit.getModelManager());
                 view.addTextChangedListener(this);
@@ -233,7 +233,7 @@ public class ViewEvents {
                 KnitOnFocusChangedEvent event = getOnFocusChangedEventPool().getObject();
                 event.setTag(tag);
                 event.setFocus(b);
-                knit.findPresenterForView(carrierObject).get().handle(getOnFocusChangedEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(getOnFocusChangedEventPool(),
                         event, knit.getModelManager());
             }
         });
@@ -247,7 +247,7 @@ public class ViewEvents {
                 KnitOnRefreshEvent event = getOnSwipeRefreshEventPool().getObject();
                 event.setTag(tag);
                 event.setViewWeakReference(view);
-                knit.findPresenterForView(carrierObject).get().handle(getOnSwipeRefreshEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(getOnSwipeRefreshEventPool(),
                         event, knit.getModelManager());
             }
         });
@@ -260,7 +260,7 @@ public class ViewEvents {
                 KnitOnSwitchToggleEvent event = getOnSwitchToggleEventPool().getObject();
                 event.setTag(tag);
                 event.setToggle(isChecked);
-                knit.findPresenterForView(carrierObject).get().handle(getOnSwitchToggleEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(getOnSwitchToggleEventPool(),
                         event, knit.getModelManager());
             }
         });
@@ -274,7 +274,7 @@ public class ViewEvents {
                 event.setTag(tag);
                 event.setTab(tab);
                 event.setState(TabSelectedEvent.State.SELECTED);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(getOnTabSelectedEventPool(),
                         event, knit.getModelManager());
             }
 
@@ -304,7 +304,7 @@ public class ViewEvents {
                 event.setTag(tag);
                 event.setTab(tab);
                 event.setState(TabSelectedEvent.State.RESELECTED);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(getOnTabSelectedEventPool(),
                         event, knit.getModelManager());
             }
 
@@ -334,7 +334,7 @@ public class ViewEvents {
                 event.setTag(tag);
                 event.setTab(tab);
                 event.setState(TabSelectedEvent.State.UNSELECTED);
-                knit.findPresenterForView(carrierObject).get().handle(getOnTabSelectedEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(getOnTabSelectedEventPool(),
                         event, knit.getModelManager());
             }
         });
@@ -348,7 +348,8 @@ public class ViewEvents {
                 AdapterItemSelectedEvent event = getOnAdapterItemSelectedEventPool().getObject();
                 event.setTag(tag);
                 event.setIndex(i);
-                knit.findPresenterForView(carrierObject).get().handle(getOnAdapterItemSelectedEventPool(),
+                findPresenterForCarrier(carrierObject).get().handle(
+                        getOnAdapterItemSelectedEventPool(),
                         event, knit.getModelManager());
             }
 
@@ -365,13 +366,20 @@ public class ViewEvents {
         GenericEvent genericEvent = getGenericEventPool().getObject();
         genericEvent.setTag(tag);
         genericEvent.setParams(params);
-        knit.findPresenterForView(carrierObject).get().handle(getGenericEventPool(), genericEvent,
+        findPresenterForCarrier(carrierObject).get().handle(getGenericEventPool(), genericEvent,
                 knit.getModelManager());
     }
 
 
     public void onViewResult(Object carrierObject, int requestCode, int resultCode, Intent data) {
         knit.findPresenterForView(carrierObject).get().onViewResult(requestCode, resultCode, data);
+    }
+
+    private EntityInstance<InternalPresenter> findPresenterForCarrier(Object carrier) {
+        if (knit.getAttachmentMap().getViewForAttachment(carrier) != null) {
+            return knit.findPresenterForView(knit.getAttachmentMap().getViewForAttachment(carrier));
+        }
+        return knit.findPresenterForView(carrier);
     }
 
 

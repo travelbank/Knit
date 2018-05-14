@@ -5,6 +5,7 @@ import com.travelbank.knit.InternalModel;
 import com.travelbank.knit.InternalPresenter;
 import com.travelbank.knit.KnitInterface;
 import com.travelbank.knit.KnitMessage;
+import com.travelbank.knit.KnitModel;
 import com.travelbank.knit.MemoryEntity;
 import com.travelbank.knit.MessagePool;
 import com.travelbank.knit.MessageTrain;

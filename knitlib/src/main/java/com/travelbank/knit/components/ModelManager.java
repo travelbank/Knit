@@ -91,7 +91,9 @@ public class ModelManager extends InternalModel {
     public void request(String data,KnitSchedulers runOn,KnitSchedulers consumeOn,EntityInstance<InternalPresenter> presenterInstance, Object... params) {
             if (valueToModelMap.containsKey(data)) {
                 usageGraph.getModelWithTag(valueToModelMap.get(data)).get().request(data, runOn,consumeOn,presenterInstance, params);
+                return;
             }
+        throw new RuntimeException("Knit: No Model Exists that will input the given value: " + data);
     }
 
     /**
@@ -107,7 +109,7 @@ public class ModelManager extends InternalModel {
             if (valueToModelMap.containsKey(data)) {
                 return usageGraph.getModelWithTag(valueToModelMap.get(data)).get().requestImmediately(data, params);
             }
-        return null;
+        throw new RuntimeException("Knit: No Model Exists that generate the given value: " + data);
     }
 
     /**
@@ -120,7 +122,9 @@ public class ModelManager extends InternalModel {
     public void input(String data, Object... params) {
             if (valueToModelMap.containsKey(data)) {
                 usageGraph.getModelWithTag(valueToModelMap.get(data)).get().input(data, params);
+                return;
             }
+        throw new RuntimeException("Knit: No Model Exists that will input the given value: " + data);
     }
 
 
