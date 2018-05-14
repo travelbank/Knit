@@ -25,4 +25,22 @@ public class Tuple4<A,B,C,D> extends Tuple3<A,B,C> {
     public D getD() {
         return d;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+
+        Tuple4<?, ?, ?, ?> tuple4 = (Tuple4<?, ?, ?, ?>) object;
+
+        return d.equals(tuple4.d);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + d.hashCode();
+        return result;
+    }
 }
