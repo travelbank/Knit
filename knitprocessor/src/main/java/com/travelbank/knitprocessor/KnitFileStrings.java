@@ -72,6 +72,8 @@ public class KnitFileStrings {
     public static final String KNITSCHEDULER_HEAVY = "heavy()";
     public static final String KNIT_MODEL_REQUEST_IMMEDIATE_METHOD = "requestImmediately";
 
+    public static final ClassName TYPE_NAME_KNIT = ClassName.bestGuess(KNIT);
+    public static final ClassName TYPE_NAME_KNIT_PRESENTER = ClassName.bestGuess(KNIT_PRESENTER);
     public static final ClassName TYPE_NAME_CLASS = ClassName.bestGuess(Class.class.getCanonicalName());
     public static final ClassName TYPE_NAME_STRING = ClassName.bestGuess(String.class.getCanonicalName());
     public static final ClassName TYPE_NAME_LIST = ClassName.bestGuess(List.class.getCanonicalName());
@@ -83,8 +85,11 @@ public class KnitFileStrings {
     public static final ClassName TYPE_NAME_ENTITY = ClassName.bestGuess("com.travelbank.knit.EntityInstance");
 
 
-    //CONTRACT
+
+    //CONTRACT && INTERACTOR
     public static final String KNIT_CONTRACT_POSTFIX = "Contract";
+    public static final String KNIT_INTERACTOR_POSTFIX = "Interactor";
+
 
     //ANDROID
     public static final String ANDROID_HANDLER = "android.os.Handler";

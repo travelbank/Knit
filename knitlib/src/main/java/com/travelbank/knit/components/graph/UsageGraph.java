@@ -149,15 +149,10 @@ public class UsageGraph {
 
     /**
      * This is the method that creates the graph. Extracts generated values from {@link ModelMapInterface}, extract required values from {@link ViewToPresenterMapInterface}.
-<<<<<<< HEAD
      * Even though the entry point of all components is the creation of a view, the graph does not need to hold any kind of view data other than it's presenter. So the base of the graph
      * consists of presenter data. Based on the required values of each presenter , it finds the model that generates those values, Then recursively checks if that model depends on another model(Umbrella Model).
      * If the model indeed depends on another, then it will recurse until dependency graph is created.
-=======
-     * Even though the entry point of all components is the creation of a view, the graph does not need to hold any kind of view data other than it's presenter.
-     * Based on the required values of each presenter , it finds the model that generates those values, Then recursively checks if that model depends on another model(Umbrella Model).
-     * If the model indeed depends on another, then it will recurse until there are no umbrella models left.
->>>>>>> remotes/origin/docs
+
      */
     private void createGraph() {
         List<Class<? extends InternalModel>> models = modelMap.getAll();

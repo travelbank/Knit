@@ -273,4 +273,12 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
 
     }
 
+    /**
+     * Getter for {@link Knit} instance . Mainly for {@link KnitPresenter2}.
+     * @return shared {@link Knit} instance'
+     */
+    protected Knit getKnitInstance(){
+        return knitInstance;
+    }
+
 }

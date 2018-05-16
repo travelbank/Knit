@@ -23,6 +23,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.tools.Diagnostic;
@@ -49,7 +50,7 @@ public class KnitModelProcessor extends AbstractProcessor {
         this.users = new HashSet<>();
         this.modelToUserMap = new HashMap<>();
         this.modelWriter = new KnitModelWriter();
-        this.modelExposerWriter  = new ModelExposerWriter();
+        this.modelExposerWriter = new ModelExposerWriter();
         this.modelMapWriter = new ModelMapWriter();
         messager = processingEnvironment.getMessager();
     }
@@ -62,7 +63,7 @@ public class KnitModelProcessor extends AbstractProcessor {
 
         handleMapping();
 
-        if(roundEnvironment.processingOver()) {
+        if (roundEnvironment.processingOver()) {
             createModels(models, modelToUserMap);
             createModelMap(models);
         }
@@ -90,17 +91,21 @@ public class KnitModelProcessor extends AbstractProcessor {
                 if (element.getKind().isField()) {
                     if (element.getAnnotation(Generates.class) != null) {
                         String[] params = element.getAnnotation(Generates.class).value();
-                        knitModelMirror.generatesParamsMap.put(params, (VariableElement)element);
+                        knitModelMirror.generatesParamsMap.put(params, (VariableElement) element);
                         knitModelMirror.vals.addAll(Arrays.asList(params));
-                    }else if(element.getAnnotation(Collects.class)!=null){
+                    } else if (element.getAnnotation(Collects.class) != null) {
                         String[] params = element.getAnnotation(Collects.class).value();
-                        knitModelMirror.generatesParamsMap.put(params, (VariableElement)element);
+                        knitModelMirror.generatesParamsMap.put(params, (VariableElement) element);
                         knitModelMirror.vals.addAll(Arrays.asList(params));
-                        knitModelMirror.reqs.addAll(Arrays.asList(element.getAnnotation(Collects.class).needs()));
-                    }else if(element.getAnnotation(Inputs.class)!=null){
+                        knitModelMirror.reqs.addAll(
+                                Arrays.asList(element.getAnnotation(Collects.class).needs()));
+                    } else if (element.getAnnotation(Inputs.class) != null) {
                         String[] params = element.getAnnotation(Inputs.class).value();
                         knitModelMirror.inputterField.put(params, (VariableElement) element);
                         knitModelMirror.vals.addAll(Arrays.asList(params));
+                    } else if (!element.getModifiers().contains(Modifier.PRIVATE)
+                            && !element.getModifiers().contains(Modifier.STATIC)) {
+                        knitModelMirror.fields.add((VariableElement) element);
                     }
                 }
             }
@@ -146,7 +151,7 @@ public class KnitModelProcessor extends AbstractProcessor {
         }
     }
 
-    private void createModelMap(Set<KnitModelMirror> modelsMirror){
-        modelMapWriter.write(processingEnv.getFiler(),modelsMirror);
+    private void createModelMap(Set<KnitModelMirror> modelsMirror) {
+        modelMapWriter.write(processingEnv.getFiler(), modelsMirror);
     }
 }

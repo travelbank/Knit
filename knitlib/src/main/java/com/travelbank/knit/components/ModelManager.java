@@ -74,6 +74,15 @@ public class ModelManager extends InternalModel {
     }
 
     /**
+     * Returns the {@link InternalModel} that generates a particular data tag.
+     * @param data Data dag that {@link InternalModel} is generating.
+     * @return {@link InternalModel} that generates the given data tag.
+     */
+    public InternalModel getModelThatGeneratesData(String data){
+        return usageGraph.getModelWithTag(valueToModelMap.get(data)).get();
+    }
+
+    /**
      * {@link InternalPresenter}s use this method when requesting data. This method finds the model {@link ComponentTag}
      * that generates the desired value , then gets that {@link InternalModel} instance from the {@link UsageGraph}
      * and calls the {@code .request(...)} method on it.
