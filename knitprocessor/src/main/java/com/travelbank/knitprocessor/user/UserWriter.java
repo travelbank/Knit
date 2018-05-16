@@ -27,7 +27,7 @@ public class UserWriter extends KnitClassWriter {
 
         TypeSpec.Builder clazzBuilder = TypeSpec
                 .classBuilder(
-                        userMirror.enclosingClass.getSimpleName() + KnitFileStrings.KNIT_PRESENTER_USER_POSTFIX)
+                        userMirror.enclosingClass + KnitFileStrings.KNIT_PRESENTER_USER_POSTFIX)
                 .addSuperinterface(ClassName.bestGuess(KnitFileStrings.KNIT_USER))
                 .addModifiers(Modifier.PUBLIC);
 
@@ -45,9 +45,7 @@ public class UserWriter extends KnitClassWriter {
 
         clazzBuilder.addField(parentField);
 
-        PackageElement packageElement = (PackageElement)userMirror.enclosingClass.getEnclosingElement() ;
-
-        writeToFile(filer,packageElement.getQualifiedName().toString(),clazzBuilder);
+        writeToFile(filer,userMirror.packageElement,clazzBuilder);
 
     }
 
@@ -65,21 +63,21 @@ public class UserWriter extends KnitClassWriter {
     }
 
     private void createExposedMethodsMethod(TypeSpec.Builder builder, UserMirror userMirror){
-        for (ExecutableElement methodElement : userMirror.method) {
-            if(methodElement.getModifiers().contains(Modifier.PRIVATE)){
+        for (String data : userMirror.methodMap.keySet()) {
+            if(userMirror.methodMap.get(data).getModifiers().contains(Modifier.PRIVATE)){
                 continue;
             }
             MethodSpec.Builder userBuilder = MethodSpec
-                    .methodBuilder("use_" + methodElement.getSimpleName().toString())
+                    .methodBuilder("use_" + userMirror.userMethodNames.get(data))
                     .addModifiers(Modifier.PUBLIC);
             userBuilder.beginControlFlow("if(parent.isAvailable())");
             int c = 0;
-            for (VariableElement variableElement : methodElement.getParameters()) {
+            for (VariableElement variableElement : userMirror.methodMap.get(data).getParameters()) {
                 userBuilder.addParameter(TypeName.get(variableElement.asType()), "v" + c++);
             }
             StringBuilder paramsBlock = new StringBuilder();
             paramsBlock.append("castParent().");
-            paramsBlock.append(methodElement.getSimpleName());
+            paramsBlock.append(userMirror.userMethodNames.get(data));
             paramsBlock.append("(");
             for (int i = 0; i < c; i++) {
                 paramsBlock.append("v");
@@ -99,8 +97,8 @@ public class UserWriter extends KnitClassWriter {
         MethodSpec getterMethod = MethodSpec
                 .methodBuilder("castParent")
                 .addModifiers(Modifier.PRIVATE)
-                .returns(ClassName.bestGuess(userMirror.enclosingClass.getQualifiedName().toString()))
-                .addStatement("return ($L)this.parent.get()",userMirror.enclosingClass.getQualifiedName())
+                .returns(ClassName.bestGuess(userMirror.enclosingClass))
+                .addStatement("return ($L)this.parent.get()",userMirror.enclosingClass)
                 .build();
         builder.addMethod(getterMethod);
     }

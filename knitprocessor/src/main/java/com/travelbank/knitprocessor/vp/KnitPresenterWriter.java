@@ -1,19 +1,18 @@
 package com.travelbank.knitprocessor.vp;
 
-import com.travelbank.knit.Use;
-import com.travelbank.knit.UseMethod;
-import com.travelbank.knitprocessor.KnitClassWriter;
-import com.travelbank.knitprocessor.KnitFileStrings;
-import com.travelbank.knitprocessor.PackageStringExtractor;
-import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
+import com.travelbank.knitprocessor.KnitClassWriter;
+import com.travelbank.knitprocessor.KnitFileStrings;
+import com.travelbank.knitprocessor.PackageStringExtractor;
+import com.travelbank.knitprocessor.user.UserMirror;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.ExecutableElement;
@@ -26,16 +25,21 @@ import javax.lang.model.element.VariableElement;
 
 class KnitPresenterWriter extends KnitClassWriter {
     void write(Filer filer, KnitPresenterMirror presenterMirror,
-            Map<KnitPresenterMirror, KnitViewMirror> map) {
+            Map<KnitPresenterMirror, KnitViewMirror> map,Set<UserMirror> userMirrorSet) {
 
         TypeSpec.Builder clazzBuilder = TypeSpec
                 .classBuilder(presenterMirror.enclosingClass.getSimpleName()
                         + KnitFileStrings.KNIT_PRESENTER_POSTFIX)
                 .superclass(ClassName.bestGuess(KnitFileStrings.KNIT_PRESENTER))
-                .addAnnotation(Use.class)
                 .addModifiers(Modifier.PUBLIC);
 
         addKnitWarning(clazzBuilder);
+
+        UserMirror userMirror = new UserMirror();
+        userMirror.enclosingClass = presenterMirror.enclosingClass.getSimpleName()
+                + KnitFileStrings.KNIT_PRESENTER_POSTFIX;
+
+        userMirror.qualifiedName = PackageStringExtractor.extract(presenterMirror.targetView)+"."+userMirror.enclosingClass;
 
         ClassName contractName = ClassName.bestGuess(presenterMirror.targetView.toString()+KnitFileStrings.KNIT_CONTRACT_POSTFIX);
 
@@ -47,13 +51,17 @@ class KnitPresenterWriter extends KnitClassWriter {
         createRemoveMethod(clazzBuilder, presenterMirror);
         createLoadMethod(clazzBuilder, presenterMirror);
         createDestroyMethod(clazzBuilder, presenterMirror);
-        createUpdatingMethods(clazzBuilder, presenterMirror, map);
+        createUpdatingMethods(clazzBuilder, presenterMirror, map,userMirror);
         createOnMemoryLowMethod(clazzBuilder,presenterMirror);
         createMethods(clazzBuilder,map,presenterMirror);
         createNativeViewCallbacks(clazzBuilder,presenterMirror);
 
 
         String packageName = PackageStringExtractor.extract(presenterMirror.targetView);
+
+        userMirror.packageElement = packageName;
+        userMirror.requiredValues.addAll(userMirror.methodMap.keySet());
+        userMirrorSet.add(userMirror);
 
         writeToFile(filer,packageName,clazzBuilder);
 
@@ -297,7 +305,7 @@ class KnitPresenterWriter extends KnitClassWriter {
 
 
     private void createUpdatingMethods(TypeSpec.Builder clazzBuilder,
-            KnitPresenterMirror presenterMirror, Map<KnitPresenterMirror, KnitViewMirror> map) {
+            KnitPresenterMirror presenterMirror, Map<KnitPresenterMirror, KnitViewMirror> map,UserMirror userMirror) {
 
         for(String string : presenterMirror.updatingMethodsMap.keySet()){
             MethodSpec.Builder updatingMethodBuilder = MethodSpec
@@ -316,10 +324,9 @@ class KnitPresenterWriter extends KnitClassWriter {
                 }
                 c++;
             }
+            userMirror.userMethodNames.put(string,string+KnitFileStrings.KNIT_PRESENTER_UPDATE_METHOD_POSTFIX);
+            userMirror.methodMap.put(string,methodElement);
             updatingMethodBuilder.addStatement("parent.$L$L($L)","use_",methodElement.getSimpleName(),paramsText.toString());
-            updatingMethodBuilder.addAnnotation(AnnotationSpec.builder(UseMethod.class)
-                            .addMember("value", "$S", string)
-                            .build());
             clazzBuilder.addMethod(updatingMethodBuilder.build());
         }
 

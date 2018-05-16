@@ -1,6 +1,5 @@
 package com.travelbank.knitprocessor.model;
 
-import com.travelbank.knit.UseMethod;
 import com.travelbank.knitprocessor.GeneratorExaminer;
 import com.travelbank.knitprocessor.KnitClassWriter;
 import com.travelbank.knitprocessor.KnitFileStrings;
@@ -19,7 +18,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.processing.Filer;
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.VariableElement;
@@ -242,14 +240,14 @@ class KnitModelWriter extends KnitClassWriter {
                 for (UserMirror userMirror : users) {
                     if (methodExists(generatedVals, userMirror)) {
                         requestMethodBuilder.beginControlFlow("if(instance.instanceOf($L.class))",
-                                userMirror.enclosingClass.getQualifiedName());
+                                userMirror.qualifiedName);
                         requestMethodBuilder.beginControlFlow("if(!userMap.containsKey($L))",
                                 "instance");
                         requestMethodBuilder.addStatement("userMap.put(instance,new $L$L($L))",
-                                userMirror.enclosingClass.getQualifiedName(),
+                                userMirror.qualifiedName,
                                 KnitFileStrings.KNIT_PRESENTER_USER_POSTFIX, "instance");
                         requestMethodBuilder.endControlFlow();
-                        String userText = userMirror.enclosingClass.getQualifiedName() +
+                        String userText = userMirror.qualifiedName+
                                 KnitFileStrings.KNIT_PRESENTER_USER_POSTFIX;
                         requestMethodBuilder.addStatement(
                                 "final $L user = ($L)userMap.get(instance)",
@@ -349,9 +347,9 @@ class KnitModelWriter extends KnitClassWriter {
 
     private String findMethod(String[] params, UserMirror userMirror) {
         for (String param : params) {
-            for (ExecutableElement executableElement : userMirror.method) {
-                if (executableElement.getAnnotation(UseMethod.class).value().equals(param)) {
-                    return "use_" + executableElement.getSimpleName();
+            for (String data : userMirror.methodMap.keySet()) {
+                if (data.equals(param)) {
+                    return "use_" + userMirror.userMethodNames.get(data);
                 }
             }
         }
@@ -360,8 +358,8 @@ class KnitModelWriter extends KnitClassWriter {
 
     private boolean methodExists(String[] params, UserMirror userMirror) {
         for (String param : params) {
-            for (ExecutableElement executableElement : userMirror.method) {
-                if (executableElement.getAnnotation(UseMethod.class).value().equals(param)) {
+            for (String data : userMirror.methodMap.keySet()) {
+                if (data.equals(param)) {
                     return true;
                 }
             }

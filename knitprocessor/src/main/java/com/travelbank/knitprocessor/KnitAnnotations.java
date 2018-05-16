@@ -12,22 +12,11 @@ import java.util.Set;
  */
 
 public class KnitAnnotations {
-    public static Set<String> getStageOne() {
+
+    public static Set<String> getAll(){
         return new HashSet<String>(Arrays.asList(
                 KnitView.class.getCanonicalName(),
-                Presenter.class.getCanonicalName()
-                ));
-    }
-
-    public static Set<String> getStageTwo() {
-        return new HashSet<String>(Arrays.asList(
-                Use.class.getCanonicalName()
-        ));
-    }
-
-    public static Set<String> getStageThree(){
-        return new HashSet<String>(Arrays.asList(
-                Use.class.getCanonicalName(),
+                Presenter.class.getCanonicalName(),
                 Model.class.getCanonicalName()
         ));
     }

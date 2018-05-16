@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 
 /**
@@ -14,9 +15,15 @@ import javax.lang.model.element.TypeElement;
 
 public class UserMirror {
 
-    public TypeElement enclosingClass;
+    public String packageElement;
 
-    public Set<ExecutableElement> method = new HashSet<>();
+    public String enclosingClass;
+
+    public String qualifiedName;
+
+    public Map<String,ExecutableElement> methodMap = new HashMap<>();
+
+    public Map<String,String> userMethodNames = new HashMap<>();
 
     public Set<String> requiredValues = new HashSet<>();
 
