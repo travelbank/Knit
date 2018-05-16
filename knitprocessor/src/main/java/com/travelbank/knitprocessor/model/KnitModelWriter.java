@@ -46,6 +46,7 @@ class KnitModelWriter extends KnitClassWriter {
         addKnitWarning(clazzBuilder);
 
         createGetParentMethod(clazzBuilder,modelMirror);
+        createGetParentExposerMethod(clazzBuilder,modelMirror);
         createDependencyFields(clazzBuilder,modelMirror);
         createDefaultMethods(clazzBuilder,modelMirror);
         createGetHandledValuesMethod(clazzBuilder,modelMirror);
@@ -54,8 +55,6 @@ class KnitModelWriter extends KnitClassWriter {
         createGeneratingFields(clazzBuilder, modelMirror);
         createConstructor(clazzBuilder, modelMirror);
         createInputMethod(clazzBuilder, modelMirror);
-
-
 
         PackageElement packageElement =
                 (PackageElement) modelMirror.enclosingClass.getEnclosingElement();
@@ -88,6 +87,20 @@ class KnitModelWriter extends KnitClassWriter {
         builder.addField(parentExposerField);
         builder.addField(schedulerProviderField);
         builder.addField(instanceMapField);
+    }
+
+    private void createGetParentExposerMethod(TypeSpec.Builder builder,
+            KnitModelMirror modelMirror){
+
+       builder.addMethod(MethodSpec
+                .methodBuilder("getParentExposer")
+                .addModifiers(Modifier.PUBLIC)
+                .returns(ClassName.bestGuess(
+                        modelMirror.enclosingClass.getQualifiedName().toString()
+                                + KnitFileStrings.KNIT_MODEL_EXPOSER_POSTFIX))
+                .addStatement("return this.parentExposer")
+                .build());
+
     }
 
     private void createGeneratingFields(TypeSpec.Builder builder,
