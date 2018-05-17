@@ -43,14 +43,12 @@ public class SecondPresenter extends KnitPresenter2<SecondPresenterInteractor,Se
     public void receiveMessage(KnitMessage message) {
         super.receiveMessage(message);
         this.string = message.<String>getData("txt");
-
     }
 
     @Override
     public void onViewStart() {
         super.onViewStart();
-        getContract().recMes(string);
-        getContract().recMes(getInteractor().getTeeeestasdasd());
+        getContract().recMes(getInteractor().getTestString());
     }
 
     @Override
