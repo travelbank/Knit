@@ -6,5 +6,6 @@ com.travelbank.knit.generators
 com.travelbank.knit.inputters
 com.travelbank.knit.schedulers
 com.travelbank.knit.schedulers.heavy
+com.travelbank.knit.tuples
 com.travelbank.knit.viewevents
 com.travelbank.knit.viewevents.handlers

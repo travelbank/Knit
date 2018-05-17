@@ -15,7 +15,7 @@ import javax.lang.model.element.VariableElement;
  * Created by omerozer on 2/4/18.
  */
 
-class KnitModelMirror {
+public class KnitModelMirror {
 
     public TypeElement enclosingClass;
 
@@ -28,5 +28,7 @@ class KnitModelMirror {
     public Set<String> vals = new LinkedHashSet<>();
 
     public Set<String> reqs = new LinkedHashSet<>();
+
+    public Set<VariableElement> fields = new LinkedHashSet<>();
 
 }

@@ -19,6 +19,9 @@ import java.util.List;
 @Model
 public class ThirdModel extends KnitModel {
 
+    boolean nonSketchBoolean = false;
+
+    String teeeestasdasd = "REC SUCCESSFULLY";
 
     @Generates("Ttest")
     public Generator0<List<StringWrapper>> generateTestString = new Generator0<List<StringWrapper>>() {

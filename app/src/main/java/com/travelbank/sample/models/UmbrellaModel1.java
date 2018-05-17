@@ -22,6 +22,12 @@ import java.util.Map;
 @Model
 public class UmbrellaModel1 extends KnitModel {
 
+    int testVal;
+
+    String testString;
+
+    List<String> asdasd;
+
     @Override
     public void onCreate() {
         super.onCreate();

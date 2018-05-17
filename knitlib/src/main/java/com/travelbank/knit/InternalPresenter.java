@@ -8,7 +8,7 @@ import com.travelbank.knit.viewevents.handlers.EventHandler;
  * these {@link InternalPresenter}s that initialize and contain the actual {@link KnitPresenter}. All {@link KnitPresenter}s annotated with a {@link Presenter}
  * will have an internal counterpart that manages them. The master class created by the processor will have a name "ClassName" + "_Presenter".
  * Actual {@link KnitPresenter} instance will be wrapped around an Exposer class that will expose all of it's public and package-private methods
- * to the {@link InternalPresenter} . T
+ * to the {@link InternalPresenter} .
  *
  * @see Presenter
  * @see KnitPresenter
@@ -37,6 +37,12 @@ public abstract class InternalPresenter implements EventHandler,PresenterInterfa
      * @return Current contract instance.
      */
     public abstract Object getContract();
+
+    /**
+     * Returns the current interactor instance. {@link KnitPresenter} will cast it accordingly based on it's need.s
+     * @return Current interactor instance.
+     */
+    public abstract Object getInteractor();
 
     /**
      * Returns a String array that contains all data tags that this presenter listens to.

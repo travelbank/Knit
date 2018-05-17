@@ -29,6 +29,14 @@ Version 1.3
 - Bug fixes
 - Full API documentation
 
+Version 2.0
+
+- Tuples to create simple data wrappers when passing multiple objects around
+- Interactors added to avoid having to use of generators for simple non-asnyc get/set operations
+- View attachments such as Adapters. View events can now be fired from inside any view attachments.
+- Intent flags added to the Navigator
+
+
 ### Adding Knit to the project:
 ```
 allprojects {
@@ -39,10 +47,12 @@ allprojects {
     }
 }
 
+Stable version 1.3.0
+
 dependencies {
-    implementation 'com.github.travelbank.Knit:knitlib:v1.3.0'
-    annotationProcessor 'com.github.travelbank.Knit:knitprocessor:v1.3.0'
-    testImplementation 'com.github.travelbank.Knit:knittestkit:v1.3.0'
+    implementation 'com.github.travelbank.Knit:knitlib:v2.0.0'
+    annotationProcessor 'com.github.travelbank.Knit:knitprocessor:v2.0.0'
+    testImplementation 'com.github.travelbank.Knit:knittestkit:v2.0.0'
 }
 ```
 
@@ -148,7 +158,7 @@ public class RepoActivityPresenter extends KnitPresenter<RepoActivityContract> {
     @Override
     public void onViewStart() {
         super.onViewStart();
-        getContract().recMes(string);
+        getContract().recMes(getInteractor().getTestString());
     }
 
     @Override
@@ -183,6 +193,15 @@ public class RepoActivityPresenter extends KnitPresenter<RepoActivityContract> {
         getContract().recMes(data.getBody().get(0).string);
     }
 }
+
+Adding attachments to views:
+
+Knit.getInstance().getAttachmentMap()
+                .attach()
+                .toView(this)//Activity, fragments etc...
+                .add(adapter1)
+                .add(adapter2).done();
+
 ```
 
 

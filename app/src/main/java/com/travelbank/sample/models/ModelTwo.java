@@ -15,6 +15,10 @@ import com.travelbank.knit.generators.Generator1;
 @Model
 public class ModelTwo extends KnitModel {
 
+    int testVal;
+
+    String testString;
+
     @Override
     public void onCreate() {
         super.onCreate();

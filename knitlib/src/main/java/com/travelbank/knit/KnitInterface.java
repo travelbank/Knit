@@ -1,5 +1,7 @@
 package com.travelbank.knit;
 
+import android.net.wifi.aware.AttachCallback;
+
 import com.travelbank.knit.classloaders.KnitModelLoader;
 import com.travelbank.knit.classloaders.KnitPresenterLoader;
 import com.travelbank.knit.classloaders.KnitUtilsLoader;
@@ -80,4 +82,10 @@ public interface KnitInterface {
      * @return supplied {@link ModelMapInterface}
      */
     ModelMapInterface getModelMap();
+
+    /**
+     * Supplies a {@link AttachmentMap}.
+     * @return supplied {@link AttachmentMap}
+     */
+    AttachmentMap getAttachmentMap();
 }

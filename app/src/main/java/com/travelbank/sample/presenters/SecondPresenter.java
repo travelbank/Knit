@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.travelbank.knit.KnitMessage;
 import com.travelbank.knit.KnitPresenter;
+import com.travelbank.knit.KnitPresenter2;
 import com.travelbank.knit.KnitResponse;
 import com.travelbank.knit.ModelEvent;
 import com.travelbank.knit.Presenter;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 
 @Presenter(value = SecondActivity.class,needs = "DENTS")
-public class SecondPresenter extends KnitPresenter<SecondActivityContract> {
+public class SecondPresenter extends KnitPresenter2<SecondPresenterInteractor,SecondActivityContract> {
 
     private String string;
 
@@ -29,6 +30,7 @@ public class SecondPresenter extends KnitPresenter<SecondActivityContract> {
         //request("umbrella", KnitSchedulers.IO,KnitSchedulers.MAIN);
         request("umbrella1", KnitSchedulers.IO,KnitSchedulers.MAIN);
         Log.d("KNIT_TEST","PRESENTER TWO VIEW APPLIED");
+
     }
 
     @Override
@@ -41,12 +43,14 @@ public class SecondPresenter extends KnitPresenter<SecondActivityContract> {
     public void receiveMessage(KnitMessage message) {
         super.receiveMessage(message);
         this.string = message.<String>getData("txt");
+
     }
 
     @Override
     public void onViewStart() {
         super.onViewStart();
         getContract().recMes(string);
+        getContract().recMes(getInteractor().getTeeeestasdasd());
     }
 
     @Override

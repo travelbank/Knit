@@ -1,10 +1,11 @@
 package com.travelbank.knitprocessor.vp;
 
 import com.travelbank.knit.KnitView;
-import com.travelbank.knit.Presenter;
 import com.travelbank.knit.ModelEvent;
+import com.travelbank.knit.Presenter;
 import com.travelbank.knit.ViewEvent;
-import com.travelbank.knitprocessor.KnitAnnotations;
+import com.travelbank.knitprocessor.KnitBaseProcessor;
+import com.travelbank.knitprocessor.user.UserMirror;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,10 +14,8 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.Element;
@@ -29,7 +28,7 @@ import javax.lang.model.type.TypeMirror;
  * Created by omerozer on 2/2/18.
  */
 
-public class KnitPresenterProcessor extends AbstractProcessor {
+public class KnitPresenterProcessor extends KnitBaseProcessor {
 
     private Set<KnitPresenterMirror> presenters;
     private Set<KnitViewMirror> views;
@@ -40,9 +39,8 @@ public class KnitPresenterProcessor extends AbstractProcessor {
     private ViewToPresenterMapWriter viewToPresenterMapWriter;
 
 
-    @Override
-    public synchronized void init(ProcessingEnvironment processingEnvironment) {
-        super.init(processingEnvironment);
+    public KnitPresenterProcessor(ProcessingEnvironment processingEnvironment) {
+        super(processingEnvironment);
         this.presenters = new LinkedHashSet<>();
         this.views = new LinkedHashSet<>();
         this.presenterToViewMap = new LinkedHashMap<>();
@@ -52,19 +50,16 @@ public class KnitPresenterProcessor extends AbstractProcessor {
         this.viewToPresenterMapWriter = new ViewToPresenterMapWriter();
     }
 
-    @Override
-    public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+    public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment,Set<UserMirror> userMirrors) {
 
         processViews(roundEnvironment.getElementsAnnotatedWith(KnitView.class));
         processPresenters(roundEnvironment.getElementsAnnotatedWith(Presenter.class));
 
         handleMapping();
 
-
         createViews(views);
-        createPresenters(presenters, presenterToViewMap);
+        createPresenters(presenters, presenterToViewMap,userMirrors);
         createViewToPresenterMap(presenterToViewMap);
-
 
         return true;
     }
@@ -141,34 +136,24 @@ public class KnitPresenterProcessor extends AbstractProcessor {
     }
 
     private void createPresenters(Set<KnitPresenterMirror> presenters,
-            Map<KnitPresenterMirror, KnitViewMirror> map) {
+            Map<KnitPresenterMirror, KnitViewMirror> map,Set<UserMirror> userMirrors) {
         for (KnitPresenterMirror knitPresenterMirror : presenters) {
-            presenterExposerWriter.write(processingEnv.getFiler(), knitPresenterMirror);
-            knitPresenterWriter.write(processingEnv.getFiler(), knitPresenterMirror, map);
+            presenterExposerWriter.write(getEnv().getFiler(), knitPresenterMirror);
+            knitPresenterWriter.write(getEnv().getFiler(), knitPresenterMirror, map,userMirrors);
         }
     }
 
     private void createViewToPresenterMap(Map<KnitPresenterMirror, KnitViewMirror> map) {
-        viewToPresenterMapWriter.write(processingEnv.getFiler(), map);
+        viewToPresenterMapWriter.write(getEnv().getFiler(), map);
     }
 
 
     private void createViews(Set<KnitViewMirror> views) {
         for (KnitViewMirror viewMirror : views) {
-            contractWriter.write(processingEnv.getFiler(),viewMirror);
+            contractWriter.write(getEnv().getFiler(),viewMirror);
         }
     }
 
-
-    @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return KnitAnnotations.getStageOne();
-    }
-
-    @Override
-    public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.latestSupported();
-    }
 
 
 }

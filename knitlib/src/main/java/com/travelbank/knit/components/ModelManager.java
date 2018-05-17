@@ -74,6 +74,15 @@ public class ModelManager extends InternalModel {
     }
 
     /**
+     * Returns the {@link InternalModel} that generates a particular data tag.
+     * @param data Data dag that {@link InternalModel} is generating.
+     * @return {@link InternalModel} that generates the given data tag.
+     */
+    public InternalModel getModelThatGeneratesData(String data){
+        return usageGraph.getModelWithTag(valueToModelMap.get(data)).get();
+    }
+
+    /**
      * {@link InternalPresenter}s use this method when requesting data. This method finds the model {@link ComponentTag}
      * that generates the desired value , then gets that {@link InternalModel} instance from the {@link UsageGraph}
      * and calls the {@code .request(...)} method on it.
@@ -91,7 +100,9 @@ public class ModelManager extends InternalModel {
     public void request(String data,KnitSchedulers runOn,KnitSchedulers consumeOn,EntityInstance<InternalPresenter> presenterInstance, Object... params) {
             if (valueToModelMap.containsKey(data)) {
                 usageGraph.getModelWithTag(valueToModelMap.get(data)).get().request(data, runOn,consumeOn,presenterInstance, params);
+                return;
             }
+        throw new RuntimeException("Knit: No Model Exists that will input the given value: " + data);
     }
 
     /**
@@ -107,7 +118,7 @@ public class ModelManager extends InternalModel {
             if (valueToModelMap.containsKey(data)) {
                 return usageGraph.getModelWithTag(valueToModelMap.get(data)).get().requestImmediately(data, params);
             }
-        return null;
+        throw new RuntimeException("Knit: No Model Exists that generate the given value: " + data);
     }
 
     /**
@@ -120,7 +131,9 @@ public class ModelManager extends InternalModel {
     public void input(String data, Object... params) {
             if (valueToModelMap.containsKey(data)) {
                 usageGraph.getModelWithTag(valueToModelMap.get(data)).get().input(data, params);
+                return;
             }
+        throw new RuntimeException("Knit: No Model Exists that will input the given value: " + data);
     }
 
 

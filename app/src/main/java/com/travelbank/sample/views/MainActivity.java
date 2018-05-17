@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.travelbank.knit.AttachmentMap;
 import com.travelbank.knit.Knit;
 import com.travelbank.knit.KnitView;
 import com.travelbank.sample.R;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText edit;
 
+    AttachmentMap attachmentMap;
 
 
     @Override
@@ -28,7 +30,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.button = (Button)findViewById(R.id.btn_next);
         this.edit = (EditText)findViewById(R.id.edit);
+        this.attachmentMap = Knit.getInstance().getAttachmentMap();
         Knit.getInstance().getViewEvents().onClick(BUTTON_CLICK,this,button);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        attachmentMap.releaseAttachments(this);
     }
 
     public void recMes(String message){
