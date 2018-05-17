@@ -19,7 +19,7 @@ Features:
 7. Navigation is supported as outlined here : [Navigation in the context of MVP](https://medium.com/@nikita.kozlov/navigation-in-the-context-of-mvp-f474ed313901)  
 8. Easy integration with other libraries such as Dagger.
 
-Version 1.2
+Version 1.3
 
 - Fragment navigation support on presenters
 - Atomic entity instances prevents NPE's & leaks caused by un-finished async tasks.
@@ -40,9 +40,9 @@ allprojects {
 }
 
 dependencies {
-    implementation 'com.github.travelbank.Knit:knitlib:v1.2.1'
-    annotationProcessor 'com.github.travelbank.Knit:knitprocessor:v1.2.1'
-    testImplementation 'com.github.travelbank.Knit:knittestkit:v1.2.1'
+    implementation 'com.github.travelbank.Knit:knitlib:v1.3.0'
+    annotationProcessor 'com.github.travelbank.Knit:knitprocessor:v1.3.0'
+    testImplementation 'com.github.travelbank.Knit:knittestkit:v1.3.0'
 }
 ```
 
