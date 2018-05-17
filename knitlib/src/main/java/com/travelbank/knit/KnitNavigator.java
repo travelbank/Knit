@@ -226,12 +226,12 @@ public class KnitNavigator {
         }
 
         /**
-         * Stub initializer for regular {@link V4FragmentNavigator}.
+         * Stub initializer for regular {@link SupportFragmentNavigator}.
          *
-         * @return instance of {@link V4FragmentNavigator}.
+         * @return instance of {@link SupportFragmentNavigator}.
          */
-        public V4FragmentNavigator withSupportFragmentManager() {
-            return new V4FragmentNavigator();
+        public SupportFragmentNavigator withSupportFragmentManager() {
+            return new SupportFragmentNavigator();
         }
 
     }
@@ -342,7 +342,7 @@ public class KnitNavigator {
         }
     }
 
-    public class V4FragmentNavigator extends Navigator {
+    public class SupportFragmentNavigator extends Navigator {
 
         /**
          * Target fragment class. This is where the navigation will take the user.
@@ -371,7 +371,7 @@ public class KnitNavigator {
          * @param fragment Target fragment class that will be initialized and shown.
          *                 return stubbed instance
          */
-        public V4FragmentNavigator target(
+        public SupportFragmentNavigator target(
                 Class<? extends android.support.v4.app.Fragment> fragment) {
             this.targetV4 = fragment;
             return this;
@@ -383,7 +383,7 @@ public class KnitNavigator {
          * @param viewObject View object that contains the fragment manager.
          *                   return stubbed instance
          */
-        public V4FragmentNavigator from(Object viewObject) {
+        public SupportFragmentNavigator from(Object viewObject) {
             this.fragmentManager = new WeakReference<>(
                     AndroidViewUtility.extractSupportFragmentManager(viewObject));
             return this;
@@ -395,7 +395,7 @@ public class KnitNavigator {
          * @param containerId Id of the view that contains fragments.
          *                    return stubbed instance
          */
-        public V4FragmentNavigator into(int containerId) {
+        public SupportFragmentNavigator into(int containerId) {
             this.containerId = containerId;
             return this;
         }
@@ -406,7 +406,7 @@ public class KnitNavigator {
          * @param message Message to be delivered.
          *                return stubbed instance
          */
-        public V4FragmentNavigator setMessage(KnitMessage message) {
+        public SupportFragmentNavigator setMessage(KnitMessage message) {
             this.message = message;
             return this;
         }
