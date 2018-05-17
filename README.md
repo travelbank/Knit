@@ -47,10 +47,12 @@ allprojects {
     }
 }
 
+Stable version 1.3.0
+
 dependencies {
-    implementation 'com.github.travelbank.Knit:knitlib:v1.3.0'
-    annotationProcessor 'com.github.travelbank.Knit:knitprocessor:v1.3.0'
-    testImplementation 'com.github.travelbank.Knit:knittestkit:v1.3.0'
+    implementation 'com.github.travelbank.Knit:knitlib:v2.0.0'
+    annotationProcessor 'com.github.travelbank.Knit:knitprocessor:v2.0.0'
+    testImplementation 'com.github.travelbank.Knit:knittestkit:v2.0.0'
 }
 ```
 
