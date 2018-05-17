@@ -128,6 +128,12 @@ public class UsageGraph {
     private Set<ComponentTag> activePresenterTags;
 
 
+    /**
+     * {@link Map} that tracks whether a component class has it's node initialized or not.
+     */
+    private Map<Class<?>,EntityNode> clazzToNodeMap;
+
+
     public UsageGraph(KnitInterface knitInstance) {
         this.modelManager = knitInstance.getModelManager();
         this.modelManager.setUsageGraph(this);
@@ -144,6 +150,7 @@ public class UsageGraph {
         this.instanceMap = new HashMap<>();
         this.activeModelTags = new HashSet<>();
         this.activePresenterTags = new HashSet<>();
+        this.clazzToNodeMap = new HashMap<>();
         createGraph();
     }
 
@@ -152,7 +159,6 @@ public class UsageGraph {
      * Even though the entry point of all components is the creation of a view, the graph does not need to hold any kind of view data other than it's presenter. So the base of the graph
      * consists of presenter data. Based on the required values of each presenter , it finds the model that generates those values, Then recursively checks if that model depends on another model(Umbrella Model).
      * If the model indeed depends on another, then it will recurse until dependency graph is created.
-
      */
     private void createGraph() {
         List<Class<? extends InternalModel>> models = modelMap.getAll();
@@ -184,9 +190,13 @@ public class UsageGraph {
                 for(Class<? extends InternalModel> model:  models){
                     createModelTag(model);
                     if (generatedValuesMap.get(model).contains(updating)) {
-                        EntityNode node = new EntityNode(clazzToTagMap.get(model), EntityType.MODEL);
-                        recurseAndCreateModel(model,node,models,generatedValuesMap,requiredValues);
-                        presenterEntityNode.next.add(node);
+                        EntityNode node;
+                        if(!clazzToNodeMap.containsKey(model)){
+                            node = new EntityNode(clazzToTagMap.get(model), EntityType.MODEL);
+                            recurseAndCreateModel(model,node,models,generatedValuesMap,requiredValues);
+                            clazzToNodeMap.put(model,node);
+                        }
+                        presenterEntityNode.next.add(clazzToNodeMap.get(model));
                     }
 
                 }
@@ -209,14 +219,17 @@ public class UsageGraph {
             Map<Class<? extends InternalModel>, List<String>> generatedValuesMap,
             Map<Class<? extends InternalModel>, List<String>> requiredValuesMap) {
 
-        createModelTag(modelClazz);
-
         for(String req :requiredValuesMap.get(modelClazz)){
             for(Class<? extends InternalModel> model : models){
                 if(generatedValuesMap.get(model).contains(req)){
-                    EntityNode reqM = new EntityNode(clazzToTagMap.get(model), EntityType.MODEL);
-                    modelNode.next.add(reqM);
-                    recurseAndCreateModel(model,reqM,models,generatedValuesMap,requiredValuesMap);
+                    EntityNode node;
+                    if(!clazzToNodeMap.containsKey(model)){
+                        createModelTag(model);
+                        node = new EntityNode(clazzToTagMap.get(model), EntityType.MODEL);
+                        recurseAndCreateModel(model,node,models,generatedValuesMap,requiredValuesMap);
+                        clazzToNodeMap.put(model,node);
+                    }
+                    modelNode.next.add(clazzToNodeMap.get(model));
                 }
             }
         }
