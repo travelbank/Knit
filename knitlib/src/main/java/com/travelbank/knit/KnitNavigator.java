@@ -111,7 +111,7 @@ public class KnitNavigator {
             return this;
         }
 
-        public ActivityNavigator fromV4Fragment(Object viewObject) {
+        public ActivityNavigator fromSupportFragment(Object viewObject) {
             this.from = new WeakReference<Activity>(AndroidViewUtility.extractActivity(viewObject));
             this.fragmentV4 = new WeakReference<>((android.support.v4.app.Fragment) viewObject);
             return this;
