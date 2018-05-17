@@ -1,5 +1,6 @@
 package com.travelbank.knitprocessor;
 
+import com.travelbank.knitprocessor.interactor.InteractorProcessor;
 import com.travelbank.knitprocessor.model.KnitModelProcessor;
 import com.travelbank.knitprocessor.user.KnitUserProcessor;
 import com.travelbank.knitprocessor.user.UserMirror;
@@ -23,6 +24,7 @@ public class KnitCoreProcessor extends AbstractProcessor {
     private KnitPresenterProcessor knitPresenterProcessor;
     private KnitModelProcessor knitModelProcessor;
     private KnitUserProcessor knitUserProcessor;
+    private InteractorProcessor interactorProcessor;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
@@ -30,6 +32,7 @@ public class KnitCoreProcessor extends AbstractProcessor {
         this.knitPresenterProcessor = new KnitPresenterProcessor(processingEnvironment);
         this.knitModelProcessor = new KnitModelProcessor(processingEnvironment);
         this.knitUserProcessor = new KnitUserProcessor(processingEnvironment);
+        this.interactorProcessor = new InteractorProcessor(processingEnvironment);
     }
 
     @Override
@@ -39,6 +42,7 @@ public class KnitCoreProcessor extends AbstractProcessor {
             knitPresenterProcessor.process(set, roundEnvironment, userMirrors);
             knitUserProcessor.process(userMirrors);
             knitModelProcessor.process(set, roundEnvironment, userMirrors);
+            interactorProcessor.process(set,roundEnvironment);
         }
         return false;
     }

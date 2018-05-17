@@ -22,6 +22,7 @@ public class KnitFileStrings {
     public static final String KNIT_PRESENTER_GET_MODEL_MANAGER_METHOD = "getModelManager";
 
     public static final String KNIT_PRESENTER_GET_VIEW_METHOD = "getContract";
+    public static final String KNIT_PRESENTER_GET_INTERACTOR_METHOD = "getInteractor";
     public static final String KNIT_GET_UPDATEABLES_METHOD = "getUpdatableFields";
     public static final String KNIT_PRESENTER_APPLY_METHOD = "onViewApplied";
     public static final String KNIT_PRESENTER_RELEASE_METHOD = "onCurrentViewReleased";

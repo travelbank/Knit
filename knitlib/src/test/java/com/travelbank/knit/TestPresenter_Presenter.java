@@ -84,6 +84,11 @@ public class TestPresenter_Presenter extends InternalPresenter {
     }
 
     @Override
+    public Object getInteractor() {
+        return null;
+    }
+
+    @Override
     public String[] getUpdatableFields() {
         return new String[0];
     }

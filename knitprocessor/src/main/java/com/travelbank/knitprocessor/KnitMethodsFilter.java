@@ -22,8 +22,18 @@ public class KnitMethodsFilter {
 
     }
 
-
     public static boolean filter(Element element){
         return !knitSpecificMethods.contains(element.getSimpleName().toString());
     }
+
+    public static boolean filterContains(Element element){
+        for(String method: knitSpecificMethods){
+            if(element.getSimpleName().toString().contains(method)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }

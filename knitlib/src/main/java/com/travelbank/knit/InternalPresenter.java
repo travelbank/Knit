@@ -42,7 +42,7 @@ public abstract class InternalPresenter implements EventHandler,PresenterInterfa
      * Returns the current interactor instance. {@link KnitPresenter} will cast it accordingly based on it's need.s
      * @return Current interactor instance.
      */
-    public Object getInteractor(){return null;}
+    public abstract Object getInteractor();
 
     /**
      * Returns a String array that contains all data tags that this presenter listens to.

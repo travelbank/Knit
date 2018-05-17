@@ -43,9 +43,11 @@ class KnitPresenterWriter extends KnitClassWriter {
 
         ClassName contractName = ClassName.bestGuess(presenterMirror.targetView.toString()+KnitFileStrings.KNIT_CONTRACT_POSTFIX);
 
-        createFields(clazzBuilder,contractName,presenterMirror);
+        ClassName interactorName = ClassName.bestGuess(presenterMirror.enclosingClass.getQualifiedName()+KnitFileStrings.KNIT_INTERACTOR_POSTFIX);
 
-        createConstructor(clazzBuilder, presenterMirror);
+        createFields(clazzBuilder,contractName,interactorName,presenterMirror);
+
+        createConstructor(clazzBuilder, presenterMirror,interactorName);
         createApplyMethod(clazzBuilder, presenterMirror, contractName);
         createHandleMethod(clazzBuilder, presenterMirror, map);
         createRemoveMethod(clazzBuilder, presenterMirror);
@@ -67,7 +69,7 @@ class KnitPresenterWriter extends KnitClassWriter {
 
     }
 
-    private void createFields(TypeSpec.Builder builder,ClassName contractName ,KnitPresenterMirror presenterMirror){
+    private void createFields(TypeSpec.Builder builder,ClassName contractName ,ClassName interactor,KnitPresenterMirror presenterMirror){
 
 
         FieldSpec parentField = FieldSpec
@@ -96,9 +98,13 @@ class KnitPresenterWriter extends KnitClassWriter {
                 .build();
 
 
-
         FieldSpec activeViewWeakRefField = FieldSpec
                 .builder(contractName, "activeViewContract")
+                .addModifiers(Modifier.PRIVATE)
+                .build();
+
+        FieldSpec interactorfield = FieldSpec
+                .builder(interactor, "interactor")
                 .addModifiers(Modifier.PRIVATE)
                 .build();
 
@@ -108,10 +114,11 @@ class KnitPresenterWriter extends KnitClassWriter {
         builder.addField(updateablesField);
         builder.addField(navigatorField);
         builder.addField(activeViewWeakRefField);
+        builder.addField(interactorfield);
     }
 
     private void createConstructor(TypeSpec.Builder clazzBuilder,
-            KnitPresenterMirror presenterMirror) {
+            KnitPresenterMirror presenterMirror,ClassName interactor) {
 
         MethodSpec.Builder constructorBuilder = MethodSpec
                 .constructorBuilder()
@@ -124,6 +131,7 @@ class KnitPresenterWriter extends KnitClassWriter {
                 .addStatement("this.modelManager = modelManager")
                 .addStatement("this.updateables = $L",KnitFileStrings.createStringArrayField(presenterMirror.updatingMethodsMap.keySet()))
                 .addStatement("this.navigator = navigator")
+                .addStatement("this.interactor = new $L(knitInstance)",interactor)
                 .addModifiers(Modifier.PUBLIC);
 
         constructorBuilder.addStatement("this.loaded = false");
@@ -160,6 +168,14 @@ class KnitPresenterWriter extends KnitClassWriter {
                 .addStatement("return this.activeViewContract")
                 .build();
 
+        MethodSpec getInteractorMethod = MethodSpec
+                .methodBuilder(KnitFileStrings.KNIT_PRESENTER_GET_INTERACTOR_METHOD)
+                .returns(Object.class)
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(Override.class)
+                .addStatement("return this.interactor")
+                .build();
+
         MethodSpec onCreateMethod = MethodSpec
                 .methodBuilder(KnitFileStrings.KNIT_ME_ONCREATE_METHOD)
                 .addModifiers(Modifier.PUBLIC)
@@ -194,6 +210,7 @@ class KnitPresenterWriter extends KnitClassWriter {
         builder.addMethod(shouldLoadMethod);
         builder.addMethod(getModelManagerMethod);
         builder.addMethod(getContractMethod);
+        builder.addMethod(getInteractorMethod);
         builder.addMethod(onCreateMethod);
         builder.addMethod(getUpdatablesMethod);
         builder.addMethod(getNavigatorMEthod);

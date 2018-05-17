@@ -28,7 +28,8 @@ class ModelExposerWriter extends KnitClassWriter {
 
         TypeSpec.Builder clazzBuilder = TypeSpec
                 .classBuilder(modelMirror.enclosingClass.getSimpleName()
-                        + KnitFileStrings.KNIT_MODEL_EXPOSER_POSTFIX);
+                        + KnitFileStrings.KNIT_MODEL_EXPOSER_POSTFIX)
+                .addModifiers(Modifier.PUBLIC);
 
         addKnitWarning(clazzBuilder);
 

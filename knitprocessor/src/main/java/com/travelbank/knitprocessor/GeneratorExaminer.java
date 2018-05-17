@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.element.VariableElement;
 
 /**
@@ -51,6 +52,10 @@ public class GeneratorExaminer {
 
     public static boolean isParameterized(String type){
         return type.contains("<")&&type.contains(">");
+    }
+
+    public static boolean filter(Element element){
+        return !element.asType().toString().contains("Generator") && !element.asType().toString().contains("Inputter");
     }
 
 
