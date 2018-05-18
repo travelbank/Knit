@@ -54,8 +54,8 @@ public class KnitAppListenerTests {
         EntityInstance<InternalPresenter> presenterEntityInstance = new EntityInstance<>();
         presenterEntityInstance.set(internalPresenter);
         when(knit.findPresenterForView(any(Object.class))).thenReturn(presenterEntityInstance);
-        this.configuration = new Configuration();
-        this.configuration.orientation = 1;
+//        this.configuration = new Configuration();
+//        this.configuration.orientation = 1;
         when(resources.getConfiguration()).thenReturn(configuration);
         when(testActivity.getResources()).thenReturn(resources);
         when(testActivity.getFragmentManager()).thenReturn(fragmentManager);
