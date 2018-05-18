@@ -17,7 +17,7 @@ import java.lang.ref.WeakReference;
  * @author Omer Ozer
  */
 
-public abstract class KnitPresenter<T> implements PresenterInterface,MessageReceiver {
+public abstract class KnitPresenter<T,I> implements PresenterInterface,MessageReceiver {
 
     /**
      * Shared {@link Knit} instance.
@@ -43,6 +43,8 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
      * Contract instance.
      */
     private Object contract;
+
+    private I interactor;
 
     public void setKnit(Knit knit) {
         this.knitInstance = knit;
@@ -118,11 +120,18 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
      * Casts then returns contract {@link this#contract} instance.
      * @return Cast contract instance.
      */
-    protected T getContract() {
+    protected T getViewWrapper() {
         if(contract == null){
             contract = knitInstance.findPresenterForParent(this).get().getContract();
         }
         return (T) contract;
+    }
+
+    protected I getAccessor() {
+        if (interactor == null) {
+            interactor = (I) knitInstance.findPresenterForParent(this).get().getInteractor();
+        }
+        return interactor;
     }
 
 
@@ -273,12 +282,5 @@ public abstract class KnitPresenter<T> implements PresenterInterface,MessageRece
 
     }
 
-    /**
-     * Getter for {@link Knit} instance . Mainly for {@link KnitPresenter2}.
-     * @return shared {@link Knit} instance'
-     */
-    protected Knit getKnitInstance(){
-        return knitInstance;
-    }
 
 }
