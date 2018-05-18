@@ -87,9 +87,9 @@ public class KnitFileStrings {
 
 
 
-    //CONTRACT && INTERACTOR
-    public static final String KNIT_CONTRACT_POSTFIX = "Contract";
-    public static final String KNIT_INTERACTOR_POSTFIX = "Interactor";
+    //ViewWrapper && ModelAccessor
+    public static final String KNIT_CONTRACT_POSTFIX = "ViewWrapper";
+    public static final String KNIT_INTERACTOR_POSTFIX = "ModelAccessor";
 
 
     //ANDROID

@@ -8,7 +8,6 @@ import com.squareup.javapoet.TypeSpec;
 import com.travelbank.knitprocessor.GeneratorExaminer;
 import com.travelbank.knitprocessor.KnitClassWriter;
 import com.travelbank.knitprocessor.KnitFileStrings;
-import com.travelbank.knitprocessor.KnitMethodsFilter;
 import com.travelbank.knitprocessor.StringUtil;
 import com.travelbank.knitprocessor.Tuple2;
 

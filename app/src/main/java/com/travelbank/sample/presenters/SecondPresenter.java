@@ -4,14 +4,13 @@ import android.util.Log;
 
 import com.travelbank.knit.KnitMessage;
 import com.travelbank.knit.KnitPresenter;
-import com.travelbank.knit.KnitPresenter2;
 import com.travelbank.knit.KnitResponse;
 import com.travelbank.knit.ModelEvent;
 import com.travelbank.knit.Presenter;
 import com.travelbank.knit.schedulers.KnitSchedulers;
 import com.travelbank.sample.datatype.StringWrapper;
 import com.travelbank.sample.views.SecondActivity;
-import com.travelbank.sample.views.SecondActivityContract;
+import com.travelbank.sample.views.SecondActivityViewWrapper;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ import java.util.List;
  */
 
 @Presenter(value = SecondActivity.class,needs = "DENTS")
-public class SecondPresenter extends KnitPresenter2<SecondPresenterInteractor,SecondActivityContract> {
+public class SecondPresenter extends KnitPresenter<SecondActivityViewWrapper,SecondPresenterModelAccessor> {
 
     private String string;
 
@@ -49,8 +48,8 @@ public class SecondPresenter extends KnitPresenter2<SecondPresenterInteractor,Se
     @Override
     public void onViewStart() {
         super.onViewStart();
-        getContract().recMes(string);
-        getContract().recMes(getInteractor().getTeeeestasdasd());
+        getViewWrapper().recMes(getAccessor().getTestString());
+
     }
 
     @Override
@@ -67,11 +66,11 @@ public class SecondPresenter extends KnitPresenter2<SecondPresenterInteractor,Se
 
     @ModelEvent("umbrella1")
     void updateData2(KnitResponse<String> data){
-        getContract().recMes(data.getBody());
+        getViewWrapper().recMes(data.getBody());
     }
 
     @ModelEvent("Ttest")
     void updateDatat2(KnitResponse<List<StringWrapper>> data){
-        getContract().recMes(data.getBody().get(0).string);
+        getViewWrapper().recMes(data.getBody().get(0).string);
     }
 }
