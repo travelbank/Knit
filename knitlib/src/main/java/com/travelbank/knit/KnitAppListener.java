@@ -40,7 +40,8 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
 
 
     /**
-     * Called when an {@link Activity} is created. This method attaches Fragment life cycle listeners
+     * Called when an {@link Activity} is created. This method attaches Fragment life cycle
+     * listeners
      * to the activity and initializes dependencies for it.
      *
      * @param activity Activity that has been created
@@ -118,7 +119,8 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
     }
 
     @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {}
+    public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+    }
 
     /**
      * Called when an {@link Activity} has been destroyed. It tells knit to destroy the components
@@ -176,6 +178,67 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
                 }
 
                 /**
+                 * Called when the {@link android.app.Fragment} is started.
+                 *
+                 * @see NativeViewCallbacks
+                 *
+                 * @param f {@link android.app.Fragment} being started
+                 */
+                @Override
+                public void onFragmentStarted(FragmentManager fm, Fragment f) {
+                    super.onFragmentStarted(fm, f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.findPresenterForView(f).get().onViewStart();
+                    }
+                }
+
+                /**
+                 * Called when the {@link android.app.Fragment} is resumed.
+                 *
+                 * @see NativeViewCallbacks
+                 *
+                 * @param f {@link android.app.Fragment} being resumed
+                 */
+                @Override
+                public void onFragmentResumed(FragmentManager fm, Fragment f) {
+                    super.onFragmentResumed(fm, f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.findPresenterForView(f).get().onViewResume();
+                    }
+                }
+
+                /**
+                 * Called when the {@link android.app.Fragment} is paused.
+                 *
+                 * @see NativeViewCallbacks
+                 *
+                 * @param f {@link android.app.Fragment} being paused
+                 */
+                @Override
+                public void onFragmentPaused(FragmentManager fm, Fragment f) {
+                    super.onFragmentPaused(fm, f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.findPresenterForView(f).get().onViewPause();
+                    }
+                }
+
+                /**
+                 * Called when the {@link android.app.Fragment} is stopped.
+                 *
+                 * @see NativeViewCallbacks
+                 *
+                 * @param f {@link android.app.Fragment} being stopped
+                 */
+                @Override
+                public void onFragmentStopped(FragmentManager fm, Fragment f) {
+                    super.onFragmentStopped(fm, f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.findPresenterForView(f).get().onViewStop();
+                    }
+                }
+
+
+                /**
                  * Called when a {@link Fragment} is destroyed. Tells {@link Knit} to
                  * destroy the components used by the fragment.
                  *
@@ -184,7 +247,9 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
                 @Override
                 public void onFragmentDestroyed(FragmentManager fm, Fragment f) {
                     super.onFragmentDestroyed(fm, f);
-                    knit.destroyComponent(f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.destroyComponent(f);
+                    }
                 }
             };
         }
@@ -216,6 +281,70 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
                 }
 
                 /**
+                 * Called when the {@link android.app.Fragment} is started.
+                 *
+                 * @see NativeViewCallbacks
+                 *
+                 * @param f {@link android.app.Fragment} being started
+                 */
+                @Override
+                public void onFragmentStarted(android.app.FragmentManager fm,
+                        android.app.Fragment f) {
+                    super.onFragmentStarted(fm, f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.findPresenterForView(f).get().onViewStart();
+                    }
+                }
+
+                /**
+                 * Called when the {@link android.app.Fragment} is resumed.
+                 *
+                 * @see NativeViewCallbacks
+                 *
+                 * @param f {@link android.app.Fragment} being resumed
+                 */
+                @Override
+                public void onFragmentResumed(android.app.FragmentManager fm,
+                        android.app.Fragment f) {
+                    super.onFragmentResumed(fm, f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.findPresenterForView(f).get().onViewResume();
+                    }
+                }
+
+                /**
+                 * Called when the {@link android.app.Fragment} is paused.
+                 *
+                 * @see NativeViewCallbacks
+                 *
+                 * @param f {@link android.app.Fragment} being paused
+                 */
+                @Override
+                public void onFragmentPaused(android.app.FragmentManager fm,
+                        android.app.Fragment f) {
+                    super.onFragmentPaused(fm, f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.findPresenterForView(f).get().onViewPause();
+                    }
+                }
+
+                /**
+                 * Called when the {@link android.app.Fragment} is stopped.
+                 *
+                 * @see NativeViewCallbacks
+                 *
+                 * @param f {@link android.app.Fragment} being stopped
+                 */
+                @Override
+                public void onFragmentStopped(android.app.FragmentManager fm,
+                        android.app.Fragment f) {
+                    super.onFragmentStopped(fm, f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.findPresenterForView(f).get().onViewStop();
+                    }
+                }
+
+                /**
                  * Called when a {@link android.app.Fragment} is destroyed. Tells {@link Knit} to
                  * destroy the components used by the fragment.
                  *
@@ -225,7 +354,9 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
                 public void onFragmentDestroyed(android.app.FragmentManager fm,
                         android.app.Fragment f) {
                     super.onFragmentDestroyed(fm, f);
-                    knit.destroyComponent(f);
+                    if (knit.findPresenterForView(f) != null) {
+                        knit.destroyComponent(f);
+                    }
                 }
             };
         }

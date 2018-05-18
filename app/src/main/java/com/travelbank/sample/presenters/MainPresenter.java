@@ -9,7 +9,8 @@ import com.travelbank.knit.Presenter;
 import com.travelbank.knit.ViewEvent;
 import com.travelbank.knit.viewevents.ViewEventEnv;
 import com.travelbank.sample.views.MainActivity;
-import com.travelbank.sample.views.MainActivityContract;
+
+import com.travelbank.sample.views.MainActivityViewWrapper;
 import com.travelbank.sample.views.SecondActivity;
 
 
@@ -18,7 +19,7 @@ import com.travelbank.sample.views.SecondActivity;
  */
 
 @Presenter(MainActivity.class)
-public class MainPresenter extends KnitPresenter<MainActivityContract> {
+public class MainPresenter extends KnitPresenter<MainActivityViewWrapper,MainPresenterModelAccessor> {
 
     @Override
     public void onCreate() {
@@ -61,7 +62,7 @@ public class MainPresenter extends KnitPresenter<MainActivityContract> {
             getNavigator()
                     .toActivity()
                     .fromParent(getView())
-                    .setMessage(newMessage().putData("txt",getContract().get()))
+                    .setMessage(newMessage().putData("txt",getViewWrapper().get()))
                     .target(SecondActivity.class)
                     .go();
     }
