@@ -32,7 +32,7 @@ Version 1.3
 Version 2.0
 
 - Tuples to create simple data wrappers when passing multiple objects around
-- Interactors added to avoid having to use of generators for simple non-asnyc get/set operations
+- Interactors added to avoid having to use generators for simple non-asnyc get/set operations
 - View attachments such as Adapters. View events can now be fired from inside any view attachments.
 - Intent flags added to the Navigator
 
