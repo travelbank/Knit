@@ -104,13 +104,16 @@ public class InteractorProcessor extends KnitBaseProcessor {
         Map<Element, Set<Tuple2<String,Element>>> presenterToModelMap = new LinkedHashMap<>();
         for (Element presenter : pm.keySet()) {
             presenterToModelMap.put(presenter, new LinkedHashSet<Tuple2<String,Element>>());
+            outer:
             for (String required : pm.get(presenter)) {
                 for (Element model : mm.keySet()) {
                     if (mm.get(model).contains(required)) {
                         presenterToModelMap.get(presenter).add(new Tuple2<String, Element>(required,model));
+                        break outer;
                     }
                 }
             }
+
         }
         return presenterToModelMap;
     }
