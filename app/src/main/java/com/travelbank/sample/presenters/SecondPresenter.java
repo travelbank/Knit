@@ -18,7 +18,7 @@ import java.util.List;
  * Created by omerozer on 2/6/18.
  */
 
-@Presenter(value = SecondActivity.class,needs = "DENTS")
+@Presenter(value = SecondActivity.class)
 public class SecondPresenter extends KnitPresenter<SecondActivityViewWrapper,SecondPresenterModelAccessor> {
 
     private String string;
@@ -49,7 +49,6 @@ public class SecondPresenter extends KnitPresenter<SecondActivityViewWrapper,Sec
     public void onViewStart() {
         super.onViewStart();
         getViewWrapper().recMes(getAccessor().getTestString());
-
     }
 
     @Override
