@@ -102,7 +102,6 @@ public class KnitFileStrings {
     public static final String STRING_CLASS = String.class.getCanonicalName();
 
 
-
     public static String createStringArrayField(Collection<String> strings){
         String[] stringsArray = new String[strings.size()];
 

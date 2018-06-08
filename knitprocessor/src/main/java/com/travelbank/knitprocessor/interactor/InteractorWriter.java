@@ -8,14 +8,18 @@ import com.squareup.javapoet.TypeSpec;
 import com.travelbank.knitprocessor.GeneratorExaminer;
 import com.travelbank.knitprocessor.KnitClassWriter;
 import com.travelbank.knitprocessor.KnitFileStrings;
+import com.travelbank.knitprocessor.KnitMethodsFilter;
 import com.travelbank.knitprocessor.StringUtil;
 import com.travelbank.knitprocessor.Tuple2;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
@@ -89,9 +93,15 @@ public class InteractorWriter extends KnitClassWriter {
             for (Element enclosed : type.getEnclosedElements()) {
                 if (enclosed.getKind().equals(ElementKind.FIELD)
                         && !enclosed.getModifiers().contains(Modifier.PRIVATE)
-                        && !enclosed.getModifiers().contains(Modifier.STATIC) && GeneratorExaminer.filter(enclosed)) {
+                        && !enclosed.getModifiers().contains(Modifier.STATIC)
+                        && GeneratorExaminer.filter(enclosed)) {
                     clazzBuilder.addMethod(createGetter((VariableElement) enclosed, v));
                     clazzBuilder.addMethod(createSetter((VariableElement) enclosed, v));
+                } else if (enclosed.getKind().equals(ElementKind.METHOD)
+                        && !enclosed.getModifiers().contains(Modifier.PRIVATE)
+                        && !enclosed.getModifiers().contains(Modifier.STATIC)
+                        && KnitMethodsFilter.filterContains(enclosed)) {
+                    createNonPrivateMethod(clazzBuilder, enclosed, v);
                 }
             }
             v++;
@@ -119,5 +129,47 @@ public class InteractorWriter extends KnitClassWriter {
                 .build();
     }
 
+    private void createNonPrivateMethod(TypeSpec.Builder clazzBuilder,
+            Element element, int v) {
+        MethodSpec.Builder methodBuilder = MethodSpec
+                .methodBuilder(element.getSimpleName().toString())
+                .addModifiers(Modifier.PUBLIC);
+
+        ExecutableElement method = (ExecutableElement) element;
+        List<String> params = new LinkedList<>();
+        int p = 0;
+        for (VariableElement variableElement : method.getParameters()) {
+            String param = "param" + p++;
+            methodBuilder.addParameter(TypeName.get(variableElement.asType()), param);
+            params.add(param);
+        }
+
+        String returnTypeString = "";
+
+        if (!method.getReturnType().toString().contains("void")) {
+            methodBuilder.returns(TypeName.get(method.getReturnType()));
+            returnTypeString = "return ";
+        }
+
+        methodBuilder.addStatement("$Lthis.exposer$L.use_$L($L)", returnTypeString,
+                Integer.toString(v), element.getSimpleName().toString(),
+                createParamBlock(params));
+
+        clazzBuilder.addMethod(methodBuilder.build());
+    }
+
+    private String createParamBlock(List<String> params) {
+        StringBuilder paramBuilder = new StringBuilder();
+
+        for (int i = 0; i < params.size(); i++) {
+            paramBuilder.append("param");
+            paramBuilder.append(i);
+
+            if (i < params.size() - 1) {
+                paramBuilder.append(",");
+            }
+        }
+        return paramBuilder.toString();
+    }
 
 }
