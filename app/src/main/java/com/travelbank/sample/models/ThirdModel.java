@@ -38,4 +38,12 @@ public class ThirdModel extends KnitModel {
         }
     };
 
+    void test(String test,int val){
+
+    }
+
+    String anotherTestMEthod(){
+        return "";
+    }
+
 }

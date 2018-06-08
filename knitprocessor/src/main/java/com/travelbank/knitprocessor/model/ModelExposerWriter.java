@@ -131,7 +131,15 @@ class ModelExposerWriter extends KnitClassWriter {
                     }
                     c++;
                 }
-                userMethodBuilder.addStatement("parent.$L($L)", methodElement.getSimpleName(),
+
+                String returnTypeString = "";
+
+                if (!methodElement.getReturnType().toString().contains("void")) {
+                    userMethodBuilder.returns(TypeName.get(methodElement.getReturnType()));
+                    returnTypeString = "return ";
+                }
+
+                userMethodBuilder.addStatement("$Lparent.$L($L)", returnTypeString,methodElement.getSimpleName(),
                         paramsText.toString());
                 builder.addMethod(userMethodBuilder.build());
             }
