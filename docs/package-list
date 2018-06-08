@@ -9,3 +9,14 @@ com.travelbank.knit.schedulers.heavy
 com.travelbank.knit.tuples
 com.travelbank.knit.viewevents
 com.travelbank.knit.viewevents.handlers
+com.travelbank.knitlint
+com.travelbank.knitprocessor
+com.travelbank.knitprocessor.interactor
+com.travelbank.knitprocessor.model
+com.travelbank.knitprocessor.user
+com.travelbank.knitprocessor.vp
+com.travelbank.sample
+com.travelbank.sample.datatype
+com.travelbank.sample.models
+com.travelbank.sample.presenters
+com.travelbank.sample.views
