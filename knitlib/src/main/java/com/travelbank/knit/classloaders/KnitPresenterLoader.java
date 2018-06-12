@@ -53,9 +53,13 @@ public class KnitPresenterLoader {
      * @return returns an instance of {@link InternalPresenter} that has the environment {@link com.travelbank.knit.KnitNavigator.Navigator } and {@link com.travelbank.knit.components.ModelManager}.
      */
     public InternalPresenter loadPresenter(Class<?> presenterClazz) {
+        return loadPresenter(presenterClazz,null);
+    }
+
+    public InternalPresenter loadPresenter(Class<?> presenterClazz,Object accessor){
         try {
             return (InternalPresenter) findConstructorForPresenter(presenterClazz).newInstance(
-                    knitInstance,navigator, modelManager);
+                    knitInstance,navigator, modelManager,accessor);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -77,7 +81,7 @@ public class KnitPresenterLoader {
             return cache.get(presenterClazz);
         }
         try {
-            Constructor<?> constructor = presenterClazz.getConstructor(Knit.class,KnitNavigator.class, InternalModel.class);
+            Constructor<?> constructor = presenterClazz.getConstructor(Knit.class,KnitNavigator.class, InternalModel.class,Object.class);
             cache.put(presenterClazz, constructor);
             return constructor;
         } catch (NoSuchMethodException e) {

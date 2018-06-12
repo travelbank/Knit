@@ -17,15 +17,18 @@ public class TestPresenter_Presenter extends InternalPresenter {
 
     private InternalModel modelManager;
 
+    Object accessor;
+
     public TestPresenter_Presenter(){
 
     }
 
     public TestPresenter_Presenter(Knit knitInstance, KnitNavigator navigator,
-            InternalModel modelManager) {
+            InternalModel modelManager,Object accessor) {
         this.knit = knitInstance;
         this.knitNavigator = navigator;
         this.modelManager = modelManager;
+        this.accessor = accessor;
     }
 
 
@@ -85,7 +88,7 @@ public class TestPresenter_Presenter extends InternalPresenter {
 
     @Override
     public Object getInteractor() {
-        return null;
+        return accessor;
     }
 
     @Override

@@ -125,13 +125,19 @@ class KnitPresenterWriter extends KnitClassWriter {
                 .addParameter(ClassName.bestGuess(KnitFileStrings.KNIT),"knitInstance")
                 .addParameter(ClassName.bestGuess(KnitFileStrings.KNIT_NAVIGATOR),"navigator")
                 .addParameter(ClassName.bestGuess(KnitFileStrings.KNIT_MODEL), "modelManager")
+                .addParameter(ClassName.OBJECT,"accessor")
                 .addStatement("$L parent = new $L()",presenterMirror.enclosingClass.getQualifiedName(),presenterMirror.enclosingClass.getQualifiedName())
                 .addStatement("this.parent = new " + presenterMirror.enclosingClass.getQualifiedName() + KnitFileStrings.KNIT_MODEL_EXPOSER_POSTFIX + "(parent)")
                 .addStatement("parent.setKnit(knitInstance)")
                 .addStatement("this.modelManager = modelManager")
                 .addStatement("this.updateables = $L",KnitFileStrings.createStringArrayField(presenterMirror.updatingMethodsMap.keySet()))
                 .addStatement("this.navigator = navigator")
+                .beginControlFlow("if(accessor==null)")
                 .addStatement("this.interactor = new $L(knitInstance)",interactor)
+                .endControlFlow()
+                .beginControlFlow("else")
+                .addStatement("this.interactor = ($L)accessor",interactor)
+                .endControlFlow()
                 .addModifiers(Modifier.PUBLIC);
 
         constructorBuilder.addStatement("this.loaded = false");
