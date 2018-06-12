@@ -358,6 +358,8 @@ public class KnitAppListener implements Application.ActivityLifecycleCallbacks {
                         knit.destroyComponent(f);
                     }
                 }
+
+
             };
         }
         return fragmentCallbacks;

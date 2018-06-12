@@ -49,7 +49,7 @@ public abstract class KnitPresenter<T,I> implements PresenterInterface,MessageRe
      */
     private Object contract;
 
-    private I interactor;
+    private Object interactor;
 
     public void setKnit(Knit knit) {
         this.knitInstance = knit;
@@ -157,9 +157,9 @@ public abstract class KnitPresenter<T,I> implements PresenterInterface,MessageRe
 
     protected I getAccessor() {
         if (interactor == null) {
-            interactor = (I) knitInstance.findPresenterForParent(this).get().getInteractor();
+            interactor = knitInstance.findPresenterForParent(this).get().getInteractor();
         }
-        return interactor;
+        return (I) interactor;
     }
 
 
@@ -186,8 +186,17 @@ public abstract class KnitPresenter<T,I> implements PresenterInterface,MessageRe
      *
      * @param contract Contract that's being set.
      */
-    void setContract(Object contract) {
+    void setViewWrapper(Object contract) {
         this.contract = contract;
+    }
+
+    /**
+     * Setter for {@link this#contract}
+     *
+     * @param accessor Contract that's being set.
+     */
+    void setAccessor(Object accessor) {
+        this.interactor = accessor;
     }
 
     /**

@@ -9,7 +9,7 @@ import org.junit.runners.JUnit4;
  */
 
 @RunWith(JUnit4.class)
-public abstract class KnitPresenterTest<T extends KnitPresenter,K> implements BaseTest {
+public abstract class KnitPresenterTest<T extends KnitPresenter,K,I> implements BaseTest {
 
     private T testSubject;
 
@@ -25,7 +25,9 @@ public abstract class KnitPresenterTest<T extends KnitPresenter,K> implements Ba
 
     }
 
-    protected abstract K getContract();
+    protected abstract K getViewWrapper();
+
+    protected abstract I getAccesor();
 
     protected abstract KnitNavigator getNavigator();
 
@@ -38,7 +40,8 @@ public abstract class KnitPresenterTest<T extends KnitPresenter,K> implements Ba
                     .setKnit(getKnitInstance())
                     .setModelManager(getModelManager())
                     .setNavigator(getNavigator())
-                    .usingContract(getContract())
+                    .usingContract(getViewWrapper())
+                    .usingAccessor(getAccesor())
                     .build();
             testSubject = (T)internalObject.getParent();
         }
