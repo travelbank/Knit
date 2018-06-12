@@ -25,6 +25,7 @@ public final class KnitTestKit {
         private InternalModel modelManager;
         private KnitNavigator navigator;
         private Object contract;
+        private Object accessor;
 
         PresenterBuilder<T> from(Class<T> clazz){
             this.clazz = clazz;
@@ -51,15 +52,21 @@ public final class KnitTestKit {
             return this;
         }
 
+        public PresenterBuilder<T> usingAccessor(Object accessor){
+            this.accessor = accessor;
+            return this;
+        }
+
         public InternalPresenter build(){
                 KnitPresenterLoader knitPresenterLoader = new KnitPresenterLoader(knit);
                 ViewToPresenterMapInterface viewToPresenterMap = new KnitUtilsLoader().getViewToPresenterMap(Knit.class);
                 InternalPresenter internalPresenter = knitPresenterLoader.loadPresenter(viewToPresenterMap.getPresenterClassForPresenter(clazz));
                 T presenter = (T)internalPresenter.getParent();
                 presenter.setKnit(knit);
-                presenter.setContract(contract);
+                presenter.setViewWrapper(contract);
                 presenter.setModelManager(modelManager);
                 presenter.setNavigator(navigator);
+                presenter.setAccessor(accessor);
                 return internalPresenter;
         }
 
