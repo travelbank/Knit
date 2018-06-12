@@ -12,6 +12,8 @@ import com.travelbank.knit.classloaders.KnitPresenterLoader;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Created by omerozer on 3/8/18.
@@ -27,8 +29,12 @@ public class KnitPresenterLoaderTests {
 
     KnitPresenterLoader knitPresenterLoader;
 
+    @Mock
+    Object accessor;
+
     @Before
     public void setup(){
+        MockitoAnnotations.initMocks(this);
         this.knit = KnitMock.get();
         this.knitNavigator = knit.getNavigator();
         this.modelManager = knit.getModelManager();
@@ -43,6 +49,17 @@ public class KnitPresenterLoaderTests {
         assertEquals(knit,castPresenter.getKnit());
         assertEquals(knitNavigator,castPresenter.getNavigator());
         assertEquals(modelManager,castPresenter.getModelManager());
+    }
+
+    @Test
+    public void loadPresenterWithAccessorTest(){
+        InternalPresenter internalPresenter = knitPresenterLoader.loadPresenter(TestPresenter_Presenter.class,accessor);
+        assertEquals(TestPresenter_Presenter.class,internalPresenter.getClass());
+        TestPresenter_Presenter castPresenter = (TestPresenter_Presenter)internalPresenter;
+        assertEquals(knit,castPresenter.getKnit());
+        assertEquals(knitNavigator,castPresenter.getNavigator());
+        assertEquals(modelManager,castPresenter.getModelManager());
+        assertEquals(accessor,castPresenter.getInteractor());
     }
 
 
