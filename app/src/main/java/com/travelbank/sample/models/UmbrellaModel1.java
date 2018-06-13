@@ -46,7 +46,7 @@ public class UmbrellaModel1 extends KnitModel {
         }
     };
 
-    @Generates("asdasd")
+    @Generates("asdasdpoiuy")
     Generator2<List<String>,Map<String,String>,String[]> testGen = new Generator2<List<String>,Map<String,String>,String[]>() {
 
         @Override
