@@ -9,6 +9,7 @@ import com.travelbank.knit.Presenter;
 import com.travelbank.knitprocessor.KnitBaseProcessor;
 import com.travelbank.knitprocessor.Tuple2;
 
+import java.lang.ref.PhantomReference;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -40,7 +41,8 @@ public class InteractorProcessor extends KnitBaseProcessor {
         return true;
     }
 
-    private Map<Element, Set<Tuple2<String,Element>>> mapPresentersToModels(RoundEnvironment roundEnvironment) {
+    private Map<Element, Set<Tuple2<String, Element>>> mapPresentersToModels(
+            RoundEnvironment roundEnvironment) {
         Map<Element, Set<String>> presenterToRequiredValueMap = processPresenters(
                 roundEnvironment.getElementsAnnotatedWith(Presenter.class));
 
@@ -99,16 +101,17 @@ public class InteractorProcessor extends KnitBaseProcessor {
         return modelToGeneratedMap;
     }
 
-    private Map<Element, Set<Tuple2<String,Element>>> createPresenterToModelsMap(Map<Element, Set<String>> pm,
+    private Map<Element, Set<Tuple2<String, Element>>> createPresenterToModelsMap(
+            Map<Element, Set<String>> pm,
             Map<Element, Set<String>> mm) {
-        Map<Element, Set<Tuple2<String,Element>>> presenterToModelMap = new LinkedHashMap<>();
+        Map<Element, Set<Tuple2<String, Element>>> presenterToModelMap = new LinkedHashMap<>();
         for (Element presenter : pm.keySet()) {
-            presenterToModelMap.put(presenter, new LinkedHashSet<Tuple2<String,Element>>());
+            presenterToModelMap.put(presenter, new LinkedHashSet<Tuple2<String, Element>>());
             for (String required : pm.get(presenter)) {
                 for (Element model : mm.keySet()) {
-                    if (mm.get(model).contains(required)) {
-                        presenterToModelMap.get(presenter).add(new Tuple2<String, Element>(required,model));
-                        break;
+                    if (mm.get(model).contains(required) && !dependencyCreated(presenterToModelMap,presenter,model)) {
+                        presenterToModelMap.get(presenter).add(
+                                new Tuple2<String, Element>(required, model));
                     }
                 }
             }
@@ -117,7 +120,21 @@ public class InteractorProcessor extends KnitBaseProcessor {
         return presenterToModelMap;
     }
 
-    private void createInteractors(Map<Element, Set<Tuple2<String,Element>>> m) {
+    private boolean dependencyCreated(
+            Map<Element, Set<Tuple2<String, Element>>> presenterToModelMap, Element presenter,
+            Element model) {
+
+        for (Tuple2<String, Element> tuple : presenterToModelMap.get(presenter)) {
+
+            if (tuple.getB().equals(model)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private void createInteractors(Map<Element, Set<Tuple2<String, Element>>> m) {
         for (Element presenter : m.keySet()) {
             interactorWriter.write(getEnv().getFiler(), presenter, m.get(presenter));
         }

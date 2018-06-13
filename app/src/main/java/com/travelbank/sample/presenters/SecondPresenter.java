@@ -18,7 +18,7 @@ import java.util.List;
  * Created by omerozer on 2/6/18.
  */
 
-@Presenter(value = SecondActivity.class)
+@Presenter(value = SecondActivity.class,needs = "asdasdpoiuy")
 public class SecondPresenter extends KnitPresenter<SecondActivityViewWrapper,SecondPresenterModelAccessor> {
 
     private String string;
