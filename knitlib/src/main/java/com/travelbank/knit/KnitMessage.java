@@ -33,7 +33,7 @@ public class KnitMessage implements Poolable {
     }
 
     /**
-     * Access the value of the data for the given key. Throws exception if it doesn't exists.
+     * Access the value of the data for the given key. Returns null if not found.
      *
      * @param key Key for the value inside {@link this#data}
      * @param <T> Type of the value.
@@ -41,7 +41,7 @@ public class KnitMessage implements Poolable {
      */
     public<T> T getData(String key){
         if(!data.containsKey(key)){
-            throw new RuntimeException("Knit: Data('" + key + "' ) could not be found in the message");
+            return null;
         }
         return (T)data.get(key);
     }
