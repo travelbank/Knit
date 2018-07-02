@@ -77,7 +77,7 @@ public class KnitNavigator {
         private Class<? extends Activity> target;
 
         /**
-         * Message instance to be delivered.
+         * Message instance to be delivered
          */
         private KnitMessage message;
 
@@ -85,6 +85,12 @@ public class KnitNavigator {
          * Intent Flags
          */
         private int flags;
+
+
+        /**
+         * Intent directly provided
+         */
+        Intent intent;
 
 
         /**
@@ -128,8 +134,25 @@ public class KnitNavigator {
             return this;
         }
 
+        /**
+         * Stubber/Setter for {@link this#requestCode}
+         *
+         * @param requestCode request code for activity start intent
+         * @returns stubbed instance
+         */
         public ActivityNavigator forResult(int requestCode) {
             this.requestCode = requestCode;
+            return this;
+        }
+
+        /**
+         * Stubber/Setter for {@link this#intent}
+         *
+         * @param intent started intent directly provided to the navigator
+         * @returns stubbed instance
+         */
+        public ActivityNavigator starterIntent(Intent intent){
+            this.intent = intent;
             return this;
         }
 
@@ -167,15 +190,16 @@ public class KnitNavigator {
                         message);
             }
 
-            if (from == null) {
+
+            if (from == null && intent ==null) {
                 throw new RuntimeException("Knit: `From` has not been set. ");
             }
 
-            if (target == null) {
+            if (target == null && intent ==null) {
                 throw new RuntimeException("Knit: 'Target' has not been set");
             }
 
-            Intent intent = new Intent(from.get(), target);
+            Intent intent = this.intent == null ? new Intent(from.get(), target) : this.intent;
             intent.setFlags(flags);
 
             if (requestCode == Integer.MIN_VALUE) {
