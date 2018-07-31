@@ -254,6 +254,14 @@ public abstract class KnitPresenter<T,I> implements PresenterInterface,MessageRe
      * @see NativeViewCallbacks
      */
     @Override
+    public void onViewCreated() {
+
+    }
+
+    /**
+     * @see NativeViewCallbacks
+     */
+    @Override
     public void onViewStart() {
 
     }

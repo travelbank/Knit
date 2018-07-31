@@ -455,6 +455,7 @@ public class UsageGraph {
                 internalPresenter = ((InternalPresenter) instanceMap.get(entityNode.tag).get());
                 internalPresenter.onViewApplied(viewObject);
                 handleMessageDelivery(internalPresenter, entityNode.tag);
+                internalPresenter.onViewCreated();
                 break;
         }
         counterMap.get(entityNode.tag).use();

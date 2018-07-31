@@ -107,6 +107,11 @@ public class TestPresenter_Presenter extends InternalPresenter {
     }
 
     @Override
+    public void onViewCreated() {
+
+    }
+
+    @Override
     public void onViewStart() {
 
     }

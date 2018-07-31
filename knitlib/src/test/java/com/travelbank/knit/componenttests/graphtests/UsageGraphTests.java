@@ -122,6 +122,7 @@ public class UsageGraphTests {
         verify(testSingletonModel).onCreate();
         verify(testPresenter).onCreate();
         verify(testPresenter).receiveMessage(messageCaptor.capture());
+        verify(testPresenter).onViewCreated();
         assertEquals(MockKnitMessage.get(),messageCaptor.getValue());
 
     }
