@@ -1,5 +1,6 @@
 package com.travelbank.knitprocessor.model;
 
+import com.travelbank.knit.AnnotationDefaults;
 import com.travelbank.knit.Collects;
 import com.travelbank.knit.Generates;
 import com.travelbank.knit.Inputs;
@@ -66,6 +67,8 @@ public class KnitModelProcessor extends KnitBaseProcessor {
             KnitModelMirror knitModelMirror = new KnitModelMirror();
             knitModelMirror.enclosingClass = clazz;
             knitModelMirror.instanceType = clazz.getAnnotation(Model.class).value();
+            String tag = clazz.getAnnotation(Model.class).tag();
+            if(!tag.equals(AnnotationDefaults.MODEL_TAG_DEF)){knitModelMirror.vals.add(tag);}
             for (Element element : clazz.getEnclosedElements()) {
                 if (element.getKind().isField()) {
                     if (element.getAnnotation(Generates.class) != null) {

@@ -18,7 +18,7 @@ import javax.lang.model.element.Modifier;
 
 public class NativeViewCallbacks {
     public static List<String> getAll(){
-        return Arrays.asList("onViewStart","onViewResume","onViewPause","onViewStop","onViewResult","onReturnToView","receiveMessage");
+        return Arrays.asList("onViewCreated","onViewStart","onViewResume","onViewPause","onViewStop","onViewResult","onReturnToView","receiveMessage");
     }
 
     private static boolean isOnViewResult(String result){

@@ -9,4 +9,5 @@ package com.travelbank.knit;
 
 public @interface Model {
     InstanceType value() default InstanceType.IN_GRAPH;
+    String tag() default AnnotationDefaults.MODEL_TAG_DEF;
 }

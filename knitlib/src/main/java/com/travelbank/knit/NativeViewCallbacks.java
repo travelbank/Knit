@@ -2,6 +2,7 @@ package com.travelbank.knit;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
 /**
  *
@@ -11,6 +12,12 @@ import android.content.Intent;
  */
 
 public interface NativeViewCallbacks {
+
+
+    /**
+     * Exposes {@link Activity#onCreate(Bundle)}.
+     */
+    void onViewCreated();
 
     /**
      * Exposes {@link Activity#onStart()}.

@@ -13,7 +13,7 @@ import com.travelbank.knit.generators.Generator0;
  * Created by omerozer on 2/3/18.
  */
 
-@Model(InstanceType.SINGLETON)
+@Model(value = InstanceType.SINGLETON,tag = "testTag")
 public class MainModel extends KnitModel {
 
     @Override
