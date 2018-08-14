@@ -4,5 +4,4 @@ package com.travelbank.knit;
  * Created by bo_om on 3/12/2018.
  */
 
-public class View1 {
-}
+public class View1  {}

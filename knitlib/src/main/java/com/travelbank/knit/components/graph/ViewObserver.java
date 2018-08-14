@@ -14,6 +14,7 @@ public class ViewObserver {
 
     public static void observeView(Object viewObject,Listener listener){
         View root = AndroidViewUtility.extractRootView(viewObject);
+        if(root==null){return;}
         root.getViewTreeObserver().addOnGlobalLayoutListener(getLayoutListener(root,listener));
     }
 
