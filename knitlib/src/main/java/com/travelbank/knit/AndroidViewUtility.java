@@ -139,7 +139,7 @@ public class AndroidViewUtility {
         if(viewObject instanceof View){
             return (View)viewObject;
         }
-        throw new RuntimeException("Knit: View object must be an Android UI/View such as Activity,Fragment,View.");
+        return null;
     }
 
 }

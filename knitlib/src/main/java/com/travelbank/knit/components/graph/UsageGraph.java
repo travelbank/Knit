@@ -444,7 +444,7 @@ public class UsageGraph {
                 break;
 
             case PRESENTER:
-                final InternalPresenter internalPresenter;
+                InternalPresenter internalPresenter;
                 if (!counterMap.get(entityNode.tag).isUsed()) {
                     internalPresenter = knitPresenterLoader.loadPresenter(
                             tagToClazzMap.get(entityNode.tag));
@@ -452,13 +452,14 @@ public class UsageGraph {
                     activePresenterTags.add(entityNode.tag);
                     internalPresenter.onCreate();
                 }
-                internalPresenter = ((InternalPresenter) instanceMap.get(entityNode.tag).get());
-                handleMessageDelivery(internalPresenter, entityNode.tag);
+                final InternalPresenter internalPresenterFinal;
+                internalPresenterFinal = ((InternalPresenter) instanceMap.get(entityNode.tag).get());
+                handleMessageDelivery(internalPresenterFinal, entityNode.tag);
                 ViewObserver.observeView(viewObject, new ViewObserver.Listener() {
                     @Override
                     public void onViewInflated() {
-                        internalPresenter.onViewApplied(viewObject);
-                        internalPresenter.onViewCreated();
+                        internalPresenterFinal.onViewApplied(viewObject);
+                        internalPresenterFinal.onViewCreated();
                     }
                 });
 
