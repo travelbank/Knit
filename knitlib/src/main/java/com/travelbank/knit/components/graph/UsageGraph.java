@@ -420,7 +420,7 @@ public class UsageGraph {
      * @param entityNode Entry point of the graph. {@link EntityNode} of a view.
      * @param viewObject Instance of the view that is getting it's dependencies started.
      */
-    private void recurseForStart(EntityNode entityNode, Object viewObject) {
+    private void recurseForStart(EntityNode entityNode,final Object viewObject) {
         //DFS to create models first
 
         if (entityNode == null) {
@@ -444,7 +444,7 @@ public class UsageGraph {
                 break;
 
             case PRESENTER:
-                InternalPresenter internalPresenter;
+                final InternalPresenter internalPresenter;
                 if (!counterMap.get(entityNode.tag).isUsed()) {
                     internalPresenter = knitPresenterLoader.loadPresenter(
                             tagToClazzMap.get(entityNode.tag));
@@ -453,9 +453,15 @@ public class UsageGraph {
                     internalPresenter.onCreate();
                 }
                 internalPresenter = ((InternalPresenter) instanceMap.get(entityNode.tag).get());
-                internalPresenter.onViewApplied(viewObject);
                 handleMessageDelivery(internalPresenter, entityNode.tag);
-                internalPresenter.onViewCreated();
+                ViewObserver.observeView(viewObject, new ViewObserver.Listener() {
+                    @Override
+                    public void onViewInflated() {
+                        internalPresenter.onViewApplied(viewObject);
+                        internalPresenter.onViewCreated();
+                    }
+                });
+
                 break;
         }
         counterMap.get(entityNode.tag).use();
