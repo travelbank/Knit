@@ -118,4 +118,28 @@ public class AndroidViewUtility {
     }
 
 
+    /**
+     * Extracts an {@link View} from an Android ui component such as {@link Fragment} or {@link android.view.View}.
+     * @param viewObject given view object.
+     * @return extracted {@link View}
+     */
+    public static View extractRootView(Object viewObject){
+        if (viewObject instanceof Activity){
+            return ((Activity) viewObject).getWindow().getDecorView().getRootView();
+        }
+
+        if(viewObject instanceof Fragment){
+            return ((Fragment)viewObject).getView();
+        }
+
+        if(viewObject instanceof android.support.v4.app.Fragment){
+            return ((android.support.v4.app.Fragment)viewObject).getView();
+        }
+
+        if(viewObject instanceof View){
+            return (View)viewObject;
+        }
+        throw new RuntimeException("Knit: View object must be an Android UI/View such as Activity,Fragment,View.");
+    }
+
 }
