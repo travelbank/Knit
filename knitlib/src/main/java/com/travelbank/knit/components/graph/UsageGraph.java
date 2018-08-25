@@ -455,10 +455,10 @@ public class UsageGraph {
                 final InternalPresenter internalPresenterFinal;
                 internalPresenterFinal = ((InternalPresenter) instanceMap.get(entityNode.tag).get());
                 handleMessageDelivery(internalPresenterFinal, entityNode.tag);
+                internalPresenterFinal.onViewApplied(viewObject);
                 ViewObserver.observeView(viewObject, new ViewObserver.Listener() {
                     @Override
                     public void onViewInflated() {
-                        internalPresenterFinal.onViewApplied(viewObject);
                         internalPresenterFinal.onViewCreated();
                     }
                 });
