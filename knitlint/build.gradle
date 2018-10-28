@@ -16,7 +16,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes('Lint-Registry-v2': 'com.omerozer.knitlint.KnitIssueRegistry')
+        attributes('Lint-Registry-v2': 'com.travelbank.knitlint.KnitIssueRegistry')
     }
 }
 
